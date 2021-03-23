@@ -1,4 +1,4 @@
-package com.example.newadminespeedboat;
+package com.espeedboat.admin;
 
 import org.junit.Test;
 
