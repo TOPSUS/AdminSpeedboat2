@@ -10,11 +10,12 @@
         <item name="colorSecondaryVariant">@color/secondary_dark</item>
         <item name="colorOnSecondary">@color/primary_white</item>
         <!-- Status bar color. -->
-        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
+        <item name="android:statusBarColor" tools:targetApi="l">@color/primary_grey</item>
         <!-- Customize your theme here. -->
         <item name="background">@color/tertiary_blue</item>
         <item name= "android:textViewStyle" > @style/RobotoTextViewStyle </item>
         <item name= "android:buttonStyle" > @style/RobotoButtonStyle </item>
+        <item name="colorControlNormal">@color/primary_black</item>
     </style>
     <style name= "RobotoTextViewStyle" parent= "android:Widget.TextView" >
         <item name= "android:fontFamily" > @font/roboto_regular </item>

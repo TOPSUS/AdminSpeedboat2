@@ -7,15 +7,12 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
 import android.view.Window;
-import android.view.WindowInsets;
-import android.view.WindowInsetsController;
-import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.espeedboat.admin.utils.Util;
+import com.espeedboat.admin.activity.LoginActivity;
 
 public class SplashActivity extends AppCompatActivity {
     // Initial Variable
@@ -40,7 +37,7 @@ public class SplashActivity extends AppCompatActivity {
         ivSplash.setAnimation(splashAnim);
 
         new Handler().postDelayed(() -> {
-            startActivity(new Intent(SplashActivity.this, MainActivity.class)
+            startActivity(new Intent(SplashActivity.this, LoginActivity.class)
                     .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
             finish();
         }, 4000);
