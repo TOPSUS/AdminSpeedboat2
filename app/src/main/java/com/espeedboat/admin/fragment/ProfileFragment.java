@@ -53,11 +53,6 @@ public class ProfileFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
-        back.setOnClickListener(v -> {
-            back.setVisibility(View.INVISIBLE);
-            profileToolbar.setVisibility(View.VISIBLE);
-        });
     }
 
     private void init() {
