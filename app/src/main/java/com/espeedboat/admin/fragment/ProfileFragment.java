@@ -1,5 +1,6 @@
 package com.espeedboat.admin.fragment;
 
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 
@@ -12,9 +13,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.espeedboat.admin.MainActivity;
 import com.espeedboat.admin.R;
+import com.espeedboat.admin.activity.LoginActivity;
+import com.espeedboat.admin.utils.SessionManager;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -25,6 +31,9 @@ public class ProfileFragment extends Fragment {
 
     private View view;
     private ImageView back, profileToolbar;
+    private SessionManager sessionManager;
+    private TextView username, role;
+    private RelativeLayout logout;
 
     public ProfileFragment() {
         // Required empty public constructor
@@ -53,8 +62,22 @@ public class ProfileFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        username.setText(sessionManager.getUserName());
+        role.setText(sessionManager.getUserRole());
+
+        logout.setOnClickListener(v -> {
+            sessionManager.clearSession();
+
+            Intent intent = new Intent(view.getContext(), LoginActivity.class);
+            startActivity(intent);
+        });
     }
 
     private void init() {
+        sessionManager = new SessionManager(view.getContext());
+        username = view.findViewById(R.id.username);
+        role = view.findViewById(R.id.role);
+        logout = view.findViewById(R.id.logout);
     }
 }

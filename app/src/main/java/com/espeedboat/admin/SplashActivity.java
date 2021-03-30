@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.animation.Animation;
@@ -13,6 +14,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.espeedboat.admin.activity.LoginActivity;
+import com.espeedboat.admin.utils.SessionManager;
 
 public class SplashActivity extends AppCompatActivity {
     // Initial Variable
@@ -20,6 +22,7 @@ public class SplashActivity extends AppCompatActivity {
     TextView tvSplash;
     Handler handler = new Handler();
     CharSequence charSequence;
+    SessionManager sessionManager;
     int index;
     long delay = 200;
 
@@ -37,8 +40,15 @@ public class SplashActivity extends AppCompatActivity {
         ivSplash.setAnimation(splashAnim);
 
         new Handler().postDelayed(() -> {
-            startActivity(new Intent(SplashActivity.this, LoginActivity.class)
-                    .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
+            String isLogin = sessionManager.getToken();
+
+            if (isLogin == null) {
+                startActivity(new Intent(SplashActivity.this, LoginActivity.class)
+                        .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
+            } else {
+                startActivity(new Intent(SplashActivity.this, MainActivity.class)
+                        .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
+            }
             finish();
         }, 4000);
     }
@@ -46,6 +56,7 @@ public class SplashActivity extends AppCompatActivity {
     private void bindView () {
         ivSplash = findViewById(R.id.splash_logo);
         tvSplash = findViewById(R.id.splash_text);
+        sessionManager = new SessionManager(getApplicationContext());
     }
 
     Runnable runnable = new Runnable() {

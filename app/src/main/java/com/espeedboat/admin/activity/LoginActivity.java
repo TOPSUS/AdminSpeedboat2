@@ -15,6 +15,7 @@ import com.espeedboat.admin.MainActivity;
 import com.espeedboat.admin.R;
 import com.espeedboat.admin.client.RetrofitClient;
 import com.espeedboat.admin.model.Auth;
+import com.espeedboat.admin.model.Data;
 import com.espeedboat.admin.model.Response;
 import com.espeedboat.admin.service.AuthService;
 import com.espeedboat.admin.utils.SessionManager;
@@ -70,7 +71,10 @@ public class LoginActivity extends AppCompatActivity {
             public void onResponse(Call<Response> call, retrofit2.Response<Response> response) {
                 if (response.isSuccessful()) {
                     if (response.body().getStatus() == 200) {
-                        Auth auth = response.body().getData().getAuth();
+                        Data data = response.body().getData();
+                        sessionManager.setAuthToken(data.getAuth().getToken());
+                        sessionManager.setUserName(data.getAuth().getUser().getNama());
+                        sessionManager.setUserRole(data.getAuth().getUser().getRole());
                         Toast.makeText(getApplicationContext(), "Login Berhasil", Toast.LENGTH_SHORT).show();
                         startActivity(new Intent(LoginActivity.this, MainActivity.class));
                         finish();
