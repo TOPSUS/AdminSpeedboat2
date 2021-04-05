@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/dashboard"
+        android:title="@string/menu_dashboard"
+        android:icon="@drawable/ic_dashboard_24"
+        android:iconTint="@color/primary_black"/>
+
+    <item
+        android:id="@+id/jadwal"
+        android:title="@string/menu_jadwal"
+        android:icon="@drawable/ic_date_range_24"
+        android:iconTint="@color/primary_black"/>
+
+    <item
+        android:id="@+id/spacer"
+        android:title=""/>
+
+    <item
+        android:id="@+id/transaksi"
+        android:title="@string/menu_transaksi"
+        android:icon="@drawable/ic_baseline_fact_check_24"
+        android:iconTint="@color/primary_black"/>
+
+    <item
+        android:id="@+id/speedboat"
+        android:title="@string/menu_speedboat"
+        android:icon="@drawable/ic_boat_24"
+        android:iconTint="@color/primary_black"/>
+</menu>

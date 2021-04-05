@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingVertical="@dimen/margin_48"
+    android:background="@color/tertiary_blue"
+    tools:context=".activity.LoginActivity">
+    <ImageView
+        android:id="@+id/login_logo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentTop="true"
+        android:src="@drawable/logo_app" />
+
+    <LinearLayout
+        android:id="@+id/bg_wrapper"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/login_logo"
+        android:layout_marginTop="@dimen/margin_32"
+        android:orientation="horizontal"
+        android:weightSum="2">
+        <LinearLayout
+            android:id="@+id/bg_view_left"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:weightSum="2"
+            android:padding="@dimen/margin_32"
+            android:orientation="vertical"
+            android:background="@drawable/bg_login_gradient">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:layout_weight="1">
+                <TextView
+                    android:layout_width="@dimen/margin_72"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto_regular"
+                    android:lineHeight="16sp"
+                    android:text="@string/auth_masuk"
+                    android:textAlignment="textStart"
+                    android:textColor="@color/primary_white"
+                    android:textSize="16sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:gravity="bottom"
+                android:layout_weight="1">
+                <TextView
+                    android:id="@+id/forgot_password"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto_medium"
+                    android:lineHeight="16sp"
+                    android:text="@string/auth_forgot"
+                    android:textAlignment="textStart"
+                    android:textColor="@color/primary_white"
+                    android:textSize="16sp"
+                    android:clickable="true"/>
+            </LinearLayout>
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/bg_view_right"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:padding="@dimen/margin_32"
+            android:gravity="bottom|end"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto_medium"
+                android:lineHeight="16sp"
+                android:text="E-Speedboat Admin"
+                android:textAlignment="textEnd"
+                android:textColor="@color/primary"
+                android:textSize="16sp"/>
+        </LinearLayout>
+    </LinearLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/bg_wrapper"
+        android:layout_alignBottom="@+id/bg_wrapper"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:gravity="center_vertical">
+        <androidx.cardview.widget.CardView
+            android:id="@+id/form_login"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/margin_32"
+            app:cardElevation="4dp"
+            app:cardBackgroundColor="@color/primary_white"
+            app:cardCornerRadius="@dimen/margin_16">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margin_24"
+                android:paddingVertical="@dimen/margin_24"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingHorizontal="4dp"
+                    android:text="Email"
+                    android:textAlignment="textStart"
+                    android:textColor="@color/primary_grey"
+                    android:textSize="12sp" />
+
+                <EditText
+                    android:id="@+id/emailadmin"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawableEnd="@drawable/ic_email_24"
+                    android:inputType="textEmailAddress"
+                    android:paddingHorizontal="2dp"
+                    android:textColor="@color/state_primary_edit_text"
+                    android:textColorHint="@color/state_primary_edit_text"
+                    android:backgroundTint="@color/state_primary_edit_text"
+                    android:drawableTint="@color/primary" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingHorizontal="4dp"
+                    android:text="Password"
+                    android:textAlignment="textStart"
+                    android:textColor="@color/primary_grey"
+                    android:textSize="12sp" />
+
+                <EditText
+                    android:id="@+id/passwordadmin"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawableEnd="@drawable/ic_eye_24"
+                    android:inputType="textPassword"
+                    android:paddingHorizontal="2dp"
+                    android:textColor="@color/state_primary_edit_text"
+                    android:textColorHint="@color/state_primary_edit_text"
+                    android:backgroundTint="@color/state_primary_edit_text"
+                    android:drawableTint="@color/primary" />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+        <ImageView
+            android:id="@+id/ic_profile_bubble"
+            android:layout_width="wrap_content"
+            android:layout_height="56dp"
+            android:layout_marginTop="-24dp"
+            android:layout_centerHorizontal="true"
+            android:layout_alignTop="@+id/form_login"
+            android:elevation="8dp"
+            android:src="@drawable/ic_profile_buble"/>
+
+        <ImageButton
+            android:id="@+id/loginbutton"
+            android:layout_width="128dp"
+            android:layout_height="48dp"
+            android:layout_marginBottom="-24dp"
+            android:layout_centerHorizontal="true"
+            android:layout_alignBottom="@+id/form_login"
+            android:elevation="8dp"
+            android:background="@drawable/bg_btn_login" >
+        </ImageButton>
+
+        <TextView
+            android:layout_width="@dimen/margin_72"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/loginbutton"
+            android:layout_alignEnd="@+id/loginbutton"
+            android:layout_alignBottom="@+id/loginbutton"
+            android:layout_alignTop="@+id/loginbutton"
+            android:fontFamily="@font/roboto_regular"
+            android:lineHeight="16sp"
+            android:elevation="10dp"
+            android:text="@string/auth_masuk"
+            android:textAlignment="gravity"
+            android:gravity="center"
+            android:textColor="@color/primary_white"
+            android:textSize="16sp" />
+    </RelativeLayout>
+</RelativeLayout>

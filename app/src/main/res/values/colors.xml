@@ -10,4 +10,26 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <!--  Primary Color Scheme  -->
+    <color name="primary">#1BA0DC</color>
+    <color name="primary_light">#67d0ff</color>
+    <color name="primary_dark">#0071aa</color>
+    <color name="primary_sea">#068ECB</color>
+    <color name="primary_pink">#F2BAE8</color>
+    <color name="primary_black">#282828</color>
+    <color name="primary_grey">#929292</color>
+    <color name="primary_white">#FFFFFFFF</color>
+    <color name="primary_green">#1BDC51</color>
+    <color name="primary_yellow">#FDF42A</color>
+    <color name="primary_red">#F23131</color>
+
+    <!--  Secondary Color Scheme  -->
+    <color name="secondary">#1bdcb9</color>
+    <color name="secondary_light">#6bffeb</color>
+    <color name="secondary_dark">#00a989</color>
+    <color name="secondary_grey">#CECECE</color>
+    <color name="secondary_black">#747474</color>
+
+    <!--  Tertiary Color Scheme  -->
+    <color name="tertiary_blue">#FAFDFF</color>
 </resources>

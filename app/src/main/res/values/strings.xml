@@ -1,5 +1,18 @@
 <resources>
-    <string name="app_name">My Application</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="app_name">Admin ESpeedboat</string>
+
+    <!--  Bottom bar Menu  -->
+    <string name="menu_dashboard">Dashboard</string>
+    <string name="menu_jadwal">Jadwal</string>
+    <string name="menu_transaksi">Transaksi</string>
+    <string name="menu_speedboat">Speedboat</string>
+
+    <!--  Auth  -->
+    <string name="auth_masuk">Masuk</string>
+    <string name="auth_forgot">Lupa Password</string>
+    <string name="auth_pin">Pin</string>
+    <string name="auth_reset">Reset</string>
+
+    <!--  Menu  -->
+    <string name="menu_profile">Profile</string>
 </resources>
