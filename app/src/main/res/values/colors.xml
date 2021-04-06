@@ -10,6 +10,12 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <color name="status_red">#EC5564</color>
+    <color name="status_green">#6FDD7A</color>
+    <color name="status_yellow">#FECD57</color>
+    <color name="status_orange">#FB6D51</color>
+
     <!--  Primary Color Scheme  -->
     <color name="primary">#1BA0DC</color>
     <color name="primary_light">#67d0ff</color>
@@ -22,6 +28,10 @@
     <color name="primary_green">#1BDC51</color>
     <color name="primary_yellow">#FDF42A</color>
     <color name="primary_red">#F23131</color>
+    <color name="primary_blue">#1BA0DC</color>
+    <color name="background_blue">#EAF8FF</color>
+    <color name="base_blue">#F3F9FD</color>
+
 
     <!--  Secondary Color Scheme  -->
     <color name="secondary">#1bdcb9</color>
@@ -29,6 +39,7 @@
     <color name="secondary_dark">#00a989</color>
     <color name="secondary_grey">#CECECE</color>
     <color name="secondary_black">#747474</color>
+    <color name="secondary_blue">#BBE6FA</color>
 
     <!--  Tertiary Color Scheme  -->
     <color name="tertiary_blue">#FAFDFF</color>
