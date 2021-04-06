@@ -1,5 +1,6 @@
 package com.espeedboat.admin.fragment;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -8,6 +9,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,7 +23,12 @@ import android.widget.Toast;
 import com.espeedboat.admin.MainActivity;
 import com.espeedboat.admin.R;
 import com.espeedboat.admin.activity.LoginActivity;
+import com.espeedboat.admin.interfaces.FinishActivity;
+import com.espeedboat.admin.interfaces.ToolbarTitle;
+import com.espeedboat.admin.utils.Constants;
 import com.espeedboat.admin.utils.SessionManager;
+
+import org.w3c.dom.Text;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -29,11 +37,13 @@ import com.espeedboat.admin.utils.SessionManager;
  */
 public class ProfileFragment extends Fragment {
 
+    FinishActivity finishActivityCallback;
     private View view;
     private ImageView back, profileToolbar;
     private SessionManager sessionManager;
-    private TextView username, role;
-    private RelativeLayout logout;
+    private TextView username, role, title;
+    private RelativeLayout logout, review;
+    ToolbarTitle toolbarTitleCallback;
 
     public ProfileFragment() {
         // Required empty public constructor
@@ -42,6 +52,13 @@ public class ProfileFragment extends Fragment {
     public static ProfileFragment newInstance(String param1, String param2) {
         ProfileFragment fragment = new ProfileFragment();
         return fragment;
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        toolbarTitleCallback = (ToolbarTitle) context;
+        finishActivityCallback = (FinishActivity) context;
     }
 
     @Override
@@ -55,6 +72,8 @@ public class ProfileFragment extends Fragment {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_profile, container, false);
         init();
+
+        toolbarTitleCallback.setToolbarTitle("Profile");
 
         return view;
     }
@@ -72,6 +91,15 @@ public class ProfileFragment extends Fragment {
             Intent intent = new Intent(view.getContext(), LoginActivity.class);
             startActivity(intent);
         });
+
+        review.setOnClickListener(v -> {
+            toolbarTitleCallback.setToolbarTitle("Review");
+            Fragment fragment = new ReviewFragment();
+            FragmentManager fm = getActivity().getSupportFragmentManager();
+            FragmentTransaction ft = fm.beginTransaction();
+            ft.replace(R.id.content, fragment, Constants.FRAG_MOVE);
+            ft.commit();
+        });
     }
 
     private void init() {
@@ -79,5 +107,7 @@ public class ProfileFragment extends Fragment {
         username = view.findViewById(R.id.username);
         role = view.findViewById(R.id.role);
         logout = view.findViewById(R.id.logout);
+        review = view.findViewById(R.id.menu_review);
+        title = view.findViewById(R.id.toolbar_title);
     }
 }

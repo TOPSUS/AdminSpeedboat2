@@ -1,4 +1,6 @@
 <resources>
+    <!--  Base  -->
+    <string name="base_null">Null</string>
     <string name="app_name">Admin ESpeedboat</string>
 
     <!--  Bottom bar Menu  -->
@@ -27,4 +29,9 @@
     <string name="profile_menu_point">Reward Point</string>
     <string name="profile_menu_review">Review</string>
     <string name="profile_logout">Logout</string>
+
+    <!--  Review Detail  -->
+    <string name="rd_from">From</string>
+    <string name="rd_to">To</string>
+    <string name="rd_detail">Detail Order</string>
 </resources>
