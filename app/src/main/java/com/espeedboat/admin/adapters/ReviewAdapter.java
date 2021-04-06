@@ -72,7 +72,9 @@ public class ReviewAdapter extends RecyclerView.Adapter<ReviewViewHolder>{
         FragmentManager mFragmentManager = ((MainActivity) context).getSupportFragmentManager();
         FragmentTransaction mFragmentTransaction = mFragmentManager
                 .beginTransaction()
-                .replace(R.id.content, rdFragment, rdFragment.getTag());
+                .addToBackStack(null)
+                .add(R.id.content, rdFragment, rdFragment.getTag());
+
         mFragmentTransaction.commit();
     }
 }

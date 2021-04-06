@@ -40,7 +40,6 @@ import retrofit2.Callback;
 
 public class ReviewFragment extends Fragment {
 
-    FinishActivity finishActivityCallback;
     private RecyclerView recyclerView;
     private View view;
     private RecyclerView.LayoutManager layoutManager;
@@ -50,7 +49,6 @@ public class ReviewFragment extends Fragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        finishActivityCallback = (FinishActivity) context;
     }
 
     @Override

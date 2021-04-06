@@ -1,12 +1,21 @@
 package com.espeedboat.admin;
 
+import android.content.Context;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
+
+import com.espeedboat.admin.fragment.ReviewFragment;
+import com.espeedboat.admin.interfaces.FinishActivity;
+import com.espeedboat.admin.interfaces.ToolbarTitle;
+import com.espeedboat.admin.utils.Constants;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -20,6 +29,7 @@ public class DashboardFragment extends Fragment {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
+    ToolbarTitle toolbarTitleCallback;
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
@@ -47,6 +57,12 @@ public class DashboardFragment extends Fragment {
     }
 
     @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        toolbarTitleCallback = (ToolbarTitle) context;
+    }
+
+    @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
@@ -59,6 +75,19 @@ public class DashboardFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_dashboard, container, false);
+        View view = inflater.inflate(R.layout.fragment_dashboard, container, false);
+        RelativeLayout rl = view.findViewById(R.id.wrapper_menu_review);
+        rl.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                toolbarTitleCallback.setToolbarTitle("Review");
+                Fragment fragment = new ReviewFragment();
+                FragmentManager fm = getActivity().getSupportFragmentManager();
+                FragmentTransaction ft = fm.beginTransaction();
+                ft.replace(R.id.content, fragment, Constants.FRAG_MOVE);
+                ft.commit();
+            }
+        });
+        return view;
     }
 }

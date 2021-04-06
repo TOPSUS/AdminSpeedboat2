@@ -29,7 +29,6 @@ import retrofit2.Callback;
 
 public class ReviewDetailFragment extends Fragment {
 
-    FinishActivity finishActivityCallback;
     View view;
     private TextView email, tanggal, review, score_text, from_loc, from_date, from_time, to_loc, to_date,
             to_time, speedboat_name, person, total_price;
@@ -37,12 +36,6 @@ public class ReviewDetailFragment extends Fragment {
     private ImageView imageUser;
     private Integer review_id = 0;
     private ReviewService service;
-
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        finishActivityCallback = (FinishActivity) context;
-    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -59,13 +52,7 @@ public class ReviewDetailFragment extends Fragment {
         view = inflater.inflate(R.layout.fragment_review_detail, container, false);
         this.service = RetrofitClient.getClient().create(ReviewService.class);
         getData();
-        ImageView back = view.findViewById(R.id.toolbar_back);
-        back.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Log.d("TEST", "TEST");
-            }
-        });
+
         return view;
     }
 

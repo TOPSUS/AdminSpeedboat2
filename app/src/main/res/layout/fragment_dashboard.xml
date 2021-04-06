@@ -296,9 +296,41 @@
                     android:letterSpacing="0.03"/>
             </RelativeLayout>
 
+<!--            <RelativeLayout-->
+<!--                android:id="@+id/r4"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:padding="10dp"-->
+<!--                android:layout_below="@id/r3"-->
+<!--                android:layout_marginEnd="10dp"-->
+<!--                android:layout_marginStart="5dp"-->
+<!--                android:layout_marginBottom="5dp">-->
+
+<!--                <ImageView-->
+<!--                    android:id="@+id/i4"-->
+<!--                    android:layout_width="60dp"-->
+<!--                    android:layout_height="60dp"-->
+<!--                    android:src="@drawable/amazon"/>-->
+
+<!--                <TextView-->
+<!--                    android:layout_marginTop="10dp"-->
+<!--                    android:id="@+id/tt4"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="Reward"-->
+<!--                    android:layout_toRightOf="@+id/i4"-->
+<!--                    android:textSize="25dp"-->
+<!--                    android:textStyle="bold"-->
+<!--                    android:fontFamily="sans-serif-black"-->
+<!--                    android:textColor="#516b9e"-->
+<!--                    android:layout_marginLeft="20dp"-->
+<!--                    android:letterSpacing="0.03"/>-->
+<!--            </RelativeLayout>-->
+
             <RelativeLayout
-                android:id="@+id/r4"
+                android:id="@+id/wrapper_menu_review"
                 android:layout_width="match_parent"
+                android:clickable="true"
                 android:layout_height="wrap_content"
                 android:padding="10dp"
                 android:layout_below="@id/r3"
@@ -307,18 +339,18 @@
                 android:layout_marginBottom="5dp">
 
                 <ImageView
-                    android:id="@+id/i4"
+                    android:id="@+id/iv_menu_review"
                     android:layout_width="60dp"
                     android:layout_height="60dp"
                     android:src="@drawable/amazon"/>
 
                 <TextView
                     android:layout_marginTop="10dp"
-                    android:id="@+id/tt4"
+                    android:id="@+id/tv_menu_review"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Reward"
-                    android:layout_toRightOf="@+id/i4"
+                    android:text="Review"
+                    android:layout_toRightOf="@+id/iv_menu_review"
                     android:textSize="25dp"
                     android:textStyle="bold"
                     android:fontFamily="sans-serif-black"
