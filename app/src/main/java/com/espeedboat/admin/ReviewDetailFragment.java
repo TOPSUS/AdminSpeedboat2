@@ -59,6 +59,13 @@ public class ReviewDetailFragment extends Fragment {
         view = inflater.inflate(R.layout.fragment_review_detail, container, false);
         this.service = RetrofitClient.getClient().create(ReviewService.class);
         getData();
+        ImageView back = view.findViewById(R.id.toolbar_back);
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d("TEST", "TEST");
+            }
+        });
         return view;
     }
 
