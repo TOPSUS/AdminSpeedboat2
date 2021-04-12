@@ -34,4 +34,7 @@
     <string name="rd_from">From</string>
     <string name="rd_to">To</string>
     <string name="rd_detail">Detail Order</string>
+
+    <!--  Dashboard  -->
+    <string name="dashboard_total">Total</string>
 </resources>
