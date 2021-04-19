@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:id="@+id/dashboard"
+        android:id="@+id/nav_dashboard"
         android:title="@string/menu_dashboard"
         android:icon="@drawable/ic_dashboard_24"
         android:iconTint="@color/primary_black"/>
@@ -23,7 +23,7 @@
         android:iconTint="@color/primary_black"/>
 
     <item
-        android:id="@+id/speedboat"
+        android:id="@+id/nav_kapal"
         android:title="@string/menu_speedboat"
         android:icon="@drawable/ic_boat_24"
         android:iconTint="@color/primary_black"/>

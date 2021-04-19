@@ -22,6 +22,7 @@
     <color name="primary_green">#1BDC51</color>
     <color name="primary_yellow">#FDF42A</color>
     <color name="primary_red">#F23131</color>
+    <color name="primary_red_dark">#CF2B2B</color>
 
     <!--  Secondary Color Scheme  -->
     <color name="secondary">#1bdcb9</color>

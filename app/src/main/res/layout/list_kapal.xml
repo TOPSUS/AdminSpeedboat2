@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/transparent"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <RelativeLayout
+        android:id="@+id/itemLay"
+        android:focusableInTouchMode="false"
+        android:focusable="true"
+        android:clickable="true"
+        android:background="@drawable/bg_item_kapal"
+        android:layout_toStartOf="@id/remove"
+        android:padding="@dimen/margin_16"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <RelativeLayout
+            android:id="@+id/header_wrapper"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/img_kapal"
+                android:layout_width="@dimen/profile_size_64"
+                android:layout_height="@dimen/profile_size_64"
+                app:civ_border_color="@color/secondary_grey"
+                android:src="@drawable/profile"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_8"
+                android:layout_toEndOf="@id/img_kapal"
+                android:layout_centerVertical="true"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/nama"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto_bold"
+                    android:text="Nama Kapal"
+                    android:textColor="@color/primary_black"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/kapasitas"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto_regular"
+                    android:text="Kapasitas 30 Orang"
+                    android:textColor="@color/primary_grey"
+                    android:textSize="16sp" />
+
+            </LinearLayout>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_8"
+            android:layout_below="@+id/header_wrapper">
+            <LinearLayout
+                android:id="@+id/info_wrapper"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <TextView
+                    android:id="@+id/tipe"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto_medium"
+                    android:text="Speedboat"
+                    android:textColor="@color/primary_grey"
+                    android:textSize="16sp" />
+                <TextView
+                    android:id="@+id/golongan"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto_medium"
+                    android:text="Golongan I"
+                    android:textColor="@color/primary_black"
+                    android:textSize="16sp" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/harga"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignBottom="@id/info_wrapper"
+                android:fontFamily="@font/roboto_bold"
+                android:text="Rp. 300.000,-"
+                android:textColor="@color/primary"
+                android:textSize="24sp" />
+        </RelativeLayout>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/remove"
+        android:focusable="true"
+        android:clickable="true"
+        android:layout_width="32dp"
+        android:layout_height="match_parent"
+        android:layout_alignBottom="@id/itemLay"
+        android:layout_alignParentEnd="true"
+        android:layout_alignTop="@id/itemLay"
+        android:background="@drawable/bg_item_kapal_remove">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/ic_baseline_delete"
+            android:backgroundTint="@color/primary_white"
+            android:layout_centerInParent="true"/>
+    </RelativeLayout>
+</RelativeLayout>

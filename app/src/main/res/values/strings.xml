@@ -1,13 +1,13 @@
 <resources>
     <!--  Base  -->
     <string name="base_null">Null</string>
-    <string name="app_name">Admin ESpeedboat</string>
+    <string name="app_name">E Tiket</string>
 
     <!--  Bottom bar Menu  -->
     <string name="menu_dashboard">Dashboard</string>
     <string name="menu_jadwal">Jadwal</string>
     <string name="menu_transaksi">Transaksi</string>
-    <string name="menu_speedboat">Speedboat</string>
+    <string name="menu_speedboat">Kapal</string>
 
     <!--  Auth  -->
     <string name="auth_masuk">Masuk</string>
@@ -37,4 +37,13 @@
 
     <!--  Dashboard  -->
     <string name="dashboard_total">Total</string>
+
+    <!--  Kapal  -->
+    <string name="kapal_nama">Nama</string>
+    <string name="kapal_kapasitas">Kapasitas</string>
+    <string name="kapal_deskripsi">Deskripsi</string>
+    <string name="kapal_contact">Contact Service</string>
+    <string name="kapal_tipe">Tipe Kapal</string>
+    <string name="kapal_golongan">Golongan Kapal</string>
+    <string name="kapal_save">Save</string>
 </resources>

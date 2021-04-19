@@ -9,4 +9,6 @@
     <dimen name="margin_72">72dp</dimen>
 
     <dimen name="profile_size_64">64dp</dimen>
+
+    <dimen name="card_radius_8">8dp</dimen>
 </resources>

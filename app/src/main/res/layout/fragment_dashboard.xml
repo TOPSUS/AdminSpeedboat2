@@ -168,7 +168,7 @@
                     android:layout_toEndOf="@+id/rating_progress_wrap"
                     android:layout_centerVertical="true"
                     android:fontFamily="@font/roboto_medium"
-                    android:textSize="18sp"
+                    android:textSize="24sp"
                     android:textColor="@color/primary_yellow"
                     android:text="Rating 4.5"/>
             </RelativeLayout>
@@ -245,7 +245,7 @@
                     android:drawableTint="@color/primary_white"/>
 
                 <Button
-                    android:id="@+id/menu_speedboat"
+                    android:id="@+id/menu_kapal"
                     android:layout_width="wrap_content"
                     android:layout_height="56dp"
                     android:layout_marginLeft="@dimen/margin_8"

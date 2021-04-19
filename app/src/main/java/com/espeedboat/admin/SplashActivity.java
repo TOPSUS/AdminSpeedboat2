@@ -34,26 +34,26 @@ public class SplashActivity extends AppCompatActivity {
         startActivity(new Intent(SplashActivity.this, MainActivity.class)
                 .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
 
-        bindView();
-        hideSystemUI(getWindow());
-
-        animateText("Admin ESpeedboat");
-
-        Animation splashAnim = AnimationUtils.loadAnimation(this, R.anim.splash_anim);
-        ivSplash.setAnimation(splashAnim);
-
-        new Handler().postDelayed(() -> {
-            String isLogin = sessionManager.getToken();
-
-            if (isLogin == null) {
-                startActivity(new Intent(SplashActivity.this, LoginActivity.class)
-                        .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
-            } else {
-                startActivity(new Intent(SplashActivity.this, MainActivity.class)
-                        .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
-            }
-            finish();
-        }, 4000);
+//        bindView();
+//        hideSystemUI(getWindow());
+//
+//        animateText("Admin ESpeedboat");
+//
+//        Animation splashAnim = AnimationUtils.loadAnimation(this, R.anim.splash_anim);
+//        ivSplash.setAnimation(splashAnim);
+//
+//        new Handler().postDelayed(() -> {
+//            String isLogin = sessionManager.getToken();
+//
+//            if (isLogin == null) {
+//                startActivity(new Intent(SplashActivity.this, LoginActivity.class)
+//                        .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
+//            } else {
+//                startActivity(new Intent(SplashActivity.this, MainActivity.class)
+//                        .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
+//            }
+//            finish();
+//        }, 4000);
     }
 
     private void bindView () {

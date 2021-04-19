@@ -1,5 +1,6 @@
 package com.espeedboat.admin;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
@@ -7,20 +8,25 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.os.Bundle;
+import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.espeedboat.admin.fragment.KapalFragment;
 import com.espeedboat.admin.fragment.ProfileFragment;
 import com.espeedboat.admin.interfaces.FinishActivity;
 import com.espeedboat.admin.interfaces.ToolbarTitle;
 import com.espeedboat.admin.utils.Constants;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity implements FinishActivity, ToolbarTitle {
 
     private Toolbar toolbar;
     private TextView title;
     private ImageView profileToolbar, notifToolbar, back;
+    private BottomNavigationView navigation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +46,11 @@ public class MainActivity extends AppCompatActivity implements FinishActivity, T
         loadFragment(new DashboardFragment());
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+    }
+
     private void init() {
         toolbar = findViewById(R.id.main_toolbar);
         setSupportActionBar(toolbar);
@@ -50,6 +61,9 @@ public class MainActivity extends AppCompatActivity implements FinishActivity, T
         title = findViewById(R.id.toolbar_title);
         title.setText(R.string.menu_dashboard);
         back = findViewById(R.id.toolbar_back);
+
+        navigation = findViewById(R.id.bottomnav);
+        navigation.setOnNavigationItemSelectedListener(bottomNavItemSelected);
     }
 
     private void leftToolbarListener() {
@@ -68,6 +82,22 @@ public class MainActivity extends AppCompatActivity implements FinishActivity, T
         ft.commit();
     }
 
+    private BottomNavigationView.OnNavigationItemSelectedListener bottomNavItemSelected = item -> {
+        back.setVisibility(View.INVISIBLE);
+
+        switch (item.getItemId()) {
+            case R.id.nav_kapal:
+                loadFragment(new KapalFragment());
+                title.setText(R.string.menu_speedboat);
+                return true;
+            case R.id.nav_dashboard:
+                loadFragment(new DashboardFragment());
+                title.setText(R.string.menu_dashboard);
+                return true;
+        }
+
+        return false;
+    };
 
     // Back Button Click
     private void backButtonClick() {

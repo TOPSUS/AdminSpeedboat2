@@ -10,10 +10,12 @@ import androidx.fragment.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
 import com.budiyev.android.circularprogressbar.CircularProgressBar;
+import com.espeedboat.admin.fragment.KapalFragment;
 import com.espeedboat.admin.fragment.ReviewFragment;
 import com.espeedboat.admin.interfaces.FinishActivity;
 import com.espeedboat.admin.interfaces.ToolbarTitle;
@@ -62,11 +64,13 @@ public class DashboardFragment extends Fragment {
 
         setBarChart();
 
+        menuClickListener();
+
         transaksiProgress.setProgress(50f);
         ratingProgress.setProgress(50f);
 
         for (int i = 0; i < 5; i++) {
-            View view = LayoutInflater.from(getActivity()).inflate(R.layout.transaksi_data, null);
+            View lview = LayoutInflater.from(getActivity()).inflate(R.layout.transaksi_data, null);
 
             LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
                     LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
@@ -83,9 +87,9 @@ public class DashboardFragment extends Fragment {
             }
 
 
-            view.setLayoutParams(layoutParams);
+            lview.setLayoutParams(layoutParams);
 
-            transaksiData.addView(view);
+            transaksiData.addView(lview);
         }
 
         return view;
@@ -96,6 +100,28 @@ public class DashboardFragment extends Fragment {
         transaksiProgress = view.findViewById(R.id.transaksi_progress);
         ratingProgress = view.findViewById(R.id.rating_progress);
         transaksiData = view.findViewById(R.id.transaksi_data_horizontal);
+    }
+
+    private void menuClickListener() {
+        Button mReview = view.findViewById(R.id.menu_review);
+        mReview.setOnClickListener(v -> {
+            toolbarTitleCallback.setToolbarTitle("Review");
+            Fragment fragment = new ReviewFragment();
+            FragmentManager fm = getActivity().getSupportFragmentManager();
+            FragmentTransaction ft = fm.beginTransaction();
+            ft.replace(R.id.content, fragment, Constants.FRAG_MOVE);
+            ft.commit();
+        });
+
+        Button mKapal = view.findViewById(R.id.menu_kapal);
+        mKapal.setOnClickListener(v -> {
+            toolbarTitleCallback.setToolbarTitle("Kapal");
+            Fragment fragment = new KapalFragment();
+            FragmentManager fm = getActivity().getSupportFragmentManager();
+            FragmentTransaction ft = fm.beginTransaction();
+            ft.replace(R.id.content, fragment, Constants.FRAG_MOVE);
+            ft.commit();
+        });
     }
 
     private void setBarChart() {

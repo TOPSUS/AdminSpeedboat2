@@ -9,6 +9,21 @@ public class Data {
     @SerializedName("auth")
     @Expose
     private Auth auth;
+    @SerializedName("kapal")
+    @Expose
+    private List<Kapal> kapal = null;
+    @SerializedName("review_list")
+    @Expose
+    private List<ReviewList> reviewList = null;
+    @SerializedName("review_summary")
+    @Expose
+    private ReviewSummary reviewSummary;
+    @SerializedName("review_detail")
+    @Expose
+    private ReviewDetail reviewDetail;
+    @SerializedName("review_detail_order")
+    @Expose
+    private ReviewDetailOrder reviewDetailOrder;
 
     public Auth getAuth() {
         return auth;
@@ -17,13 +32,6 @@ public class Data {
     public void setAuth(Auth auth) {
         this.auth = auth;
     }
-
-    @SerializedName("review_list")
-    @Expose
-    private List<ReviewList> reviewList = null;
-    @SerializedName("review_summary")
-    @Expose
-    private ReviewSummary reviewSummary;
 
     public List<ReviewList> getReviewList() {
         return reviewList;
@@ -41,10 +49,13 @@ public class Data {
         this.reviewSummary = reviewSummary;
     }
 
+    public List<Kapal> getKapal() {
+        return kapal;
+    }
 
-    @SerializedName("review_detail")
-    @Expose
-    private ReviewDetail reviewDetail;
+    public void setKapal(List<Kapal> kapal) {
+        this.kapal = kapal;
+    }
 
     public ReviewDetail getReviewDetail() {
         return reviewDetail;
@@ -53,10 +64,6 @@ public class Data {
     public void setReviewDetail(ReviewDetail reviewDetail) {
         this.reviewDetail = reviewDetail;
     }
-
-    @SerializedName("review_detail_order")
-    @Expose
-    private ReviewDetailOrder reviewDetailOrder;
 
     public ReviewDetailOrder getReviewDetailOrder() {
         return reviewDetailOrder;

@@ -66,8 +66,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginVertical="@dimen/margin_8"
                 android:padding="@dimen/margin_8"
+                android:background="@drawable/bg_btn_profile"
                 android:clickable="true"
-                android:orientation="horizontal">
+                android:focusable="true">
                 <ImageView
                     android:id="@+id/img_edit"
                     android:layout_alignParentStart="true"
@@ -100,7 +101,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginVertical="@dimen/margin_8"
                 android:padding="@dimen/margin_8"
-                android:orientation="horizontal">
+                android:background="@drawable/bg_btn_profile"
+                android:clickable="true"
+                android:focusable="true">
                 <ImageView
                     android:id="@+id/img_change"
                     android:layout_alignParentStart="true"
@@ -142,12 +145,15 @@
                 android:text="@string/profile_section_menu"
                 android:textSize="14sp"
                 android:textColor="@color/secondary_black"/>
+
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginVertical="@dimen/margin_8"
                 android:padding="@dimen/margin_8"
-                android:orientation="horizontal">
+                android:background="@drawable/bg_btn_profile"
+                android:clickable="true"
+                android:focusable="true">
                 <ImageView
                     android:id="@+id/img_article"
                     android:layout_alignParentStart="true"
@@ -180,7 +186,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginVertical="@dimen/margin_8"
                 android:padding="@dimen/margin_8"
-                android:orientation="horizontal">
+                android:background="@drawable/bg_btn_profile"
+                android:clickable="true"
+                android:focusable="true">
                 <ImageView
                     android:id="@+id/img_reward"
                     android:layout_alignParentStart="true"
@@ -210,12 +218,13 @@
             </RelativeLayout>
             <RelativeLayout
                 android:id="@+id/menu_review"
-                android:clickable="true"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginVertical="@dimen/margin_8"
                 android:padding="@dimen/margin_8"
-                android:orientation="horizontal">
+                android:background="@drawable/bg_btn_profile"
+                android:clickable="true"
+                android:focusable="true">
                 <ImageView
                     android:id="@+id/img_review"
                     android:layout_alignParentStart="true"
@@ -249,7 +258,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginVertical="@dimen/margin_8"
                 android:padding="@dimen/margin_8"
-                android:orientation="horizontal">
+                android:background="@drawable/bg_btn_profile"
+                android:clickable="true"
+                android:focusable="true">
                 <ImageView
                     android:id="@+id/img_logout"
                     android:layout_alignParentStart="true"

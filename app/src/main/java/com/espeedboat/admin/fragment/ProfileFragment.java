@@ -30,11 +30,6 @@ import com.espeedboat.admin.utils.SessionManager;
 
 import org.w3c.dom.Text;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link ProfileFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class ProfileFragment extends Fragment {
 
     FinishActivity finishActivityCallback;
