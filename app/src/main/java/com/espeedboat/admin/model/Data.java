@@ -24,6 +24,20 @@ public class Data {
     @SerializedName("review_detail_order")
     @Expose
     private ReviewDetailOrder reviewDetailOrder;
+    @SerializedName("pelabuhan")
+    @Expose
+    private List<Pelabuhan> pelabuhan = null;
+    @SerializedName("golongan")
+    @Expose
+    private List<Golongan> golongan = null;
+
+    public List<Pelabuhan> getPelabuhan() {
+        return pelabuhan;
+    }
+
+    public void setPelabuhan(List<Pelabuhan> pelabuhan) {
+        this.pelabuhan = pelabuhan;
+    }
 
     public Auth getAuth() {
         return auth;
@@ -71,5 +85,13 @@ public class Data {
 
     public void setReviewDetailOrder(ReviewDetailOrder reviewDetailOrder) {
         this.reviewDetailOrder = reviewDetailOrder;
+    }
+
+    public List<Golongan> getGolongan() {
+        return golongan;
+    }
+
+    public void setGolongan(List<Golongan> golongan) {
+        this.golongan = golongan;
     }
 }

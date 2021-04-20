@@ -43,7 +43,9 @@
     <string name="kapal_kapasitas">Kapasitas</string>
     <string name="kapal_deskripsi">Deskripsi</string>
     <string name="kapal_contact">Contact Service</string>
+    <string name="kapal_lama_operasi">Lama Beroperasi</string>
     <string name="kapal_tipe">Tipe Kapal</string>
+    <string name="kapal_pelabuhan">Pelabuhan</string>
     <string name="kapal_golongan">Golongan Kapal</string>
     <string name="kapal_save">Save</string>
 </resources>
