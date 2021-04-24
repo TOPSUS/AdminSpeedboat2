@@ -4,6 +4,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
@@ -28,6 +29,7 @@ import android.widget.Toast;
 
 import com.espeedboat.admin.R;
 import com.espeedboat.admin.client.RetrofitClient;
+import com.espeedboat.admin.fragment.KapalFragment;
 import com.espeedboat.admin.interfaces.FinishActivity;
 import com.espeedboat.admin.interfaces.ToolbarTitle;
 import com.espeedboat.admin.model.Data;
@@ -39,14 +41,17 @@ import com.espeedboat.admin.service.GolonganService;
 import com.espeedboat.admin.service.KapalService;
 import com.espeedboat.admin.service.PelabuhanService;
 import com.espeedboat.admin.utils.Constants;
+import com.espeedboat.admin.utils.FileUtils;
 import com.espeedboat.admin.utils.SessionManager;
 import com.google.android.material.datepicker.MaterialDatePicker;
 import com.google.android.material.datepicker.MaterialPickerOnPositiveButtonClickListener;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
+import java.io.File;
 import java.io.IOException;
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -56,6 +61,9 @@ import java.util.List;
 import java.util.UUID;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 
@@ -73,6 +81,7 @@ public class CreateKapalActivity extends AppCompatActivity {
     private RelativeLayout imageBtn;
     private ProgressDialog dialog;
     private CircleImageView imageView;
+    private Uri selectedImage, uri;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -128,6 +137,68 @@ public class CreateKapalActivity extends AppCompatActivity {
 
         lamaBeroperasi.setOnClickListener(v -> {
             setLamaOperasiListener();
+        });
+
+        submit.setOnClickListener(v -> {
+            String in_nama, in_deskripsi, in_contact, in_tipe, in_tanggal_beroperasi = null, in_golongan;
+            int in_kapasitas;
+            long date = 0;
+
+            DateFormat dateFormat = new SimpleDateFormat("dd MMM yyyy");
+            try {
+                date = dateFormat.parse(lamaBeroperasi.getText().toString()).getTime();
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+
+            in_nama = nama.getText().toString();
+            in_deskripsi = deskripsi.getText().toString();
+            in_contact = contact.getText().toString();
+            in_tipe = autoCompleteTipe.getText().toString();
+            DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+            in_tanggal_beroperasi = df.format(date);
+            in_golongan = autoCompleteGolongan.getText().toString();
+            in_kapasitas = Integer.parseInt(kapasitas.getText().toString());
+
+//            File file = FileUtils.getFile(this, uri);
+//            if (file != null) {
+//                RequestBody requestFile = RequestBody.create( MediaType.parse("image/*"), file );
+
+//                MultipartBody.Part body = MultipartBody.Part.createFormData("image_kapal", file.getName(), requestFile);
+            SessionManager sm = new SessionManager(this);
+                KapalService service = RetrofitClient.getClient().create(KapalService.class);
+                Call<Response> create =  service.createKapal(sm.getAuthToken(), in_nama, in_kapasitas, in_deskripsi, in_contact,
+                        in_tipe, in_golongan, in_tanggal_beroperasi);
+
+                create.enqueue(new Callback<Response>() {
+                    @Override
+                    public void onResponse(Call<Response> call, retrofit2.Response<Response> response) {
+                        if (response.isSuccessful()) {
+                            if (response.body().getStatus() == 200) {
+                                Toast.makeText(getApplicationContext(),  response.body().getMessage(), Toast.LENGTH_LONG).show();
+
+//                                FragmentManager fm = getSupportFragmentManager();
+//                                FragmentTransaction ft = fm.beginTransaction();
+//                                ft.replace(R.id.content, new KapalFragment(), Constants.FRAG_MOVE);
+//                                ft.commit();
+                            } else {
+                                Log.d("error a", response.message().toString());
+                                Toast.makeText(getApplicationContext(),  "a", Toast.LENGTH_LONG).show();
+                            }
+                        } else {
+                            Log.d("error b", response.body().toString());
+                            Toast.makeText(getApplicationContext(),  "b", Toast.LENGTH_LONG).show();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<Response> call, Throwable t) {
+                        Log.d("data input", t.getMessage().toString());
+                        Toast.makeText(getApplicationContext(),  t.getMessage(), Toast.LENGTH_LONG).show();
+
+                    }
+                });
+//            }
         });
     }
 
@@ -270,7 +341,8 @@ public class CreateKapalActivity extends AppCompatActivity {
                             if (list.getId() == golonganId) {
                                 namaGolongan = list.getGolongan() + " (" + list.getHarga().toString() + ")";
                             }
-                            golongans.add(list.getGolongan() + " (" + list.getHarga().toString() + ")" );
+//                            golongans.add(list.getGolongan() + " (" + list.getHarga().toString() + ")" );
+                            golongans.add(list.getGolongan());
                         }
 
                         autoCompleteGolongan = findViewById(R.id.autoCompleteGolongan);
@@ -334,6 +406,7 @@ public class CreateKapalActivity extends AppCompatActivity {
             switch (requestCode) {
                 case 0:
                     if (resultCode == this.RESULT_OK && data != null) {
+//                        selectedImage = data.getExtras().get("URI");
                         Bitmap selectedImage = (Bitmap) data.getExtras().get("data");
                         imageView.setDrawingCacheEnabled(true);
                         imageView.buildDrawingCache();
@@ -345,11 +418,12 @@ public class CreateKapalActivity extends AppCompatActivity {
                     break;
                 case 1:
                     if (resultCode == this.RESULT_OK && data != null) {
-                        Uri selectedImage = data.getData();
+                        selectedImage = data.getData();
 
                         if (selectedImage != null) {
                             try {
                                 Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), selectedImage);
+                                uri = Uri.parse(bitmap.toString());
                                 Toast.makeText(this, "Image Loaded", Toast.LENGTH_SHORT).show();
                                 imageView.setDrawingCacheEnabled(true);
                                 imageView.buildDrawingCache();
