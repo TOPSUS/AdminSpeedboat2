@@ -19,6 +19,29 @@
             android:layout_height="wrap_content"
             android:padding="@dimen/margin_24"
             android:orientation="vertical">
+
+            <RelativeLayout
+                android:id="@+id/image_wrapper"
+                android:layout_width="128dp"
+                android:layout_height="128dp"
+                android:layout_gravity="center"
+                android:paddingVertical="@dimen/margin_4">
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/image_kapal"
+                    android:layout_width="128dp"
+                    android:layout_height="128dp"
+                    android:layout_centerInParent="true"
+                    app:civ_border_color="@color/white"
+                    android:src="@drawable/profile"/>
+                <ImageButton
+                    android:layout_width="@dimen/margin_48"
+                    android:layout_height="@dimen/margin_48"
+                    android:background="@drawable/bg_btn_circle"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentBottom="true"
+                    android:src="@drawable/ic_camera"/>
+            </RelativeLayout>
+
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/namaTextField"
                 android:layout_width="match_parent"

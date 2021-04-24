@@ -1,11 +1,18 @@
 package com.espeedboat.admin.activity;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.FragmentManager;
 
 import android.annotation.SuppressLint;
+import android.app.ProgressDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
@@ -15,6 +22,7 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -37,6 +45,7 @@ import com.google.android.material.datepicker.MaterialPickerOnPositiveButtonClic
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
+import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -44,7 +53,9 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
+import java.util.UUID;
 
+import de.hdodenhof.circleimageview.CircleImageView;
 import retrofit2.Call;
 import retrofit2.Callback;
 
@@ -54,11 +65,14 @@ public class CreateKapalActivity extends AppCompatActivity {
     // layouts attribute
     private AutoCompleteTextView autoCompletePelabuhan, autoCompleteTipe, autoCompleteGolongan;
     private TextInputEditText nama, kapasitas, deskripsi, contact, lamaBeroperasi;
-    private Button remove, save;
+    private Button remove, submit;
     private ImageView profileToolbar, notifToolbar, back;
     private TextView title;
     private Toolbar toolbar;
     private MaterialDatePicker datePicker;
+    private RelativeLayout imageBtn;
+    private ProgressDialog dialog;
+    private CircleImageView imageView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,11 +83,16 @@ public class CreateKapalActivity extends AppCompatActivity {
 
         setToolbar();
 
+        eventListener();
+
+        setRemoveVisible(false);
+
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {
             int id = bundle.getInt(Constants.KAPAL_ID, 0);
             if (id > 0) {
                 title.setText(R.string.menu_speedboat_edit);
+                setRemoveVisible(true);
                 getDataKapal(id);
             }
         }
@@ -96,6 +115,16 @@ public class CreateKapalActivity extends AppCompatActivity {
         deskripsi = findViewById(R.id.deskripsiForm);
         contact = findViewById(R.id.contactForm);
         lamaBeroperasi = findViewById(R.id.lamaOperasiForm);
+        imageBtn = findViewById(R.id.image_wrapper);
+        imageView = findViewById(R.id.image_kapal);
+        remove = findViewById(R.id.btn_remove);
+        submit = findViewById(R.id.btn_submit);
+    }
+
+    private void eventListener() {
+        imageBtn.setOnClickListener(v -> {
+            setCameraListener();
+        });
 
         lamaBeroperasi.setOnClickListener(v -> {
             setLamaOperasiListener();
@@ -116,6 +145,14 @@ public class CreateKapalActivity extends AppCompatActivity {
         profileToolbar.setVisibility(View.GONE);
         back.setVisibility(View.VISIBLE);
         back.setOnClickListener(v -> onBackPressed());
+    }
+
+    private void setRemoveVisible(Boolean con) {
+        if (con) {
+            remove.setVisibility(View.VISIBLE);
+        } else {
+            remove.setVisibility(View.GONE);
+        }
     }
 
     private void getDataKapal(int id) {
@@ -266,5 +303,68 @@ public class CreateKapalActivity extends AppCompatActivity {
             String date = dateFormat.format(selection);
             lamaBeroperasi.setText(date);
         });
+    }
+
+    private void setCameraListener() {
+        final CharSequence[] options = { "Camera", "Choose from Gallery", "Cancel" };
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Choose Image");
+
+        builder.setItems(options, (dialog, item) -> {
+            if (options[item].equals("Camera")) {
+                Intent takePicture = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                startActivityForResult(takePicture, 0);
+
+            } else if (options[item].equals("Choose from Gallery")) {
+                Intent pickPhoto = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                startActivityForResult(pickPhoto , 1);
+
+            } else if (options[item].equals("Cancel")) {
+                dialog.dismiss();
+            }
+        });
+        builder.show();
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode != this.RESULT_CANCELED) {
+            switch (requestCode) {
+                case 0:
+                    if (resultCode == this.RESULT_OK && data != null) {
+                        Bitmap selectedImage = (Bitmap) data.getExtras().get("data");
+                        imageView.setDrawingCacheEnabled(true);
+                        imageView.buildDrawingCache();
+                        imageView.setImageBitmap(selectedImage);
+                        Toast.makeText(this, "Image Loaded", Toast.LENGTH_SHORT).show();
+                        String fileName = UUID.randomUUID().toString() + ".jpg";
+                    }
+
+                    break;
+                case 1:
+                    if (resultCode == this.RESULT_OK && data != null) {
+                        Uri selectedImage = data.getData();
+
+                        if (selectedImage != null) {
+                            try {
+                                Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), selectedImage);
+                                Toast.makeText(this, "Image Loaded", Toast.LENGTH_SHORT).show();
+                                imageView.setDrawingCacheEnabled(true);
+                                imageView.buildDrawingCache();
+                                imageView.setImageBitmap(bitmap);
+                                String fileName = UUID.randomUUID().toString() + ".jpg";
+
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                                Toast.makeText(this, "Failed!", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+
+                    }
+                    break;
+            }
+        }
     }
 }
