@@ -2,6 +2,7 @@ package com.espeedboat.admin.adapters;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.text.Layout;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -16,6 +17,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 
+import com.espeedboat.admin.activity.CreateKapalActivity;
 import com.espeedboat.admin.client.RetrofitClient;
 import com.espeedboat.admin.interfaces.UpdateListener;
 import com.espeedboat.admin.model.Data;
@@ -30,6 +32,7 @@ import retrofit2.Callback;
 import com.espeedboat.admin.R;
 import com.espeedboat.admin.model.Response;
 import com.espeedboat.admin.service.KapalService;
+import com.espeedboat.admin.utils.Constants;
 import com.espeedboat.admin.utils.SessionManager;
 
 public class KapalAdapter extends BaseAdapter {
@@ -75,6 +78,7 @@ public class KapalAdapter extends BaseAdapter {
         holder.golongan = rowView.findViewById(R.id.golongan);
         holder.price = rowView.findViewById(R.id.harga);
         holder.remove = rowView.findViewById(R.id.remove);
+        holder.itemLayout = rowView.findViewById(R.id.itemLay);
 
         // set text
         holder.nama.setText(kapals.get(position).getNama());
@@ -84,12 +88,13 @@ public class KapalAdapter extends BaseAdapter {
         holder.price.setText("Rp. " + kapals.get(position).getGolongan().getHarga().toString() + ",-");
 
         // listener
-        holder.remove.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // do something
-                confirmDelete(kapals.get(position).getId());
-            }
+        holder.remove.setOnClickListener(v -> {
+            // do something
+            confirmDelete(kapals.get(position).getId());
+        });
+
+        holder.itemLayout.setOnClickListener(v -> {
+            viewKapal(kapals.get(position).getId());
         });
 
         return rowView;
@@ -103,6 +108,13 @@ public class KapalAdapter extends BaseAdapter {
 
     public void updateData (List<Kapal> kapals) {
         this.kapals = kapals;
+    }
+
+
+    private void viewKapal(final int id) {
+        Intent intent = new Intent(context, CreateKapalActivity.class);
+        intent.putExtra(Constants.KAPAL_ID, id);
+        context.startActivity(intent);
     }
 
     private void confirmDelete(final int id) {

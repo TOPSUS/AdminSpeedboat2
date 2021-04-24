@@ -92,12 +92,12 @@ public class KapalFragment extends Fragment implements UpdateListener {
                     if (response.body().getStatus() == 200) {
 
                         Data data = response.body().getData();
-                        if (data.getKapal().size() > 0) {
+                        if (data.getListKapal().size() > 0) {
                             listView.setVisibility(View.VISIBLE);
                             empty.setVisibility(View.GONE);
 
                             listView.setAdapter(kapalAdapter);
-                            kapalAdapter.updateData(data.getKapal());
+                            kapalAdapter.updateData(data.getListKapal());
                             kapalAdapter.notifyDataSetChanged();
                         } else {
                             listView.setVisibility(View.GONE);

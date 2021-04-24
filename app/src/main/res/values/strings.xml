@@ -3,11 +3,13 @@
     <string name="base_null">Null</string>
     <string name="app_name">E Tiket</string>
 
-    <!--  Bottom bar Menu  -->
+    <!--  Menu  -->
     <string name="menu_dashboard">Dashboard</string>
     <string name="menu_jadwal">Jadwal</string>
     <string name="menu_transaksi">Transaksi</string>
     <string name="menu_speedboat">Kapal</string>
+    <string name="menu_speedboat_create">Create Kapal</string>
+    <string name="menu_speedboat_edit">Edit Kapal</string>
 
     <!--  Auth  -->
     <string name="auth_masuk">Masuk</string>

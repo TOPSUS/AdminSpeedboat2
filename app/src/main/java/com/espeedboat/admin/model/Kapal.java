@@ -3,6 +3,8 @@ package com.espeedboat.admin.model;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.util.Date;
+
 public class Kapal {
     @SerializedName("id")
     @Expose
@@ -22,6 +24,15 @@ public class Kapal {
     @SerializedName("golongan")
     @Expose
     private Golongan golongan;
+    @SerializedName("deskripsi")
+    @Expose
+    private String deskripsi;
+    @SerializedName("contact")
+    @Expose
+    private String contact;
+    @SerializedName("tanggal_beroperasi")
+    @Expose
+    private String tanggalBeroperasi;
 
     public Integer getId() {
         return id;
@@ -69,5 +80,29 @@ public class Kapal {
 
     public void setGolongan(Golongan golongan) {
         this.golongan = golongan;
+    }
+
+    public String getDeskripsi() {
+        return deskripsi;
+    }
+
+    public void setDeskripsi(String deskripsi) {
+        this.deskripsi = deskripsi;
+    }
+
+    public String getContact() {
+        return contact;
+    }
+
+    public void setContact(String contact) {
+        this.contact = contact;
+    }
+
+    public String getTanggalBeroperasi() {
+        return tanggalBeroperasi;
+    }
+
+    public void setTanggalBeroperasi(String tanggalBeroperasi) {
+        this.tanggalBeroperasi = tanggalBeroperasi;
     }
 }

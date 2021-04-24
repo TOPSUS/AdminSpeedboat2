@@ -13,6 +13,9 @@ public interface KapalService {
     @GET(Endpoint.KAPAL_LIST)
     Call<Response> showKapal(@Header("Authorization") String token);
 
+    @GET(Endpoint.KAPAL_VIEW)
+    Call<Response> viewKapal(@Header("Authorization") String token, @Path(value = "kapal", encoded = true) int id);
+
     @DELETE(Endpoint.KAPAL_DELETE)
     Call<Response> deleteKapal(@Header("Authorization") String token, @Path(value = "kapal", encoded = true) int id);
 }

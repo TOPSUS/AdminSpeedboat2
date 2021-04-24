@@ -9,9 +9,12 @@ public class Data {
     @SerializedName("auth")
     @Expose
     private Auth auth;
+    @SerializedName("list_kapal")
+    @Expose
+    private List<Kapal> listKapal = null;
     @SerializedName("kapal")
     @Expose
-    private List<Kapal> kapal = null;
+    private Kapal kapal;
     @SerializedName("review_list")
     @Expose
     private List<ReviewList> reviewList = null;
@@ -63,11 +66,19 @@ public class Data {
         this.reviewSummary = reviewSummary;
     }
 
-    public List<Kapal> getKapal() {
+    public List<Kapal> getListKapal() {
+        return listKapal;
+    }
+
+    public void setListKapal(List<Kapal> kapal) {
+        this.listKapal = kapal;
+    }
+
+    public Kapal getKapal() {
         return kapal;
     }
 
-    public void setKapal(List<Kapal> kapal) {
+    public void setKapal(Kapal kapal) {
         this.kapal = kapal;
     }
 

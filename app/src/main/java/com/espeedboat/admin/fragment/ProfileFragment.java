@@ -33,12 +33,12 @@ import org.w3c.dom.Text;
 public class ProfileFragment extends Fragment {
 
     FinishActivity finishActivityCallback;
+    ToolbarTitle toolbarTitleCallback;
     private View view;
     private ImageView back, profileToolbar;
     private SessionManager sessionManager;
     private TextView username, role, title;
     private RelativeLayout logout, review;
-    ToolbarTitle toolbarTitleCallback;
 
     public ProfileFragment() {
         // Required empty public constructor
