@@ -3,8 +3,8 @@ package com.espeedboat.admin.activity;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.content.FileProvider;
 import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 
 import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
@@ -13,12 +13,10 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.provider.MediaStore;
 import android.util.Log;
-import android.view.MotionEvent;
 import android.view.View;
-import android.widget.Adapter;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
@@ -29,9 +27,6 @@ import android.widget.Toast;
 
 import com.espeedboat.admin.R;
 import com.espeedboat.admin.client.RetrofitClient;
-import com.espeedboat.admin.fragment.KapalFragment;
-import com.espeedboat.admin.interfaces.FinishActivity;
-import com.espeedboat.admin.interfaces.ToolbarTitle;
 import com.espeedboat.admin.model.Data;
 import com.espeedboat.admin.model.Golongan;
 import com.espeedboat.admin.model.Kapal;
@@ -41,12 +36,10 @@ import com.espeedboat.admin.service.GolonganService;
 import com.espeedboat.admin.service.KapalService;
 import com.espeedboat.admin.service.PelabuhanService;
 import com.espeedboat.admin.utils.Constants;
-import com.espeedboat.admin.utils.FileUtils;
 import com.espeedboat.admin.utils.SessionManager;
+import com.espeedboat.admin.utils.Util;
 import com.google.android.material.datepicker.MaterialDatePicker;
-import com.google.android.material.datepicker.MaterialPickerOnPositiveButtonClickListener;
 import com.google.android.material.textfield.TextInputEditText;
-import com.google.android.material.textfield.TextInputLayout;
 
 import java.io.File;
 import java.io.IOException;
@@ -54,10 +47,8 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Date;
-import java.util.HashSet;
-import java.util.List;
+import java.util.Locale;
 import java.util.UUID;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -81,7 +72,7 @@ public class CreateKapalActivity extends AppCompatActivity {
     private RelativeLayout imageBtn;
     private ProgressDialog dialog;
     private CircleImageView imageView;
-    private Uri selectedImage, uri;
+    private Uri selectedImage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -140,6 +131,7 @@ public class CreateKapalActivity extends AppCompatActivity {
         });
 
         submit.setOnClickListener(v -> {
+            RequestBody r_nama, r_deskripsi, r_contact, r_tipe, r_tanggal_beroperasi, r_golongan, r_kapasitas;
             String in_nama, in_deskripsi, in_contact, in_tipe, in_tanggal_beroperasi = null, in_golongan;
             int in_kapasitas;
             long date = 0;
@@ -159,35 +151,41 @@ public class CreateKapalActivity extends AppCompatActivity {
             in_tanggal_beroperasi = df.format(date);
             in_golongan = autoCompleteGolongan.getText().toString();
             in_kapasitas = Integer.parseInt(kapasitas.getText().toString());
+            KapalService service = RetrofitClient.getClient().create(KapalService.class);
+            if (selectedImage == null) {
+                Toast.makeText(getApplicationContext(),  "Pilih Image Kapal", Toast.LENGTH_LONG).show();
+            } else {
+                String filePath = Util.getRealPathFromURIPath(selectedImage, CreateKapalActivity.this);
+                File fileImage = new File(filePath);
 
-//            File file = FileUtils.getFile(this, uri);
-//            if (file != null) {
-//                RequestBody requestFile = RequestBody.create( MediaType.parse("image/*"), file );
+                RequestBody mFile = RequestBody.create(MediaType.parse("image/*"), fileImage);
+                MultipartBody.Part body = MultipartBody.Part.createFormData("image_kapal", fileImage.getName(), mFile);
+                r_nama = RequestBody.create(MultipartBody.FORM, in_nama);
+                r_kapasitas = RequestBody.create(MultipartBody.FORM, String.valueOf(in_kapasitas));
+                r_deskripsi = RequestBody.create(MultipartBody.FORM, in_deskripsi);
+                r_contact = RequestBody.create(MultipartBody.FORM, in_contact);
+                r_tipe = RequestBody.create(MultipartBody.FORM, in_tipe);
+                r_golongan = RequestBody.create(MultipartBody.FORM, in_golongan);
+                r_tanggal_beroperasi = RequestBody.create(MultipartBody.FORM, in_tanggal_beroperasi);
 
-//                MultipartBody.Part body = MultipartBody.Part.createFormData("image_kapal", file.getName(), requestFile);
-            SessionManager sm = new SessionManager(this);
-                KapalService service = RetrofitClient.getClient().create(KapalService.class);
-                Call<Response> create =  service.createKapal(sm.getAuthToken(), in_nama, in_kapasitas, in_deskripsi, in_contact,
-                        in_tipe, in_golongan, in_tanggal_beroperasi);
+                Call<Response> createPhoto =  service.createKapalPhoto(sessionManager.getAuthToken(), r_nama,
+                        r_kapasitas, r_deskripsi, r_contact, r_tipe, r_golongan,
+                        r_tanggal_beroperasi, body);
 
-                create.enqueue(new Callback<Response>() {
+                createPhoto.enqueue(new Callback<Response>() {
                     @Override
                     public void onResponse(Call<Response> call, retrofit2.Response<Response> response) {
                         if (response.isSuccessful()) {
                             if (response.body().getStatus() == 200) {
                                 Toast.makeText(getApplicationContext(),  response.body().getMessage(), Toast.LENGTH_LONG).show();
-
-//                                FragmentManager fm = getSupportFragmentManager();
-//                                FragmentTransaction ft = fm.beginTransaction();
-//                                ft.replace(R.id.content, new KapalFragment(), Constants.FRAG_MOVE);
-//                                ft.commit();
+                                onBackPressed();
                             } else {
-                                Log.d("error a", response.message().toString());
-                                Toast.makeText(getApplicationContext(),  "a", Toast.LENGTH_LONG).show();
+                                Log.d("Response not 200", response.message().toString());
+                                Toast.makeText(getApplicationContext(),  "Response not 200", Toast.LENGTH_LONG).show();
                             }
                         } else {
-                            Log.d("error b", response.body().toString());
-                            Toast.makeText(getApplicationContext(),  "b", Toast.LENGTH_LONG).show();
+                            Log.d("Response not success", response.message());
+                            Toast.makeText(getApplicationContext(),  "Response not success", Toast.LENGTH_LONG).show();
                         }
                     }
 
@@ -198,7 +196,7 @@ public class CreateKapalActivity extends AppCompatActivity {
 
                     }
                 });
-//            }
+            }
         });
     }
 
@@ -254,9 +252,9 @@ public class CreateKapalActivity extends AppCompatActivity {
         kapasitas.setText(kapal.getKapasitas().toString());
         deskripsi.setText(kapal.getDeskripsi());
         contact.setText(kapal.getContact());
-        lamaBeroperasi.setText(kapal.getTanggalBeroperasi());
         setTipeValue(kapal.getTipe());
         setPelabuhanValue(kapal.getGolongan().getIdPelabuhan(), kapal.getGolongan().getId());
+        lamaBeroperasi.setText(kapal.getTanggalBeroperasi());
     }
 
     private void setTipeValue(String tipe) {
@@ -364,10 +362,21 @@ public class CreateKapalActivity extends AppCompatActivity {
     }
 
     private void setLamaOperasiListener() {
+        Long tanggal = MaterialDatePicker.todayInUtcMilliseconds();
+        if (!lamaBeroperasi.getText().toString().isEmpty()) {
+            SimpleDateFormat formatter = new SimpleDateFormat("dd MMM yyyy", Locale.getDefault());
+            try {
+                Date formatDate = formatter.parse(lamaBeroperasi.getText().toString());
+                tanggal = formatDate.getTime();
+                Log.d("tanggal", formatDate.toString());
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+        }
         FragmentManager fm = this.getSupportFragmentManager();
         datePicker = MaterialDatePicker.Builder.datePicker()
                     .setTitleText("Select date")
-                    .setSelection(MaterialDatePicker.todayInUtcMilliseconds())
+                    .setSelection(tanggal)
                     .build();
         datePicker.show(fm, "open date picker");
         datePicker.addOnPositiveButtonClickListener(selection -> {
@@ -378,22 +387,44 @@ public class CreateKapalActivity extends AppCompatActivity {
     }
 
     private void setCameraListener() {
-        final CharSequence[] options = { "Camera", "Choose from Gallery", "Cancel" };
+        final CharSequence[] options = {"Camera", "Choose from Gallery", "Cancel" };
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Choose Image");
 
-        builder.setItems(options, (dialog, item) -> {
-            if (options[item].equals("Camera")) {
-                Intent takePicture = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                startActivityForResult(takePicture, 0);
+        builder.setItems(options, new DialogInterface.OnClickListener() {
 
-            } else if (options[item].equals("Choose from Gallery")) {
-                Intent pickPhoto = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                startActivityForResult(pickPhoto , 1);
+            @Override
+            public void onClick(DialogInterface dialog, int item) {
+                if (options[item].equals("Camera")) {
+                    Intent takePicture = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 
-            } else if (options[item].equals("Cancel")) {
-                dialog.dismiss();
+                    File mediaStorageDir = new File(Environment.getExternalStoragePublicDirectory(
+                            Environment.DIRECTORY_PICTURES), "IMG_FOLDER");
+                    try {
+                        if (!mediaStorageDir.exists()) {
+                            mediaStorageDir.mkdirs();
+                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+
+//                    selectedImage = Uri.fromFile(new File(mediaStorageDir.getPath() + File.separator +
+//                            UUID.randomUUID().toString() + ".jpg"));
+                    selectedImage = FileProvider.getUriForFile(CreateKapalActivity.this,
+                            getPackageName()+".provider",
+                            new File(mediaStorageDir.getPath() + File.separator + UUID.randomUUID().toString() + ".jpg"));
+                    takePicture.putExtra(MediaStore.EXTRA_OUTPUT, selectedImage);
+
+                    startActivityForResult(takePicture, 0);
+
+                } else if (options[item].equals("Choose from Gallery")) {
+                    Intent pickPhoto = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                    startActivityForResult(pickPhoto, 1);
+
+                } else if (options[item].equals("Cancel")) {
+                    dialog.dismiss();
+                }
             }
         });
         builder.show();
@@ -406,13 +437,18 @@ public class CreateKapalActivity extends AppCompatActivity {
             switch (requestCode) {
                 case 0:
                     if (resultCode == this.RESULT_OK && data != null) {
-//                        selectedImage = data.getExtras().get("URI");
-                        Bitmap selectedImage = (Bitmap) data.getExtras().get("data");
-                        imageView.setDrawingCacheEnabled(true);
-                        imageView.buildDrawingCache();
-                        imageView.setImageBitmap(selectedImage);
-                        Toast.makeText(this, "Image Loaded", Toast.LENGTH_SHORT).show();
-                        String fileName = UUID.randomUUID().toString() + ".jpg";
+                        if (selectedImage != null) {
+                            try {
+                                Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), selectedImage);
+                                Toast.makeText(this, "Image Loaded", Toast.LENGTH_SHORT).show();
+                                imageView.setDrawingCacheEnabled(true);
+                                imageView.buildDrawingCache();
+                                imageView.setImageBitmap(bitmap);
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                                Toast.makeText(this, "Failed!", Toast.LENGTH_SHORT).show();
+                            }
+                        }
                     }
 
                     break;
@@ -423,12 +459,10 @@ public class CreateKapalActivity extends AppCompatActivity {
                         if (selectedImage != null) {
                             try {
                                 Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), selectedImage);
-                                uri = Uri.parse(bitmap.toString());
                                 Toast.makeText(this, "Image Loaded", Toast.LENGTH_SHORT).show();
                                 imageView.setDrawingCacheEnabled(true);
                                 imageView.buildDrawingCache();
                                 imageView.setImageBitmap(bitmap);
-                                String fileName = UUID.randomUUID().toString() + ".jpg";
 
                             } catch (IOException e) {
                                 e.printStackTrace();

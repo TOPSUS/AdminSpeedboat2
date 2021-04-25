@@ -5,7 +5,7 @@
     android:background="@color/transparent"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginBottom="@dimen/margin_8">
+    android:paddingHorizontal="@dimen/margin_24">
     <RelativeLayout
         android:id="@+id/itemLay"
         android:focusableInTouchMode="false"

@@ -1,5 +1,6 @@
 package com.espeedboat.admin.model;
 
+import com.espeedboat.admin.utils.Endpoint;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
@@ -68,6 +69,10 @@ public class Kapal {
 
     public String getFoto() {
         return foto;
+    }
+
+    public String getFotoUrl() {
+        return Endpoint.URL+"/image_kapal/images/"+foto;
     }
 
     public void setFoto(String foto) {

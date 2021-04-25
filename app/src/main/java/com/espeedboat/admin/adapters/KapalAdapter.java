@@ -17,6 +17,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 
+import com.bumptech.glide.Glide;
 import com.espeedboat.admin.activity.CreateKapalActivity;
 import com.espeedboat.admin.client.RetrofitClient;
 import com.espeedboat.admin.interfaces.UpdateListener;
@@ -79,6 +80,7 @@ public class KapalAdapter extends BaseAdapter {
         holder.price = rowView.findViewById(R.id.harga);
         holder.remove = rowView.findViewById(R.id.remove);
         holder.itemLayout = rowView.findViewById(R.id.itemLay);
+        holder.image = rowView.findViewById(R.id.img_kapal);
 
         // set text
         holder.nama.setText(kapals.get(position).getNama());
@@ -86,6 +88,9 @@ public class KapalAdapter extends BaseAdapter {
         holder.tipe.setText(kapals.get(position).getTipe());
         holder.golongan.setText(kapals.get(position).getGolongan().getGolongan());
         holder.price.setText("Rp. " + kapals.get(position).getGolongan().getHarga().toString() + ",-");
+
+        //set Image
+        Glide.with(context).load(kapals.get(position).getFotoUrl()).into(holder.image);
 
         // listener
         holder.remove.setOnClickListener(v -> {

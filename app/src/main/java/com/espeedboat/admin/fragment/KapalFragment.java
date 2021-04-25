@@ -17,6 +17,7 @@ import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.espeedboat.admin.R;
 import com.espeedboat.admin.activity.CreateKapalActivity;
 import com.espeedboat.admin.adapters.KapalAdapter;
@@ -64,6 +65,12 @@ public class KapalFragment extends Fragment implements UpdateListener {
         clickListener();
 
         return view;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        getKapal();
     }
 
     private void init() {

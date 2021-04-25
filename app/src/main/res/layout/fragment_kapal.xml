@@ -47,7 +47,6 @@
         android:id="@+id/listview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginHorizontal="@dimen/margin_24"
         android:divider="#00000000"
         android:dividerHeight="8dp"
         android:background="@color/tertiary_blue"

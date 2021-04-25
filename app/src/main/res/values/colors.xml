@@ -33,6 +33,6 @@
     <color name="secondary_black">#747474</color>
 
     <!--  Tertiary Color Scheme  -->
-    <color name="tertiary_blue">#FAFDFF</color>
+    <color name="tertiary_blue">#EFF4F8</color>
     <color name="transparent">#00FFFFFF</color>
 </resources>

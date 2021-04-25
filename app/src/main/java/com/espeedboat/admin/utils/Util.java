@@ -1,6 +1,10 @@
 package com.espeedboat.admin.utils;
 
+import android.app.Activity;
 import android.content.Context;
+import android.database.Cursor;
+import android.net.Uri;
+import android.provider.MediaStore;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
@@ -30,7 +34,19 @@ public class Util {
             target.addView(imageView);
         }
     }
+
     public static void setImageUser(String imageUser, ImageView target) {
         Picasso.get().load(imageUser).transform(new CircleTransform()).into(target);
+    }
+
+    public static String getRealPathFromURIPath(Uri contentURI, Activity activity) {
+        Cursor cursor = activity.getContentResolver().query(contentURI, null, null, null, null);
+        if (cursor == null) {
+            return contentURI.getPath();
+        } else {
+            cursor.moveToFirst();
+            int idx = cursor.getColumnIndex(MediaStore.Images.ImageColumns.DATA);
+            return cursor.getString(idx);
+        }
     }
 }
