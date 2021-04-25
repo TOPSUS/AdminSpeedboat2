@@ -94,6 +94,7 @@ public class MainActivity extends AppCompatActivity implements FinishActivity, T
                 loadFragment(new DashboardFragment());
                 title.setText(R.string.menu_dashboard);
                 return true;
+
         }
 
         return false;

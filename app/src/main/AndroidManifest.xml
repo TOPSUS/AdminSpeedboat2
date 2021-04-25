@@ -12,7 +12,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.NewAdminESpeedboat"
         android:usesCleartextTraffic="true">
-        <activity android:name=".activity.CreateKapalActivity"></activity>
+        <activity android:name=".activity.EditProfileActivity"></activity>
+        <activity android:name=".activity.CreateKapalActivity" />
         <activity android:name=".activity.ForgotPasswordActivity" />
         <activity android:name=".activity.LoginActivity" />
         <activity android:name=".SplashActivity">

@@ -22,6 +22,7 @@ import android.widget.Toast;
 
 import com.espeedboat.admin.MainActivity;
 import com.espeedboat.admin.R;
+import com.espeedboat.admin.activity.EditProfileActivity;
 import com.espeedboat.admin.activity.LoginActivity;
 import com.espeedboat.admin.interfaces.FinishActivity;
 import com.espeedboat.admin.interfaces.ToolbarTitle;
@@ -38,7 +39,7 @@ public class ProfileFragment extends Fragment {
     private ImageView back, profileToolbar;
     private SessionManager sessionManager;
     private TextView username, role, title;
-    private RelativeLayout logout, review;
+    private RelativeLayout logout, review, editprofile;
 
     public ProfileFragment() {
         // Required empty public constructor
@@ -87,6 +88,12 @@ public class ProfileFragment extends Fragment {
             startActivity(intent);
         });
 
+        editprofile.setOnClickListener(v -> {
+
+            Intent intent = new Intent(view.getContext(), EditProfileActivity.class);
+            startActivity(intent);
+        });
+
         review.setOnClickListener(v -> {
             toolbarTitleCallback.setToolbarTitle("Review");
             Fragment fragment = new ReviewFragment();
@@ -104,5 +111,6 @@ public class ProfileFragment extends Fragment {
         logout = view.findViewById(R.id.logout);
         review = view.findViewById(R.id.menu_review);
         title = view.findViewById(R.id.toolbar_title);
+        editprofile = view.findViewById(R.id.menu_editprofile);
     }
 }

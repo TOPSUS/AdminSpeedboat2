@@ -50,4 +50,12 @@
     <string name="kapal_pelabuhan">Pelabuhan</string>
     <string name="kapal_golongan">Golongan Kapal</string>
     <string name="kapal_save">Save</string>
+
+    <!--User-->
+    <string name="user_nama">Nama</string>
+    <string name="user_alamat">Alamat</string>
+    <string name="user_jeniskelamin">Jenis Kelamin</string>
+    <string name="user_nohp">No HP</string>
+    <string name="user_email">Email</string>
+    <string name="user_simpan">Simpan</string>
 </resources>
