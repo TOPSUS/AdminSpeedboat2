@@ -30,7 +30,8 @@ import com.espeedboat.admin.utils.SessionManager;
 
 import org.w3c.dom.Text;
 
-public class ProfileFragment extends Fragment {
+public class
+ProfileFragment extends Fragment {
 
     FinishActivity finishActivityCallback;
     ToolbarTitle toolbarTitleCallback;

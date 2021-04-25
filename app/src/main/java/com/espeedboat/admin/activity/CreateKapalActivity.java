@@ -25,6 +25,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.espeedboat.admin.R;
 import com.espeedboat.admin.client.RetrofitClient;
 import com.espeedboat.admin.model.Data;
@@ -73,6 +74,7 @@ public class CreateKapalActivity extends AppCompatActivity {
     private ProgressDialog dialog;
     private CircleImageView imageView;
     private Uri selectedImage;
+    private int idKapal = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -131,72 +133,15 @@ public class CreateKapalActivity extends AppCompatActivity {
         });
 
         submit.setOnClickListener(v -> {
-            RequestBody r_nama, r_deskripsi, r_contact, r_tipe, r_tanggal_beroperasi, r_golongan, r_kapasitas;
-            String in_nama, in_deskripsi, in_contact, in_tipe, in_tanggal_beroperasi = null, in_golongan;
-            int in_kapasitas;
-            long date = 0;
-
-            DateFormat dateFormat = new SimpleDateFormat("dd MMM yyyy");
-            try {
-                date = dateFormat.parse(lamaBeroperasi.getText().toString()).getTime();
-            } catch (ParseException e) {
-                e.printStackTrace();
-            }
-
-            in_nama = nama.getText().toString();
-            in_deskripsi = deskripsi.getText().toString();
-            in_contact = contact.getText().toString();
-            in_tipe = autoCompleteTipe.getText().toString();
-            DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
-            in_tanggal_beroperasi = df.format(date);
-            in_golongan = autoCompleteGolongan.getText().toString();
-            in_kapasitas = Integer.parseInt(kapasitas.getText().toString());
-            KapalService service = RetrofitClient.getClient().create(KapalService.class);
-            if (selectedImage == null) {
-                Toast.makeText(getApplicationContext(),  "Pilih Image Kapal", Toast.LENGTH_LONG).show();
+            if (idKapal == 0) {
+                createKapal();
             } else {
-                String filePath = Util.getRealPathFromURIPath(selectedImage, CreateKapalActivity.this);
-                File fileImage = new File(filePath);
-
-                RequestBody mFile = RequestBody.create(MediaType.parse("image/*"), fileImage);
-                MultipartBody.Part body = MultipartBody.Part.createFormData("image_kapal", fileImage.getName(), mFile);
-                r_nama = RequestBody.create(MultipartBody.FORM, in_nama);
-                r_kapasitas = RequestBody.create(MultipartBody.FORM, String.valueOf(in_kapasitas));
-                r_deskripsi = RequestBody.create(MultipartBody.FORM, in_deskripsi);
-                r_contact = RequestBody.create(MultipartBody.FORM, in_contact);
-                r_tipe = RequestBody.create(MultipartBody.FORM, in_tipe);
-                r_golongan = RequestBody.create(MultipartBody.FORM, in_golongan);
-                r_tanggal_beroperasi = RequestBody.create(MultipartBody.FORM, in_tanggal_beroperasi);
-
-                Call<Response> createPhoto =  service.createKapalPhoto(sessionManager.getAuthToken(), r_nama,
-                        r_kapasitas, r_deskripsi, r_contact, r_tipe, r_golongan,
-                        r_tanggal_beroperasi, body);
-
-                createPhoto.enqueue(new Callback<Response>() {
-                    @Override
-                    public void onResponse(Call<Response> call, retrofit2.Response<Response> response) {
-                        if (response.isSuccessful()) {
-                            if (response.body().getStatus() == 200) {
-                                Toast.makeText(getApplicationContext(),  response.body().getMessage(), Toast.LENGTH_LONG).show();
-                                onBackPressed();
-                            } else {
-                                Log.d("Response not 200", response.message().toString());
-                                Toast.makeText(getApplicationContext(),  "Response not 200", Toast.LENGTH_LONG).show();
-                            }
-                        } else {
-                            Log.d("Response not success", response.message());
-                            Toast.makeText(getApplicationContext(),  "Response not success", Toast.LENGTH_LONG).show();
-                        }
-                    }
-
-                    @Override
-                    public void onFailure(Call<Response> call, Throwable t) {
-                        Log.d("data input", t.getMessage().toString());
-                        Toast.makeText(getApplicationContext(),  t.getMessage(), Toast.LENGTH_LONG).show();
-
-                    }
-                });
+                updateKapal();
             }
+        });
+
+        remove.setOnClickListener(v -> {
+            confirmDelete(idKapal);
         });
     }
 
@@ -225,13 +170,14 @@ public class CreateKapalActivity extends AppCompatActivity {
     }
 
     private void getDataKapal(int id) {
+        idKapal = id;
         KapalService service = RetrofitClient.getClient().create(KapalService.class);
 
         Call<Response> getKapal = service.viewKapal(sessionManager.getAuthToken(), id);
         getKapal.enqueue(new Callback<Response>() {
             @Override
             public void onResponse(Call<Response> call, retrofit2.Response<Response> response) {
-                Log.d("data", response.body().toString());
+                Log.d("data kapal", response.body().toString());
                 if (response.isSuccessful()) {
                     if (response.body().getStatus() == 200) {
                         Data data = response.body().getData();
@@ -247,6 +193,144 @@ public class CreateKapalActivity extends AppCompatActivity {
         });
     }
 
+    private void updateKapal() {
+        RequestBody r_nama, r_deskripsi, r_contact, r_tipe, r_tanggal_beroperasi, r_golongan, r_kapasitas, r_method;
+        String in_nama, in_deskripsi, in_contact, in_tipe, in_tanggal_beroperasi = null, in_golongan;
+        int in_kapasitas;
+        long date = 0;
+
+        DateFormat dateFormat = new SimpleDateFormat("dd MMM yyyy");
+        try {
+            date = dateFormat.parse(lamaBeroperasi.getText().toString()).getTime();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        in_nama = nama.getText().toString();
+        in_deskripsi = deskripsi.getText().toString();
+        in_contact = contact.getText().toString();
+        in_tipe = autoCompleteTipe.getText().toString();
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+        in_tanggal_beroperasi = df.format(date);
+        in_golongan = autoCompleteGolongan.getText().toString();
+        Log.d("in_golongan", in_golongan);
+        in_kapasitas = Integer.parseInt(kapasitas.getText().toString());
+        KapalService service = RetrofitClient.getClient().create(KapalService.class);
+        MultipartBody.Part body = null;
+        if (selectedImage != null) {
+            String filePath = Util.getRealPathFromURIPath(selectedImage, CreateKapalActivity.this);
+            File fileImage = new File(filePath);
+            RequestBody mFile = RequestBody.create(MediaType.parse("image/*"), fileImage);
+            body = MultipartBody.Part.createFormData("image_kapal", fileImage.getName(), mFile);
+        }
+
+        r_nama = RequestBody.create(MultipartBody.FORM, in_nama);
+        r_kapasitas = RequestBody.create(MultipartBody.FORM, String.valueOf(in_kapasitas));
+        r_deskripsi = RequestBody.create(MultipartBody.FORM, in_deskripsi);
+        r_contact = RequestBody.create(MultipartBody.FORM, in_contact);
+        r_tipe = RequestBody.create(MultipartBody.FORM, in_tipe);
+        r_golongan = RequestBody.create(MultipartBody.FORM, in_golongan);
+        r_tanggal_beroperasi = RequestBody.create(MultipartBody.FORM, in_tanggal_beroperasi);
+        r_method = RequestBody.create(MultipartBody.FORM, "PUT");
+
+        Call<Response> updateKapal =  service.updateKapal(sessionManager.getAuthToken(), idKapal, r_nama,
+                r_kapasitas, r_deskripsi, r_contact, r_tipe, r_golongan, r_tanggal_beroperasi, body);
+
+        updateKapal.enqueue(new Callback<Response>() {
+            @Override
+            public void onResponse(Call<Response> call, retrofit2.Response<Response> response) {
+                if (response.isSuccessful()) {
+                    if (response.body().getStatus() == 200) {
+                        Toast.makeText(getApplicationContext(),  response.body().getMessage(), Toast.LENGTH_LONG).show();
+                        onBackPressed();
+                    } else {
+                        Log.d("Response not 200", response.message().toString());
+                        Toast.makeText(getApplicationContext(),  response.body().getMessage(), Toast.LENGTH_LONG).show();
+                    }
+                } else {
+                    Log.d("Response not success", response.message()+" "+response.code());
+                    Toast.makeText(getApplicationContext(),  "Response not success", Toast.LENGTH_LONG).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Response> call, Throwable t) {
+                Log.d("data input", t.getMessage().toString());
+                Toast.makeText(getApplicationContext(),  t.getMessage(), Toast.LENGTH_LONG).show();
+
+            }
+        });
+    }
+
+    private void createKapal () {
+        RequestBody r_nama, r_deskripsi, r_contact, r_tipe, r_tanggal_beroperasi, r_golongan, r_kapasitas;
+        String in_nama, in_deskripsi, in_contact, in_tipe, in_tanggal_beroperasi = null, in_golongan;
+        int in_kapasitas;
+        long date = 0;
+
+        DateFormat dateFormat = new SimpleDateFormat("dd MMM yyyy");
+        try {
+            date = dateFormat.parse(lamaBeroperasi.getText().toString()).getTime();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        in_nama = nama.getText().toString();
+        in_deskripsi = deskripsi.getText().toString();
+        in_contact = contact.getText().toString();
+        in_tipe = autoCompleteTipe.getText().toString();
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+        in_tanggal_beroperasi = df.format(date);
+        in_golongan = autoCompleteGolongan.getText().toString();
+        in_kapasitas = Integer.parseInt(kapasitas.getText().toString());
+        KapalService service = RetrofitClient.getClient().create(KapalService.class);
+        if (selectedImage == null) {
+            Toast.makeText(getApplicationContext(),  "Pilih Image Kapal", Toast.LENGTH_LONG).show();
+        } else {
+            String filePath = Util.getRealPathFromURIPath(selectedImage, CreateKapalActivity.this);
+            File fileImage = new File(filePath);
+
+            RequestBody mFile = RequestBody.create(MediaType.parse("image/*"), fileImage);
+            MultipartBody.Part body = MultipartBody.Part.createFormData("image_kapal", fileImage.getName(), mFile);
+            r_nama = RequestBody.create(MultipartBody.FORM, in_nama);
+            r_kapasitas = RequestBody.create(MultipartBody.FORM, String.valueOf(in_kapasitas));
+            r_deskripsi = RequestBody.create(MultipartBody.FORM, in_deskripsi);
+            r_contact = RequestBody.create(MultipartBody.FORM, in_contact);
+            r_tipe = RequestBody.create(MultipartBody.FORM, in_tipe);
+            r_golongan = RequestBody.create(MultipartBody.FORM, in_golongan);
+            r_tanggal_beroperasi = RequestBody.create(MultipartBody.FORM, in_tanggal_beroperasi);
+
+            Call<Response> createPhoto =  service.createKapalPhoto(sessionManager.getAuthToken(), r_nama,
+                    r_kapasitas, r_deskripsi, r_contact, r_tipe, r_golongan,
+                    r_tanggal_beroperasi, body);
+
+            createPhoto.enqueue(new Callback<Response>() {
+                @Override
+                public void onResponse(Call<Response> call, retrofit2.Response<Response> response) {
+                    if (response.isSuccessful()) {
+                        if (response.body().getStatus() == 200) {
+                            Toast.makeText(getApplicationContext(),  response.body().getMessage(), Toast.LENGTH_LONG).show();
+                            onBackPressed();
+                        } else {
+                            Log.d("Response not 200", response.message().toString());
+                            Toast.makeText(getApplicationContext(),  "Response not 200", Toast.LENGTH_LONG).show();
+                        }
+                    } else {
+                        Log.d("Response not success", response.message());
+                        Toast.makeText(getApplicationContext(),  "Response not success", Toast.LENGTH_LONG).show();
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<Response> call, Throwable t) {
+                    Log.d("data input", t.getMessage().toString());
+                    Toast.makeText(getApplicationContext(),  t.getMessage(), Toast.LENGTH_LONG).show();
+
+                }
+            });
+        }
+    }
+
     private void setKapalValue(Kapal kapal) {
         nama.setText(kapal.getNama());
         kapasitas.setText(kapal.getKapasitas().toString());
@@ -255,6 +339,9 @@ public class CreateKapalActivity extends AppCompatActivity {
         setTipeValue(kapal.getTipe());
         setPelabuhanValue(kapal.getGolongan().getIdPelabuhan(), kapal.getGolongan().getId());
         lamaBeroperasi.setText(kapal.getTanggalBeroperasi());
+
+        //set Image
+        Glide.with(this).load(kapal.getFotoUrl()).into(imageView);
     }
 
     private void setTipeValue(String tipe) {
@@ -337,7 +424,7 @@ public class CreateKapalActivity extends AppCompatActivity {
                         Data data = response.body().getData();
                         for (Golongan list : data.getGolongan()) {
                             if (list.getId() == golonganId) {
-                                namaGolongan = list.getGolongan() + " (" + list.getHarga().toString() + ")";
+                                namaGolongan = list.getGolongan();
                             }
 //                            golongans.add(list.getGolongan() + " (" + list.getHarga().toString() + ")" );
                             golongans.add(list.getGolongan());
@@ -474,5 +561,41 @@ public class CreateKapalActivity extends AppCompatActivity {
                     break;
             }
         }
+    }
+
+    private void confirmDelete(final int id) {
+        AlertDialog.Builder alert = new AlertDialog.Builder(this);
+        alert.setTitle("Hapus Kapal");
+        alert.setMessage("Yakin hapus kapal?");
+        alert.setPositiveButton(android.R.string.ok, (dialog, which) -> {
+            // continue with delete
+            KapalService service = RetrofitClient.getClient().create(KapalService.class);
+            Call<Response> deleteKapal = service.deleteKapal(new SessionManager(this).getAuthToken(), id);
+
+            deleteKapal.enqueue(new Callback<Response>() {
+                @Override
+                public void onResponse(Call<Response> call, retrofit2.Response<Response> response) {
+                    if (response.isSuccessful()) {
+                        if (response.body().getStatus() == 200) {
+                            Toast.makeText(CreateKapalActivity.this, response.body().getMessage(), Toast.LENGTH_SHORT).show();
+                            onBackPressed();
+                        } else {
+                            Toast.makeText(CreateKapalActivity.this, response.body().getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<Response> call, Throwable t) {
+                    Log.e("ERROR [KapalAdapter] ", t.getMessage());
+                    Toast.makeText(CreateKapalActivity.this,  t.getMessage(), Toast.LENGTH_LONG).show();
+                }
+            });
+        });
+        alert.setNegativeButton(android.R.string.cancel, (dialog, which) -> {
+            // close dialog
+            dialog.cancel();
+        });
+        alert.show();
     }
 }
