@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_height="match_parent"
+    tools:context=".activity.EditProfileActivity">
+
+    <include android:id="@+id/main_toolbar"
+        layout="@layout/main_toolbar"/>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/main_toolbar">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/margin_24"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:id="@+id/image_wrapper"
+                android:layout_width="128dp"
+                android:layout_height="128dp"
+                android:layout_gravity="center"
+                android:paddingVertical="@dimen/margin_4">
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/image_edit_user"
+                    android:layout_width="128dp"
+                    android:layout_height="128dp"
+                    android:layout_centerInParent="true"
+                    app:civ_border_color="@color/white"
+                    android:src="@drawable/profile"/>
+                <ImageButton
+                    android:layout_width="@dimen/margin_48"
+                    android:layout_height="@dimen/margin_48"
+                    android:background="@drawable/bg_btn_circle"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentBottom="true"
+                    android:src="@drawable/ic_camera"/>
+            </RelativeLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/namaTextField"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="@dimen/margin_4"
+                android:hint="@string/user_nama"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/namaForm"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/alamatTextField"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="@dimen/margin_4"
+                android:hint="@string/user_alamat"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/alamatForm"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+            </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/jeniskelaminTextField"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="@dimen/margin_4"
+                android:hint="@string/user_jeniskelamin"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu">
+
+                <AutoCompleteTextView
+                    android:id="@+id/autoCompleteJeniskelamin"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="none"/>
+
+            </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/nohpTextField"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="@dimen/margin_4"
+                android:hint="@string/user_nohp"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/contactForm"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/emailTextField"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="@dimen/margin_4"
+                android:hint="@string/user_email"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/emailForm"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:focusable="false"
+                    android:clickable="true"/>
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="@dimen/margin_4"
+                android:orientation="horizontal">
+                <Button
+                    android:layout_marginTop="10dp"
+                    android:id="@+id/btn_submit"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/margin_4"
+                    android:backgroundTint="@color/primary"
+                    android:fontFamily="@font/roboto_medium"
+                    android:text="Simpan"
+                    android:textColor="@color/primary_white"
+                    android:textSize="16sp"
+                    style="@style/Widget.App.Button.OutlinedButton.IconOnly"/>
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+</RelativeLayout>

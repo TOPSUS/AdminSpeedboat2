@@ -12,4 +12,5 @@ public class Endpoint {
     public static final String KAPAL_UPDATE = "kapal/update/{kapal}";
     public static final String LIST_NAMA_PELABUHAN = "pelabuhan/get/name";
     public static final String GOLONGAN_BY_PELABUHAN = "golongan/get/{id}";
+    public static final String EDIT_USER = "user/get/{id}";
 }
