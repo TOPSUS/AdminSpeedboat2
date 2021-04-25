@@ -95,7 +95,7 @@
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/contactForm"
+                    android:id="@+id/hpForm"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
 
@@ -128,7 +128,6 @@
                     android:id="@+id/btn_submit"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/margin_4"
                     android:backgroundTint="@color/primary"
                     android:fontFamily="@font/roboto_medium"
                     android:text="Simpan"

@@ -1,5 +1,7 @@
 package com.espeedboat.admin.model;
 
+import com.espeedboat.admin.utils.Endpoint;
+import com.espeedboat.admin.utils.Util;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
@@ -130,6 +132,10 @@ public class User {
 
     public String getFoto() {
         return foto;
+    }
+
+    public String getUrlFoto() {
+        return Endpoint.URL+"/user/images/"+foto;
     }
 
     public void setFoto(String foto) {

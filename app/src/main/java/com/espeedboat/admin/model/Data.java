@@ -33,6 +33,9 @@ public class Data {
     @SerializedName("golongan")
     @Expose
     private List<Golongan> golongan = null;
+    @SerializedName("user")
+    @Expose
+    private User user;
 
     public List<Pelabuhan> getPelabuhan() {
         return pelabuhan;
@@ -104,5 +107,13 @@ public class Data {
 
     public void setGolongan(List<Golongan> golongan) {
         this.golongan = golongan;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }

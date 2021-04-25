@@ -3,6 +3,8 @@
     package="com.espeedboat.admin">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -25,6 +27,7 @@
         </provider>
         <activity android:name=".activity.CreateKapalActivity"></activity>
         <activity android:name=".activity.ForgotPasswordActivity" />
+        <activity android:name=".activity.EditProfileActivity" />
         <activity android:name=".activity.LoginActivity" />
         <activity android:name=".SplashActivity">
             <intent-filter>

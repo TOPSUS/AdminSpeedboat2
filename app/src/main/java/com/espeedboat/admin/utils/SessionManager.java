@@ -10,6 +10,7 @@ public class SessionManager {
     private String USER_TOKEN = "user_token";
     private String USER_NAME = "user_name";
     private String USER_ROLE = "user_role";
+    private String USER_ID = "user_id";
     private SharedPreferences sharedPreferences;
 
     public SessionManager (Context cont) {
@@ -54,6 +55,16 @@ public class SessionManager {
     public void clearSession() {
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.clear();
+        editor.apply();
+    }
+
+    public int getUserId() {
+        return sharedPreferences.getInt(USER_ID, 0);
+    }
+
+    public void setUserId(int id) {
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putInt(USER_ID, id);
         editor.apply();
     }
 }

@@ -75,6 +75,7 @@ public class LoginActivity extends AppCompatActivity {
                         sessionManager.setAuthToken(data.getAuth().getToken());
                         sessionManager.setUserName(data.getAuth().getUser().getNama());
                         sessionManager.setUserRole(data.getAuth().getUser().getRole());
+                        sessionManager.setUserId(data.getAuth().getUser().getId());
                         Toast.makeText(getApplicationContext(), "Login Berhasil", Toast.LENGTH_SHORT).show();
                         startActivity(new Intent(LoginActivity.this, MainActivity.class));
                         finish();
