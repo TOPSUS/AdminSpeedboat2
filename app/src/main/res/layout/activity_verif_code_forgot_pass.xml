@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:paddingVertical="@dimen/margin_48"
     android:background="@color/tertiary_blue"
-    tools:context=".activity.ForgotPasswordActivity">
+    tools:context=".activity.VerifCodeForgotPassActivity">
 
     <ImageView
         android:id="@+id/login_logo"
@@ -114,17 +114,17 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingHorizontal="4dp"
-                    android:text="Email"
+                    android:text="Masukan Kode Verifikasi"
                     android:textAlignment="textStart"
                     android:textColor="@color/primary_grey"
                     android:textSize="12sp" />
 
                 <EditText
-                    android:id="@+id/email"
+                    android:id="@+id/code"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:drawableEnd="@drawable/ic_email_24"
-                    android:inputType="textEmailAddress"
+                    android:drawableEnd="@drawable/ic_pin_24"
+                    android:inputType="text"
                     android:paddingHorizontal="2dp"
                     android:textColor="@color/state_primary_edit_text"
                     android:textColorHint="@color/state_primary_edit_text"

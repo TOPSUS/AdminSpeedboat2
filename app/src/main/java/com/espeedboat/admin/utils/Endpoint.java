@@ -14,5 +14,7 @@ public class Endpoint {
     public static final String GOLONGAN_BY_PELABUHAN = "golongan/get/{id}";
     public static final String EDIT_USER = "user/get/{id}";
     public static final String UPDATE_USER = "user/update/{id}";
-    public static final String JADWAL_LIST = "jadwal";
+    public static final String GET_CODES = "admin/getcode";
+    public static final String CEK_CODES = "admin/cekcode";
+    public static final String UPDATE_PASS = "admin/gantipass";
 }

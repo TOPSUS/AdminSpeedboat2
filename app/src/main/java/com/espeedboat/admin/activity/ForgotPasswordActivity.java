@@ -15,7 +15,7 @@ import com.espeedboat.admin.service.AuthService;
 import com.espeedboat.admin.utils.SessionManager;
 
 public class ForgotPasswordActivity extends AppCompatActivity {
-    private EditText txtEmail, txtPassword;
+    private EditText txtEmail;
     private TextView masuk;
     private ImageButton submitlogin;
     private SessionManager sessionManager;
@@ -37,5 +37,6 @@ public class ForgotPasswordActivity extends AppCompatActivity {
 
     private void init() {
         masuk = findViewById(R.id.masuk);
+        txtEmail = findViewById(R.id.email);
     }
 }

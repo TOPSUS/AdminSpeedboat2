@@ -14,18 +14,22 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.NewAdminESpeedboat"
         android:usesCleartextTraffic="true">
+        <activity android:name=".activity.SubmitForgotPassActivity"></activity>
+        <activity android:name=".activity.VerifCodeForgotPassActivity" />
+
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="com.espeedboat.admin.provider"
             android:exported="false"
             android:grantUriPermissions="true">
+
             <!-- ressource file to create -->
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/file_paths">
-            </meta-data>
+                android:resource="@xml/file_paths" />
         </provider>
-        <activity android:name=".activity.CreateKapalActivity"></activity>
+
+        <activity android:name=".activity.CreateKapalActivity" />
         <activity android:name=".activity.ForgotPasswordActivity" />
         <activity android:name=".activity.EditProfileActivity" />
         <activity android:name=".activity.LoginActivity" />
