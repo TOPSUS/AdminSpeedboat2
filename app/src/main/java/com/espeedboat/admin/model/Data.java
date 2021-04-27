@@ -36,6 +36,9 @@ public class Data {
     @SerializedName("user")
     @Expose
     private User user;
+    @SerializedName("list_jadwal")
+    @Expose
+    private List<Jadwal> listJadwal = null;
 
     public List<Pelabuhan> getPelabuhan() {
         return pelabuhan;
@@ -115,5 +118,13 @@ public class Data {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public List<Jadwal> getListJadwal() {
+        return listJadwal;
+    }
+
+    public void setListJadwal(List<Jadwal> listJadwal) {
+        this.listJadwal = listJadwal;
     }
 }

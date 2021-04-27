@@ -1,4 +1,4 @@
-package com.espeedboat.admin;
+package com.espeedboat.admin.fragment;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -14,6 +14,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.espeedboat.admin.R;
 import com.espeedboat.admin.client.RetrofitClient;
 import com.espeedboat.admin.interfaces.FinishActivity;
 import com.espeedboat.admin.model.Response;

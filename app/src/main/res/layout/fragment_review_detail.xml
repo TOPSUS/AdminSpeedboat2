@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/tertiary_blue"
-    tools:context=".ReviewDetailFragment">
+    tools:context=".fragment.ReviewDetailFragment">
 
     <LinearLayout
         app:layout_constraintBottom_toBottomOf="parent"

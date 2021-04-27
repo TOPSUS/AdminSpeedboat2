@@ -1,6 +1,5 @@
 package com.espeedboat.admin;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
@@ -8,12 +7,11 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.os.Bundle;
-import android.util.Log;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.espeedboat.admin.fragment.DashboardFragment;
 import com.espeedboat.admin.fragment.KapalFragment;
 import com.espeedboat.admin.fragment.ProfileFragment;
 import com.espeedboat.admin.interfaces.FinishActivity;

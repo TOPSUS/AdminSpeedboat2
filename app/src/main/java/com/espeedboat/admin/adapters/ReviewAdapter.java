@@ -8,18 +8,16 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.espeedboat.admin.MainActivity;
 import com.espeedboat.admin.R;
-import com.espeedboat.admin.ReviewDetailFragment;
+import com.espeedboat.admin.fragment.ReviewDetailFragment;
 import com.espeedboat.admin.holders.ReviewViewHolder;
 import com.espeedboat.admin.model.ReviewList;
 import com.espeedboat.admin.utils.Constants;
-import com.espeedboat.admin.utils.Util;
 
 import java.util.List;
 

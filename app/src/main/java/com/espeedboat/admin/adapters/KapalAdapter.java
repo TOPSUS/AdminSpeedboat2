@@ -40,8 +40,8 @@ public class KapalAdapter extends BaseAdapter {
 
     private Context context;
     private LayoutInflater layoutInflater;
-    private List<Kapal> kapals;
     private UpdateListener updateListener;
+    private List<Kapal> kapals;
 
     public KapalAdapter (Context context, List<Kapal> kapals, UpdateListener updateListener) {
         this.context = context;

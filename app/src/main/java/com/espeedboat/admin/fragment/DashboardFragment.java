@@ -1,4 +1,4 @@
-package com.espeedboat.admin;
+package com.espeedboat.admin.fragment;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -15,6 +15,7 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
 import com.budiyev.android.circularprogressbar.CircularProgressBar;
+import com.espeedboat.admin.R;
 import com.espeedboat.admin.fragment.KapalFragment;
 import com.espeedboat.admin.fragment.ReviewFragment;
 import com.espeedboat.admin.interfaces.FinishActivity;
@@ -117,6 +118,16 @@ public class DashboardFragment extends Fragment {
         mKapal.setOnClickListener(v -> {
             toolbarTitleCallback.setToolbarTitle("Kapal");
             Fragment fragment = new KapalFragment();
+            FragmentManager fm = getActivity().getSupportFragmentManager();
+            FragmentTransaction ft = fm.beginTransaction();
+            ft.replace(R.id.content, fragment, Constants.FRAG_MOVE);
+            ft.commit();
+        });
+
+        Button mJadwal = view.findViewById(R.id.menu_jadwal);
+        mJadwal.setOnClickListener(v -> {
+            toolbarTitleCallback.setToolbarTitle("Jadwal");
+            Fragment fragment = new JadwalFragment();
             FragmentManager fm = getActivity().getSupportFragmentManager();
             FragmentTransaction ft = fm.beginTransaction();
             ft.replace(R.id.content, fragment, Constants.FRAG_MOVE);
