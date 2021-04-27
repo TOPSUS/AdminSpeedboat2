@@ -11,6 +11,7 @@ public class SessionManager {
     private String USER_NAME = "user_name";
     private String USER_ROLE = "user_role";
     private String USER_ID = "user_id";
+    private String USER_EMAIL = "user_email";
     private SharedPreferences sharedPreferences;
 
     public SessionManager (Context cont) {
@@ -36,6 +37,16 @@ public class SessionManager {
 
     public String getUserName() {
         return sharedPreferences.getString(USER_NAME, null);
+    }
+
+    public void setUserEmail(String string) {
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString(USER_EMAIL, string);
+        editor.apply();
+    }
+
+    public String getUserEmail() {
+        return sharedPreferences.getString(USER_EMAIL, null);
     }
 
     public void setUserRole(String string) {

@@ -16,6 +16,7 @@ public class Endpoint {
     public static final String UPDATE_USER = "user/update/{id}";
     public static final String GET_CODES = "admin/getcode";
     public static final String CEK_CODES = "admin/cekcode";
-    public static final String UPDATE_PASS = "admin/gantipass";
+    public static final String FORGOT_PASS = "admin/forgotpass";
     public static final String JADWAL_LIST = "jadwal";
+    public static final String GANTI_PASS = "gantipass";
 }

@@ -1,7 +1,7 @@
 <resources>
     <!--  Base  -->
     <string name="base_null">Null</string>
-    <string name="app_name">E Tiket</string>
+    <string name="app_name">E-Tiket</string>
 
     <!--  Menu  -->
     <string name="menu_dashboard">Dashboard</string>

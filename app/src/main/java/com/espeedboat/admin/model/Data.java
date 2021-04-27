@@ -127,4 +127,5 @@ public class Data {
     public void setListJadwal(List<Jadwal> listJadwal) {
         this.listJadwal = listJadwal;
     }
+
 }

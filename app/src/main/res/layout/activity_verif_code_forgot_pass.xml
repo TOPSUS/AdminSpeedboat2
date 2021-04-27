@@ -143,7 +143,7 @@
             android:src="@drawable/ic_profile_buble"/>
 
         <ImageButton
-            android:id="@+id/loginbutton"
+            android:id="@+id/subbutton"
             android:layout_width="128dp"
             android:layout_height="48dp"
             android:layout_marginBottom="-24dp"
@@ -156,14 +156,14 @@
         <TextView
             android:layout_width="@dimen/margin_72"
             android:layout_height="wrap_content"
-            android:layout_alignStart="@+id/loginbutton"
-            android:layout_alignEnd="@+id/loginbutton"
-            android:layout_alignBottom="@+id/loginbutton"
-            android:layout_alignTop="@+id/loginbutton"
+            android:layout_alignStart="@+id/subbutton"
+            android:layout_alignEnd="@+id/subbutton"
+            android:layout_alignBottom="@+id/subbutton"
+            android:layout_alignTop="@+id/subbutton"
             android:fontFamily="@font/roboto_regular"
             android:lineHeight="16sp"
             android:elevation="10dp"
-            android:text="@string/auth_reset"
+            android:text="Submit"
             android:textAlignment="gravity"
             android:gravity="center"
             android:textColor="@color/primary_white"

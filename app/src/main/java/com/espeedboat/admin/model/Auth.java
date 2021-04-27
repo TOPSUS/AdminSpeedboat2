@@ -11,6 +11,7 @@ public class Auth {
     @Expose
     private User user;
 
+
     public String getToken() {
         return token;
     }

@@ -6,16 +6,21 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.espeedboat.admin.activity.LoginActivity;
 import com.espeedboat.admin.fragment.DashboardFragment;
+import com.espeedboat.admin.fragment.JadwalFragment;
 import com.espeedboat.admin.fragment.KapalFragment;
 import com.espeedboat.admin.fragment.ProfileFragment;
 import com.espeedboat.admin.interfaces.FinishActivity;
 import com.espeedboat.admin.interfaces.ToolbarTitle;
+import com.espeedboat.admin.model.Auth;
+import com.espeedboat.admin.model.User;
 import com.espeedboat.admin.utils.Constants;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -42,7 +47,10 @@ public class MainActivity extends AppCompatActivity implements FinishActivity, T
         });
 
         loadFragment(new DashboardFragment());
+
     }
+
+
 
     @Override
     protected void onStart() {
@@ -92,7 +100,10 @@ public class MainActivity extends AppCompatActivity implements FinishActivity, T
                 loadFragment(new DashboardFragment());
                 title.setText(R.string.menu_dashboard);
                 return true;
-
+            case R.id.jadwal:
+                loadFragment(new JadwalFragment());
+                title.setText(R.string.menu_jadwal);
+                return true;
         }
 
         return false;

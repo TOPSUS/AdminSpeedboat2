@@ -109,27 +109,6 @@
                 android:layout_margin="@dimen/margin_24"
                 android:paddingVertical="@dimen/margin_24"
                 android:orientation="vertical">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:paddingHorizontal="4dp"
-                    android:text="Masukan Password Lama"
-                    android:textAlignment="textStart"
-                    android:textColor="@color/primary_grey"
-                    android:textSize="12sp" />
-
-                <EditText
-                    android:id="@+id/oldpass"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:drawableEnd="@drawable/ic_eye_24"
-                    android:inputType="text"
-                    android:paddingHorizontal="2dp"
-                    android:textColor="@color/state_primary_edit_text"
-                    android:textColorHint="@color/state_primary_edit_text"
-                    android:backgroundTint="@color/state_primary_edit_text"
-                    android:drawableTint="@color/primary" />
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -144,7 +123,28 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:drawableEnd="@drawable/ic_eye_24"
-                    android:inputType="text"
+                    android:inputType="textPassword"
+                    android:paddingHorizontal="2dp"
+                    android:textColor="@color/state_primary_edit_text"
+                    android:textColorHint="@color/state_primary_edit_text"
+                    android:backgroundTint="@color/state_primary_edit_text"
+                    android:drawableTint="@color/primary" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingHorizontal="4dp"
+                    android:text="Konfirmasi Password"
+                    android:textAlignment="textStart"
+                    android:textColor="@color/primary_grey"
+                    android:textSize="12sp" />
+
+                <EditText
+                    android:id="@+id/confirmpass"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawableEnd="@drawable/ic_eye_24"
+                    android:inputType="textPassword"
                     android:paddingHorizontal="2dp"
                     android:textColor="@color/state_primary_edit_text"
                     android:textColorHint="@color/state_primary_edit_text"
@@ -163,7 +163,7 @@
             android:src="@drawable/ic_profile_buble"/>
 
         <ImageButton
-            android:id="@+id/loginbutton"
+            android:id="@+id/passbutton"
             android:layout_width="128dp"
             android:layout_height="48dp"
             android:layout_marginBottom="-24dp"
@@ -176,14 +176,14 @@
         <TextView
             android:layout_width="@dimen/margin_72"
             android:layout_height="wrap_content"
-            android:layout_alignStart="@+id/loginbutton"
-            android:layout_alignEnd="@+id/loginbutton"
-            android:layout_alignBottom="@+id/loginbutton"
-            android:layout_alignTop="@+id/loginbutton"
+            android:layout_alignStart="@+id/passbutton"
+            android:layout_alignEnd="@+id/passbutton"
+            android:layout_alignBottom="@+id/passbutton"
+            android:layout_alignTop="@+id/passbutton"
             android:fontFamily="@font/roboto_regular"
             android:lineHeight="16sp"
             android:elevation="10dp"
-            android:text="@string/auth_reset"
+            android:text="Submit"
             android:textAlignment="gravity"
             android:gravity="center"
             android:textColor="@color/primary_white"

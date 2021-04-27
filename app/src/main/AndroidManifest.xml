@@ -14,7 +14,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.NewAdminESpeedboat"
         android:usesCleartextTraffic="true">
-        <activity android:name=".activity.SubmitForgotPassActivity"></activity>
+        <activity android:name=".activity.GantiPasswordActivity"></activity>
+        <activity android:name=".activity.SubmitForgotPassActivity" />
         <activity android:name=".activity.VerifCodeForgotPassActivity" />
 
         <provider
