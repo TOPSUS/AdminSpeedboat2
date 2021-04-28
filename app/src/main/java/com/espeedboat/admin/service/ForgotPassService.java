@@ -19,5 +19,5 @@ public interface ForgotPassService {
 
     @FormUrlEncoded
     @POST(Endpoint.FORGOT_PASS)
-    Call<Response> postPass(@Field("oldpass") String oldpass, @Field("newpass") String newpass, @Field("email") String email);
+    Call<Response> postPass(@Field("confirmpass") String confirmpass, @Field("newpass") String newpass, @Field("email") String email);
 }

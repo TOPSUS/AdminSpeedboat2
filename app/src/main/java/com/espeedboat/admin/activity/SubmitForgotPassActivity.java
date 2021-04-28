@@ -22,7 +22,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 
 public class SubmitForgotPassActivity extends AppCompatActivity {
-    private EditText txtOldpass, txtNewpass;
+    private EditText txtConfirmpass, txtNewpass;
     private TextView masuk;
     private ImageButton submitpass;
     private SessionManager sessionManager;
@@ -46,7 +46,7 @@ public class SubmitForgotPassActivity extends AppCompatActivity {
 
     private void init() {
         masuk = findViewById(R.id.masuk);
-        txtOldpass = findViewById(R.id.oldpass);
+        txtConfirmpass = findViewById(R.id.confirmpass);
         txtNewpass = findViewById(R.id.newpass);
         submitpass = findViewById(R.id.passbutton);
         sessionManager = new SessionManager(this);
@@ -60,7 +60,7 @@ public class SubmitForgotPassActivity extends AppCompatActivity {
         progress.setMessage("Submitting");
         progress.show();
 
-        Call<Response> forgot = forgotpass.postPass(txtOldpass.getText().toString(),txtNewpass.getText().toString(),sessionManager.getUserEmail());
+        Call<Response> forgot = forgotpass.postPass(txtConfirmpass.getText().toString(),txtNewpass.getText().toString(),sessionManager.getUserEmail());
 
         forgot.enqueue(new Callback<Response>() {
             @Override
