@@ -25,6 +25,7 @@ import com.bumptech.glide.Glide;
 import com.espeedboat.admin.MainActivity;
 import com.espeedboat.admin.R;
 import com.espeedboat.admin.activity.EditProfileActivity;
+import com.espeedboat.admin.activity.GantiPasswordActivity;
 import com.espeedboat.admin.activity.LoginActivity;
 import com.espeedboat.admin.client.RetrofitClient;
 import com.espeedboat.admin.interfaces.FinishActivity;
@@ -51,7 +52,7 @@ ProfileFragment extends Fragment {
     private ImageView back, profileToolbar;
     private SessionManager sessionManager;
     private TextView username, role, title;
-    private RelativeLayout logout, review, editprofile;
+    private RelativeLayout logout, review, editprofile, changepass;
     private CircleImageView profilePic;
 
     public ProfileFragment() {
@@ -109,6 +110,12 @@ ProfileFragment extends Fragment {
             startActivity(intent);
         });
 
+        changepass.setOnClickListener(v -> {
+
+            Intent intent = new Intent(view.getContext(), GantiPasswordActivity.class);
+            startActivity(intent);
+        });
+
         review.setOnClickListener(v -> {
             toolbarTitleCallback.setToolbarTitle("Review");
             Fragment fragment = new ReviewFragment();
@@ -134,6 +141,7 @@ ProfileFragment extends Fragment {
         title = view.findViewById(R.id.toolbar_title);
         editprofile = view.findViewById(R.id.menu_editprofile);
         profilePic = view.findViewById(R.id.profile);
+        changepass = view.findViewById(R.id.menu_changepass);
     }
 
     private void setUser() {

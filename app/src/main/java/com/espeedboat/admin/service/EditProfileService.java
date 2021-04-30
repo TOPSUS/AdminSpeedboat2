@@ -6,6 +6,8 @@ import com.espeedboat.admin.utils.Endpoint;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 import retrofit2.Call;
+import retrofit2.http.Field;
+import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.Multipart;
@@ -27,4 +29,12 @@ public interface EditProfileService {
                                      @Part("nohp") RequestBody nohp,
                                      @Part("email") RequestBody email,
                                      @Part MultipartBody.Part body);
+
+    @FormUrlEncoded
+    @POST(Endpoint.GANTI_PASS)
+    Call<Response> postGantiPass(@Header("Authorization") String token,
+                                     @Field("oldpass") String oldpass,
+                                     @Field("confirmpass") String confirmpass,
+                                     @Field("newpass") String newpass,
+                                     @Field("id") int id);
 }

@@ -98,6 +98,7 @@
                     android:src="@drawable/ic_chevron_right_24"/>
             </RelativeLayout>
             <RelativeLayout
+                android:id="@+id/menu_changepass"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginVertical="@dimen/margin_8"
