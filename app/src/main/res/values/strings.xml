@@ -10,6 +10,8 @@
     <string name="menu_speedboat">Kapal</string>
     <string name="menu_speedboat_create">Create Kapal</string>
     <string name="menu_speedboat_edit">Edit Kapal</string>
+    <string name="menu_jadwal_create">Create Jadwal</string>
+    <string name="menu_jadwal_edit">Edit Jadwal</string>
 
     <!--  Auth  -->
     <string name="auth_masuk">Masuk</string>
@@ -50,6 +52,15 @@
     <string name="kapal_pelabuhan">Pelabuhan</string>
     <string name="kapal_golongan">Golongan Kapal</string>
     <string name="kapal_save">Save</string>
+    
+    <!--  Dashboard  -->
+    <string name="jadwal_kapal">Kapal</string>
+    <string name="jadwal_asal_pelabuhan">Asal Pelabuhan</string>
+    <string name="jadwal_tujuan_pelabuhan">Tujuan Pelabuhan</string>
+    <string name="jadwal_tanggal">Tanggal</string>
+    <string name="jadwal_waktu">Waktu Berangkat</string>
+    <string name="jadwal_estimasi">Estimasi Waktu</string>
+    <string name="jadwal_harga">Harga</string>
 
     <!--User-->
     <string name="user_nama">Nama</string>
