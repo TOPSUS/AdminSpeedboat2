@@ -34,6 +34,22 @@ public class Jadwal {
     @SerializedName("harga")
     @Expose
     private Integer harga;
+    @SerializedName("waktu_berangkat")
+    @Expose
+    private String waktuBerangkat;
+    @SerializedName("asal")
+    @Expose
+    private Integer asal;
+    @SerializedName("tujuan")
+    @Expose
+    private Integer tujuan;
+    @SerializedName("estimasi")
+    @Expose
+    private Integer estimasi;
+    @SerializedName("id_kapal")
+    @Expose
+    private Integer idKapal;
+
 
     public Integer getId() {
         return id;
@@ -114,4 +130,44 @@ public class Jadwal {
     public void setHarga(Integer harga) {
         this.harga = harga;
     }
+
+    public String getWaktuBerangkat() {
+        return waktuBerangkat;
+    }
+
+    public void setWaktuBerangkat(String waktuBerangkat) {
+        this.waktuBerangkat = waktuBerangkat;
+    }
+    public Integer getAsal() {
+        return asal;
+    }
+
+    public void setAsal(Integer asal) {
+        this.asal = asal;
+    }
+
+    public Integer getTujuan() {
+        return tujuan;
+    }
+
+    public void setTujuan(Integer tujuan) {
+        this.tujuan = tujuan;
+    }
+
+    public Integer getEstimasi() {
+        return estimasi;
+    }
+
+    public void setEstimasi(Integer estimasi) {
+        this.estimasi = estimasi;
+    }
+
+    public Integer getIdKapal() {
+        return idKapal;
+    }
+
+    public void setIdKapal(Integer idKapal) {
+        this.idKapal = idKapal;
+    }
+
 }

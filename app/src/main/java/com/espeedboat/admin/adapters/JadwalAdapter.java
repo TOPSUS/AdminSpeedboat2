@@ -1,6 +1,7 @@
 package com.espeedboat.admin.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.transition.AutoTransition;
 import android.transition.TransitionManager;
 import android.util.Log;
@@ -16,6 +17,8 @@ import android.widget.Toast;
 import androidx.appcompat.app.AlertDialog;
 
 import com.espeedboat.admin.R;
+import com.espeedboat.admin.activity.CreateJadwalActivity;
+import com.espeedboat.admin.activity.CreateKapalActivity;
 import com.espeedboat.admin.client.RetrofitClient;
 import com.espeedboat.admin.interfaces.UpdateListener;
 import com.espeedboat.admin.model.Jadwal;
@@ -23,6 +26,7 @@ import com.espeedboat.admin.model.Kapal;
 import com.espeedboat.admin.model.Response;
 import com.espeedboat.admin.service.JadwalService;
 import com.espeedboat.admin.service.KapalService;
+import com.espeedboat.admin.utils.Constants;
 import com.espeedboat.admin.utils.SessionManager;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.card.MaterialCardView;
@@ -107,6 +111,10 @@ public class JadwalAdapter extends BaseAdapter {
             confirmDelete(listJadwal.get(position).getId());
         });
 
+        holder.edit.setOnClickListener(v -> {
+            viewJadwal(listJadwal.get(position).getId());
+        });
+
         return rowView;
     }
 
@@ -121,6 +129,11 @@ public class JadwalAdapter extends BaseAdapter {
         this.listJadwal = jadwals;
     }
 
+    private void viewJadwal(final int id) {
+        Intent intent = new Intent(context, CreateJadwalActivity.class);
+        intent.putExtra(Constants.JADWAL_ID, id);
+        context.startActivity(intent);
+    }
 
     private void confirmDelete(final int id) {
         AlertDialog.Builder alert = new AlertDialog.Builder(context);

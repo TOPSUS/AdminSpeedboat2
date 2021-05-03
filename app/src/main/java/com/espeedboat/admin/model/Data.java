@@ -42,6 +42,9 @@ public class Data {
     @SerializedName("dropdown")
     @Expose
     private List<Dropdown> dropdown = null;
+    @SerializedName("jadwal")
+    @Expose
+    private Jadwal jadwal;
 
     public List<Pelabuhan> getPelabuhan() {
         return pelabuhan;
@@ -137,5 +140,13 @@ public class Data {
 
     public void setDropdown(List<Dropdown> dropdown) {
         this.dropdown = dropdown;
+    }
+
+    public Jadwal getJadwal() {
+        return jadwal;
+    }
+
+    public void setJadwal(Jadwal jadwal) {
+        this.jadwal = jadwal;
     }
 }

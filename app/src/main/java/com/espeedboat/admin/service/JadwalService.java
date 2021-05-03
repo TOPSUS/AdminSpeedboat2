@@ -26,4 +26,7 @@ public interface JadwalService {
 
     @DELETE(Endpoint.JADWAL_DELETE)
     Call<Response> deleteJadwal(@Header("Authorization") String token, @Path(value = "jadwal", encoded = true) int id);
+
+    @GET(Endpoint.JADWAL_VIEW)
+    Call<Response> showJadwal(@Header("Authorization") String token, @Path(value = "jadwal", encoded = true) int id);
 }

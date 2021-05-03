@@ -183,6 +183,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Edit"
+                    android:visibility="gone"
                     android:backgroundTint="@color/primary"
                     android:insetTop="0dp"
                     android:insetBottom="0dp"

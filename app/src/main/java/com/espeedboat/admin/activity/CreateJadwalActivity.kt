@@ -1,6 +1,7 @@
 package com.espeedboat.admin.activity
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.*
 import android.widget.AdapterView.OnItemClickListener
@@ -10,6 +11,7 @@ import com.espeedboat.admin.R
 import com.espeedboat.admin.adapters.DropdownAdapter
 import com.espeedboat.admin.client.RetrofitClient
 import com.espeedboat.admin.model.Dropdown
+import com.espeedboat.admin.model.Jadwal
 import com.espeedboat.admin.model.Response
 import com.espeedboat.admin.service.JadwalService
 import com.espeedboat.admin.service.KapalService
@@ -58,16 +60,16 @@ class CreateJadwalActivity : AppCompatActivity() {
         setContentView(R.layout.activity_create_jadwal)
         init()
         setRemoveVisible(false)
+        setToolbar()
         val bundle = intent.extras
         if (bundle != null) {
-            val id = bundle.getInt(Constants.KAPAL_ID, 0)
-            if (id > 0) {
-                title!!.setText(R.string.menu_jadwal_edit)
-                setRemoveVisible(true)
-                getDataJadwal(id)
-            }
+            val id = bundle.getInt(Constants.JADWAL_ID, 0)
+//            if (id > 0) {
+//                title?.setText(R.string.menu_jadwal_edit)
+//                setRemoveVisible(true)
+//                getDataJadwal(id)
+//            }
         }
-        setToolbar()
         kapalValue
         pelabuhanValue
         setClickListener()
@@ -75,8 +77,28 @@ class CreateJadwalActivity : AppCompatActivity() {
 
     private fun getDataJadwal(id: Int) {
         idJadwal = id
-        if (idJadwal != 0) {
-        }
+        val service = RetrofitClient.getClient().create<JadwalService>(JadwalService::class.java)
+
+        val showJadwal = service.showJadwal(sessionManager!!.authToken, id)
+        showJadwal.enqueue(object : Callback<Response> {
+            override fun onResponse(call: Call<Response>, response: retrofit2.Response<Response>) {
+                Log.d("data jadwal", response.body().toString())
+                if (response.isSuccessful) {
+                    if (response.body()!!.status == 200) {
+                        val data = response.body()!!.data
+//                        setJadwalValue(data.jadwal);
+                    } else {
+                        Toast.makeText(applicationContext, "Failed show Jadwal", Toast.LENGTH_LONG).show()
+                    }
+                } else {
+                    Toast.makeText(applicationContext, "Failed Fetch Jadwal", Toast.LENGTH_LONG).show()
+                }
+            }
+
+            override fun onFailure(call: Call<Response>, t: Throwable) {
+                Toast.makeText(applicationContext, "Error Fetch Jadwal", Toast.LENGTH_LONG).show()
+            }
+        })
     }
 
     override fun onBackPressed() {
@@ -122,6 +144,7 @@ class CreateJadwalActivity : AppCompatActivity() {
 
     private val kapalValue: Unit
         private get() {
+            autoCompleteKapal?.clearListSelection()
             val service = RetrofitClient.getClient().create<KapalService>(KapalService::class.java)
             val getUserKapal = service.getUserKapal(sessionManager!!.authToken)
             getUserKapal.enqueue(object : Callback<Response> {
@@ -130,6 +153,8 @@ class CreateJadwalActivity : AppCompatActivity() {
                         if (response.body()!!.status == 200) {
                             val data = response.body()!!.data
                             if (data.dropdown.size > 0) {
+                                var i = 0
+                                var selectedId = -1
                                 for (drops in data.dropdown) {
                                     listKapal!!.add(drops)
                                 }
