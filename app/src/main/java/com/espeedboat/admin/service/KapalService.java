@@ -30,7 +30,7 @@ public interface KapalService {
     @GET(Endpoint.KAPAL_VIEW)
     Call<Response> viewKapal(@Header("Authorization") String token, @Path(value = "kapal", encoded = true) int id);
 
-    @DELETE(Endpoint.KAPAL_DELETE)
+    @GET(Endpoint.KAPAL_DELETE)
     Call<Response> deleteKapal(@Header("Authorization") String token, @Path(value = "kapal", encoded = true) int id);
 
     @Multipart

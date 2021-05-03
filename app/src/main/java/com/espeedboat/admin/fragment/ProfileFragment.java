@@ -29,6 +29,7 @@ import com.espeedboat.admin.activity.GantiPasswordActivity;
 import com.espeedboat.admin.activity.LoginActivity;
 import com.espeedboat.admin.client.RetrofitClient;
 import com.espeedboat.admin.interfaces.FinishActivity;
+import com.espeedboat.admin.interfaces.ShowBackButton;
 import com.espeedboat.admin.interfaces.ToolbarTitle;
 import com.espeedboat.admin.model.Data;
 import com.espeedboat.admin.model.Response;
@@ -43,11 +44,11 @@ import de.hdodenhof.circleimageview.CircleImageView;
 import retrofit2.Call;
 import retrofit2.Callback;
 
-public class
-ProfileFragment extends Fragment {
+public class ProfileFragment extends Fragment {
 
     FinishActivity finishActivityCallback;
     ToolbarTitle toolbarTitleCallback;
+    ShowBackButton showBackButton;
     private View view;
     private ImageView back, profileToolbar;
     private SessionManager sessionManager;
@@ -69,6 +70,7 @@ ProfileFragment extends Fragment {
         super.onAttach(context);
         toolbarTitleCallback = (ToolbarTitle) context;
         finishActivityCallback = (FinishActivity) context;
+//        showBackButton = (ShowBackButton) context;
     }
 
     @Override
@@ -133,6 +135,7 @@ ProfileFragment extends Fragment {
     }
 
     private void init() {
+//        showBackButton.showBackButton();
         sessionManager = new SessionManager(view.getContext());
         username = view.findViewById(R.id.username);
         role = view.findViewById(R.id.role);

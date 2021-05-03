@@ -18,13 +18,14 @@ import com.espeedboat.admin.fragment.JadwalFragment;
 import com.espeedboat.admin.fragment.KapalFragment;
 import com.espeedboat.admin.fragment.ProfileFragment;
 import com.espeedboat.admin.interfaces.FinishActivity;
+import com.espeedboat.admin.interfaces.ShowBackButton;
 import com.espeedboat.admin.interfaces.ToolbarTitle;
 import com.espeedboat.admin.model.Auth;
 import com.espeedboat.admin.model.User;
 import com.espeedboat.admin.utils.Constants;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-public class MainActivity extends AppCompatActivity implements FinishActivity, ToolbarTitle {
+public class MainActivity extends AppCompatActivity implements FinishActivity, ToolbarTitle, ShowBackButton {
 
     private Toolbar toolbar;
     private TextView title;
@@ -49,8 +50,6 @@ public class MainActivity extends AppCompatActivity implements FinishActivity, T
         loadFragment(new DashboardFragment());
 
     }
-
-
 
     @Override
     protected void onStart() {
@@ -89,8 +88,6 @@ public class MainActivity extends AppCompatActivity implements FinishActivity, T
     }
 
     private BottomNavigationView.OnNavigationItemSelectedListener bottomNavItemSelected = item -> {
-        back.setVisibility(View.INVISIBLE);
-
         switch (item.getItemId()) {
             case R.id.nav_kapal:
                 loadFragment(new KapalFragment());
@@ -144,5 +141,10 @@ public class MainActivity extends AppCompatActivity implements FinishActivity, T
     @Override
     public void setToolbarTitle(String toolbarTitle) {
         title.setText(toolbarTitle);
+    }
+
+    @Override
+    public void showBackButton() {
+        back.setVisibility(View.VISIBLE);
     }
 }
