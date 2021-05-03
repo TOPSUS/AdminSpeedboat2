@@ -1,6 +1,7 @@
 package com.espeedboat.admin.fragment;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -14,6 +15,8 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import com.espeedboat.admin.R;
+import com.espeedboat.admin.activity.CreateJadwalActivity;
+import com.espeedboat.admin.activity.CreateKapalActivity;
 import com.espeedboat.admin.adapters.JadwalAdapter;
 import com.espeedboat.admin.client.RetrofitClient;
 import com.espeedboat.admin.interfaces.ShowBackButton;
@@ -23,6 +26,7 @@ import com.espeedboat.admin.model.Jadwal;
 import com.espeedboat.admin.model.Response;
 import com.espeedboat.admin.service.JadwalService;
 import com.espeedboat.admin.utils.SessionManager;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,6 +44,7 @@ public class JadwalFragment extends Fragment implements UpdateListener {
     private LinearLayout empty;
     private JadwalAdapter jadwalAdapter;
     private List<Jadwal> jadwals;
+    private FloatingActionButton add;
     ShowBackButton showBackButton;
 
     @Override
@@ -63,6 +68,7 @@ public class JadwalFragment extends Fragment implements UpdateListener {
 
         init();
         getJadwal();
+        clickListener();
 
         return view;
     }
@@ -72,8 +78,16 @@ public class JadwalFragment extends Fragment implements UpdateListener {
         service = RetrofitClient.getClient().create(JadwalService.class);
         jadwalList = view.findViewById(R.id.listview);
         empty = view.findViewById(R.id.empty_wrapper);
+        add = view.findViewById(R.id.fab);
         jadwalAdapter = new JadwalAdapter(getActivity(), jadwals, JadwalFragment.this);
         showBackButton.showBackButton(false);
+    }
+
+    private void clickListener() {
+        add.setOnClickListener(v -> {
+            Intent i = new Intent(context, CreateJadwalActivity.class);
+            startActivity(i);
+        });
     }
 
     private void getJadwal() {

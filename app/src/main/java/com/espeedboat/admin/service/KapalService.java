@@ -24,6 +24,9 @@ import retrofit2.http.Path;
 import retrofit2.http.Query;
 
 public interface KapalService {
+    @GET(Endpoint.KAPAL_USER_LIST)
+    Call<Response> getUserKapal(@Header("Authorization") String token);
+
     @GET(Endpoint.KAPAL_LIST)
     Call<Response> showKapal(@Header("Authorization") String token);
 

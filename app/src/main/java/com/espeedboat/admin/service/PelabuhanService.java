@@ -10,4 +10,7 @@ import retrofit2.http.Header;
 public interface PelabuhanService {
     @GET(Endpoint.LIST_NAMA_PELABUHAN)
     Call<Response> listNamaPelabuhan(@Header("Authorization") String token);
+
+    @GET(Endpoint.PELABUHAN_LIST)
+    Call<Response> getPelabuhanList(@Header("Authorization") String token);
 }

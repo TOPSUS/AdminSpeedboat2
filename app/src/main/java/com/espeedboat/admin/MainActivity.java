@@ -114,17 +114,17 @@ public class MainActivity extends AppCompatActivity implements FinishActivity, T
         try {
             if (fragmentManager.findFragmentByTag(Constants.FRAG_MOVE).isVisible()) {
                 BottomNavigationView mBottomNavigationView = findViewById(R.id.bottomnav);
-                if (mBottomNavigationView.getSelectedItemId() == R.id.nav_dashboard) {
-                    super.onBackPressed();
-                    finishActivity();
-                } else {
+//                if (mBottomNavigationView.getSelectedItemId() == R.id.nav_dashboard) {
+//                    super.onBackPressed();
+//                    finishActivity();
+//                } else {
                     loadFragment(new DashboardFragment());
                     mBottomNavigationView.setSelectedItemId(R.id.nav_dashboard);
                     profileToolbar.setVisibility(View.VISIBLE);
                     title.setText(R.string.menu_dashboard);
                     back = findViewById(R.id.toolbar_back);
                     back.setVisibility(View.INVISIBLE);
-                }
+//                }
             }
         } catch (NullPointerException e) {
             super.onBackPressed();

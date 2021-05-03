@@ -10,7 +10,9 @@ public class Endpoint {
     public static final String KAPAL_DELETE = "kapal/{kapal}";
     public static final String KAPAL_CREATE = "kapal";
     public static final String KAPAL_UPDATE = "kapal/update/{kapal}";
+    public static final String KAPAL_USER_LIST = "get/user/kapal";
     public static final String LIST_NAMA_PELABUHAN = "pelabuhan/get/name";
+    public static final String PELABUHAN_LIST = "get/pelabuhan";
     public static final String GOLONGAN_BY_PELABUHAN = "golongan/get/{id}";
     public static final String EDIT_USER = "user/get/{id}";
     public static final String UPDATE_USER = "user/update/{id}";
@@ -18,5 +20,6 @@ public class Endpoint {
     public static final String CEK_CODES = "admin/cekcode";
     public static final String FORGOT_PASS = "admin/forgotpass";
     public static final String JADWAL_LIST = "jadwal";
+    public static final String JADWAL_CREATE = "jadwal";
     public static final String GANTI_PASS = "gantipass";
 }
