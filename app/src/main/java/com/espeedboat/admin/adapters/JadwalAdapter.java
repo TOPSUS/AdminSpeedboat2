@@ -77,10 +77,10 @@ public class JadwalAdapter extends BaseAdapter {
         holder.harga.setText("IDR " + String.valueOf(listJadwal.get(position).getHarga()));
 
 
-        ViewGroup.MarginLayoutParams layoutParams = new ViewGroup.MarginLayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
-                ViewGroup.LayoutParams.WRAP_CONTENT);
-        layoutParams.setMargins(24, 0, 24, 16);
-        rowView.setLayoutParams(layoutParams);
+//        ViewGroup.MarginLayoutParams layoutParams = new ViewGroup.MarginLayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
+//                ViewGroup.LayoutParams.WRAP_CONTENT);
+//        layoutParams.setMargins(24, 0, 24, 16);
+//        rowView.setLayoutParams(layoutParams);
 
         return rowView;
     }

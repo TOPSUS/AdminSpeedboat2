@@ -1,7 +1,9 @@
 package com.espeedboat.admin.fragment;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -94,6 +96,7 @@ public class JadwalFragment extends Fragment implements UpdateListener {
         Call<Response> getJadwals = service.listJadwal(sessionManager.getAuthToken());
 
         getJadwals.enqueue(new Callback<Response>() {
+            @SuppressLint("ResourceAsColor")
             @Override
             public void onResponse(Call<Response> call, retrofit2.Response<Response> response) {
                 if (response.isSuccessful()) {
@@ -103,6 +106,9 @@ public class JadwalFragment extends Fragment implements UpdateListener {
                         if (data.getListJadwal().size() > 0) {
                             empty.setVisibility(View.GONE);
                             jadwalList.setVisibility(View.VISIBLE);
+
+                            jadwalList.setDivider(new ColorDrawable(R.color.transparent));
+                            jadwalList.setDividerHeight(0);
 
                             jadwalList.setAdapter(jadwalAdapter);
                             jadwalAdapter.updateData(data.getListJadwal());
