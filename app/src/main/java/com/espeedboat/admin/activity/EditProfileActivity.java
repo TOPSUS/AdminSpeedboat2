@@ -206,7 +206,7 @@ public class EditProfileActivity extends AppCompatActivity {
         email.setText(user.getEmail());
         setJKValue(user.getJeniskelamin());
 
-        Glide.with(this).load(user.getUrlFoto()).into(profile);
+        Glide.with(this).load(user.getUrlFoto()).error(R.drawable.no_profile).into(profile);
     }
 
     private void setCameraListener() {
