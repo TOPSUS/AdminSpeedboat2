@@ -86,7 +86,6 @@ public class JadwalFragment extends Fragment implements UpdateListener {
                     if (response.body().getStatus() == 200) {
                         Data data = response.body().getData();
 
-                        Log.d("error jadwal", data.getListJadwal().toString());
                         if (data.getListJadwal().size() > 0) {
                             empty.setVisibility(View.GONE);
                             jadwalList.setVisibility(View.VISIBLE);
@@ -94,11 +93,12 @@ public class JadwalFragment extends Fragment implements UpdateListener {
                             jadwalList.setAdapter(jadwalAdapter);
                             jadwalAdapter.updateData(data.getListJadwal());
                             jadwalAdapter.notifyDataSetChanged();
+                        } else {
+                            jadwalList.setVisibility(View.GONE);
+                            empty.setVisibility(View.VISIBLE);
                         }
                     } else {
-
                         Toast.makeText(context,  "Response Status Code Error", Toast.LENGTH_LONG).show();
-
                     }
                 } else {
                     Toast.makeText(context,  "Failed to get Jadwal", Toast.LENGTH_LONG).show();
@@ -107,7 +107,8 @@ public class JadwalFragment extends Fragment implements UpdateListener {
 
             @Override
             public void onFailure(Call<Response> call, Throwable t) {
-                Toast.makeText(context,  t.getMessage(), Toast.LENGTH_LONG).show();
+                Log.d("Failure Jadwal", t.getMessage().toString());
+                Toast.makeText(context,  "Failure Jadwal", Toast.LENGTH_LONG).show();
             }
         });
     }
