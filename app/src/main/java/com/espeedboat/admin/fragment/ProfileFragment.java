@@ -70,7 +70,7 @@ public class ProfileFragment extends Fragment {
         super.onAttach(context);
         toolbarTitleCallback = (ToolbarTitle) context;
         finishActivityCallback = (FinishActivity) context;
-//        showBackButton = (ShowBackButton) context;
+        showBackButton = (ShowBackButton) context;
     }
 
     @Override
@@ -135,7 +135,7 @@ public class ProfileFragment extends Fragment {
     }
 
     private void init() {
-//        showBackButton.showBackButton();
+        showBackButton.showBackButton(true);
         sessionManager = new SessionManager(view.getContext());
         username = view.findViewById(R.id.username);
         role = view.findViewById(R.id.role);
@@ -178,6 +178,6 @@ public class ProfileFragment extends Fragment {
         role.setText(user.getRole());
 
         //set Image
-        Glide.with(this).load(user.getUrlFoto()).into(profilePic);
+        Glide.with(this).load(user.getUrlFoto()).error(R.drawable.no_profile).into(profilePic);
     }
 }

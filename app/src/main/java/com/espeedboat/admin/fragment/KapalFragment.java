@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 
@@ -22,6 +23,7 @@ import com.espeedboat.admin.R;
 import com.espeedboat.admin.activity.CreateKapalActivity;
 import com.espeedboat.admin.adapters.KapalAdapter;
 import com.espeedboat.admin.client.RetrofitClient;
+import com.espeedboat.admin.interfaces.ShowBackButton;
 import com.espeedboat.admin.interfaces.UpdateListener;
 import com.espeedboat.admin.model.Data;
 import com.espeedboat.admin.model.Kapal;
@@ -47,6 +49,13 @@ public class KapalFragment extends Fragment implements UpdateListener {
     private KapalAdapter kapalAdapter;
     private List<Kapal> kapals;
     private FloatingActionButton add;
+    ShowBackButton showBackButton;
+
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+        showBackButton = (ShowBackButton) context;
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -74,6 +83,7 @@ public class KapalFragment extends Fragment implements UpdateListener {
     }
 
     private void init() {
+        showBackButton.showBackButton(false);
         listView = view.findViewById(R.id.listview);
         empty = view.findViewById(R.id.empty_wrapper);
         add = view.findViewById(R.id.fab);

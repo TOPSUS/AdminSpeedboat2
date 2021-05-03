@@ -144,7 +144,13 @@ public class MainActivity extends AppCompatActivity implements FinishActivity, T
     }
 
     @Override
-    public void showBackButton() {
-        back.setVisibility(View.VISIBLE);
+    public void showBackButton(Boolean status) {
+        if (status) {
+            back.setVisibility(View.VISIBLE);
+            profileToolbar.setVisibility(View.GONE);
+        } else {
+            back.setVisibility(View.GONE);
+            profileToolbar.setVisibility(View.VISIBLE);
+        }
     }
 }

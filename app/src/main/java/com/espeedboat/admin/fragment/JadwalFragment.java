@@ -2,9 +2,6 @@ package com.espeedboat.admin.fragment;
 
 import android.content.Context;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,15 +10,18 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+
 import com.espeedboat.admin.R;
 import com.espeedboat.admin.adapters.JadwalAdapter;
 import com.espeedboat.admin.client.RetrofitClient;
+import com.espeedboat.admin.interfaces.ShowBackButton;
 import com.espeedboat.admin.interfaces.UpdateListener;
 import com.espeedboat.admin.model.Data;
 import com.espeedboat.admin.model.Jadwal;
 import com.espeedboat.admin.model.Response;
 import com.espeedboat.admin.service.JadwalService;
-import com.espeedboat.admin.service.KapalService;
 import com.espeedboat.admin.utils.SessionManager;
 
 import java.util.ArrayList;
@@ -40,6 +40,13 @@ public class JadwalFragment extends Fragment implements UpdateListener {
     private LinearLayout empty;
     private JadwalAdapter jadwalAdapter;
     private List<Jadwal> jadwals;
+    ShowBackButton showBackButton;
+
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+        showBackButton = (ShowBackButton) context;
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -66,6 +73,7 @@ public class JadwalFragment extends Fragment implements UpdateListener {
         jadwalList = view.findViewById(R.id.listview);
         empty = view.findViewById(R.id.empty_wrapper);
         jadwalAdapter = new JadwalAdapter(getActivity(), jadwals, JadwalFragment.this);
+        showBackButton.showBackButton(false);
     }
 
     private void getJadwal() {

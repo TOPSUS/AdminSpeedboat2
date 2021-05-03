@@ -19,6 +19,7 @@ import com.espeedboat.admin.R;
 import com.espeedboat.admin.fragment.KapalFragment;
 import com.espeedboat.admin.fragment.ReviewFragment;
 import com.espeedboat.admin.interfaces.FinishActivity;
+import com.espeedboat.admin.interfaces.ShowBackButton;
 import com.espeedboat.admin.interfaces.ToolbarTitle;
 import com.espeedboat.admin.utils.Constants;
 import com.github.mikephil.charting.charts.BarChart;
@@ -44,11 +45,13 @@ public class DashboardFragment extends Fragment {
     ToolbarTitle toolbarTitleCallback;
     CircularProgressBar transaksiProgress, ratingProgress;
     LinearLayout transaksiData;
+    ShowBackButton showBackButton;
 
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
         toolbarTitleCallback = (ToolbarTitle) context;
+        showBackButton = (ShowBackButton) context;
     }
 
     @Override
@@ -66,6 +69,8 @@ public class DashboardFragment extends Fragment {
         setBarChart();
 
         menuClickListener();
+
+        showBackButton.showBackButton(false);
 
         transaksiProgress.setProgress(50f);
         ratingProgress.setProgress(50f);
