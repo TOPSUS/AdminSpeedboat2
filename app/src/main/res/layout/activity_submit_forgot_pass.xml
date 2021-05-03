@@ -81,7 +81,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/roboto_medium"
                 android:lineHeight="16sp"
-                android:text="E-Speedboat Admin"
+                android:text="E-Tiket Admin"
                 android:textAlignment="textEnd"
                 android:textColor="@color/primary"
                 android:textSize="16sp"/>
