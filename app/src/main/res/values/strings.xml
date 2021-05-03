@@ -71,4 +71,7 @@
     <string name="user_simpan">Simpan</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="qr_screen_desc">Scan Ticket QR Here!</string>
+    <string name="sb_qr">QR Scanner</string>
 </resources>

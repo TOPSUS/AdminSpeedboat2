@@ -45,6 +45,15 @@ public class Data {
     @SerializedName("jadwal")
     @Expose
     private Jadwal jadwal;
+    @SerializedName("transaksi_list")
+    @Expose
+    private List<Transaksi> transaksiLists = null;
+    @SerializedName("transaksi")
+    @Expose
+    private Transaksi transaksi = null;
+    @SerializedName("tiket")
+    @Expose
+    private Tiket tiket;
 
     public List<Pelabuhan> getPelabuhan() {
         return pelabuhan;
@@ -148,5 +157,29 @@ public class Data {
 
     public void setJadwal(Jadwal jadwal) {
         this.jadwal = jadwal;
+    }
+
+    public List<Transaksi> getTransaksiList() {
+        return transaksiLists;
+    }
+
+    public void setTransaksiList(List<Transaksi> transaksi) {
+        this.transaksiLists = transaksi;
+    }
+
+    public Transaksi getTransaksi() {
+        return transaksi;
+    }
+
+    public void setTransaksi(Transaksi transaksi) {
+        this.transaksi = transaksi;
+    }
+
+    public Tiket getTiket() {
+        return tiket;
+    }
+
+    public void setTiket(Tiket tiket) {
+        this.tiket = tiket;
     }
 }

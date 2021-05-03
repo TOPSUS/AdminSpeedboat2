@@ -35,4 +35,5 @@
     <!--  Tertiary Color Scheme  -->
     <color name="tertiary_blue">#FAFDFF</color>
     <color name="transparent">#00FFFFFF</color>
+    <color name="status_orange">#FB6D51</color>
 </resources>

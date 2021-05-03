@@ -17,6 +17,7 @@ import com.espeedboat.admin.fragment.DashboardFragment;
 import com.espeedboat.admin.fragment.JadwalFragment;
 import com.espeedboat.admin.fragment.KapalFragment;
 import com.espeedboat.admin.fragment.ProfileFragment;
+import com.espeedboat.admin.fragment.QrFragment;
 import com.espeedboat.admin.interfaces.FinishActivity;
 import com.espeedboat.admin.interfaces.ShowBackButton;
 import com.espeedboat.admin.interfaces.ToolbarTitle;
@@ -24,6 +25,7 @@ import com.espeedboat.admin.model.Auth;
 import com.espeedboat.admin.model.User;
 import com.espeedboat.admin.utils.Constants;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class MainActivity extends AppCompatActivity implements FinishActivity, ToolbarTitle, ShowBackButton {
 
@@ -31,6 +33,7 @@ public class MainActivity extends AppCompatActivity implements FinishActivity, T
     private TextView title;
     private ImageView profileToolbar, notifToolbar, back;
     private BottomNavigationView navigation;
+    private FloatingActionButton fabBottom;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,6 +72,14 @@ public class MainActivity extends AppCompatActivity implements FinishActivity, T
 
         navigation = findViewById(R.id.bottomnav);
         navigation.setOnNavigationItemSelectedListener(bottomNavItemSelected);
+
+        fabBottom = findViewById(R.id.fabBottom);
+        fabBottom.setOnClickListener(v -> {
+            profileToolbar.setVisibility(View.INVISIBLE);
+            back.setVisibility(View.VISIBLE);
+            title.setText(R.string.sb_qr);
+            loadFragment(new QrFragment());
+        });
     }
 
     private void leftToolbarListener() {
