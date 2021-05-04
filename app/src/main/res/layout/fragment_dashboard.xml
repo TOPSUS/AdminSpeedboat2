@@ -34,11 +34,12 @@
                     android:textColor="@color/primary_white"
                     android:fontFamily="@font/roboto_medium"/>
                 <TextView
+                    android:id="@+id/total_pendapatan"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="end"
                     android:layout_weight="1"
-                    android:text="Rp. 800.000,-"
+                    android:text="Rp. 0,-"
                     android:textSize="18sp"
                     android:textColor="@color/primary_white"
                     android:fontFamily="@font/roboto_medium"/>
@@ -89,14 +90,16 @@
                         app:maximum="100"
                         app:progress="30"
                         app:progressAnimationDuration="100"
-                        app:startAngle="270"/>
+                        app:startAngle="270"
+                        android:layout_centerVertical="true"/>
 
                     <TextView
+                        android:id="@+id/total_transaksi_percentage"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerInParent="true"
                         android:fontFamily="@font/roboto_bold"
-                        android:textSize="16sp"
+                        android:textSize="15sp"
                         android:textColor="@color/primary"
                         android:text="50%" />
                 </RelativeLayout>
@@ -109,12 +112,18 @@
                     android:layout_centerVertical="true"
                     android:orientation="vertical">
                     <TextView
+                        android:id="@+id/total_transaksi"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/roboto_medium"
                         android:textSize="16sp"
                         android:textColor="@color/primary"
-                        android:text="100/200"/>
+                        android:text="100/200"
+                        app:autoSizeMaxTextSize="16sp"
+                        app:autoSizeMinTextSize="12sp"
+                        app:autoSizeStepGranularity="1sp"
+                        app:autoSizeTextType="uniform"
+                        android:maxLines="1"/>
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -122,7 +131,12 @@
                         android:fontFamily="@font/roboto_medium"
                         android:textSize="14sp"
                         android:textColor="@color/primary"
-                        android:text="Transaction Done"/>
+                        android:text="Transaction Done"
+                        app:autoSizeMaxTextSize="16sp"
+                        app:autoSizeMinTextSize="12sp"
+                        app:autoSizeStepGranularity="1sp"
+                        app:autoSizeTextType="uniform"
+                        android:maxLines="1"/>
                 </LinearLayout>
             </RelativeLayout>
 
@@ -153,7 +167,8 @@
                         app:maximum="100"
                         app:progress="40"
                         app:progressAnimationDuration="100"
-                        app:startAngle="270"/>
+                        app:startAngle="270"
+                        android:layout_centerVertical="true"/>
 
                     <View
                         android:layout_width="@dimen/margin_32"
@@ -162,6 +177,7 @@
                         android:layout_centerInParent="true"/>
                 </RelativeLayout>
                 <TextView
+                    android:id="@+id/total_rating"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/margin_8"
@@ -170,7 +186,12 @@
                     android:fontFamily="@font/roboto_medium"
                     android:textSize="24sp"
                     android:textColor="@color/primary_yellow"
-                    android:text="Rating 4.5"/>
+                    android:text="Rating 4.5"
+                    app:autoSizeMaxTextSize="24sp"
+                    app:autoSizeMinTextSize="12sp"
+                    app:autoSizeStepGranularity="1sp"
+                    app:autoSizeTextType="uniform"
+                    android:maxLines="1"/>
             </RelativeLayout>
         </LinearLayout>
 
@@ -279,6 +300,7 @@
                 android:textColor="@color/primary_grey"
                 android:gravity="start"/>
             <TextView
+                android:id="@+id/btn_all_transaksi"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -288,17 +310,14 @@
                 android:textColor="@color/primary"
                 android:gravity="end"/>
         </LinearLayout>
-        <HorizontalScrollView
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/transaksi_data_horizontal"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:paddingVertical="@dimen/margin_8"
-            android:scrollbars="none">
-            <LinearLayout
-                android:id="@+id/transaksi_data_horizontal"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:orientation="horizontal">
-            </LinearLayout>
-        </HorizontalScrollView>
+            android:scrollbars="none"
+            android:orientation="horizontal">
+
+        </androidx.recyclerview.widget.RecyclerView>
     </LinearLayout>
 </ScrollView>

@@ -54,6 +54,9 @@ public class Data {
     @SerializedName("tiket")
     @Expose
     private Tiket tiket;
+    @SerializedName("dashboard")
+    @Expose
+    private Dashboard dashboard;
 
     public List<Pelabuhan> getPelabuhan() {
         return pelabuhan;
@@ -181,5 +184,13 @@ public class Data {
 
     public void setTiket(Tiket tiket) {
         this.tiket = tiket;
+    }
+
+    public Dashboard getDashboard() {
+        return dashboard;
+    }
+
+    public void setDashboard(Dashboard dashboard) {
+        this.dashboard = dashboard;
     }
 }

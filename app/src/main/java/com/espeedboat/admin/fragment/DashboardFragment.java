@@ -1,27 +1,42 @@
 package com.espeedboat.admin.fragment;
 
 import android.content.Context;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.budiyev.android.circularprogressbar.CircularProgressBar;
 import com.espeedboat.admin.R;
+import com.espeedboat.admin.adapters.HomeTransaksiAdapter;
+import com.espeedboat.admin.adapters.TransaksiAdapter;
+import com.espeedboat.admin.client.RetrofitClient;
 import com.espeedboat.admin.fragment.KapalFragment;
 import com.espeedboat.admin.fragment.ReviewFragment;
 import com.espeedboat.admin.interfaces.FinishActivity;
 import com.espeedboat.admin.interfaces.ShowBackButton;
 import com.espeedboat.admin.interfaces.ToolbarTitle;
+import com.espeedboat.admin.model.Data;
+import com.espeedboat.admin.model.Response;
+import com.espeedboat.admin.model.Transaksi;
+import com.espeedboat.admin.service.DashboardService;
+import com.espeedboat.admin.service.JadwalService;
 import com.espeedboat.admin.utils.Constants;
+import com.espeedboat.admin.utils.SessionManager;
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.components.AxisBase;
 import com.github.mikephil.charting.components.XAxis;
@@ -35,8 +50,13 @@ import com.github.mikephil.charting.formatter.ValueFormatter;
 import com.github.mikephil.charting.utils.ColorTemplate;
 import com.github.mikephil.charting.utils.ViewPortHandler;
 
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
 import java.util.ArrayList;
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
 
 public class DashboardFragment extends Fragment {
 
@@ -44,8 +64,13 @@ public class DashboardFragment extends Fragment {
     BarChart barChart;
     ToolbarTitle toolbarTitleCallback;
     CircularProgressBar transaksiProgress, ratingProgress;
-    LinearLayout transaksiData;
+    RecyclerView transaksiData;
     ShowBackButton showBackButton;
+    DashboardService dashboardService;
+    SessionManager sessionManager;
+    Context context;
+    TextView totalPendapatan, totalTransaksi, totalRate, transaksiPercentage, viewAllTransaksi;
+    LinearLayoutManager linearLayoutManager;
 
     @Override
     public void onAttach(Context context) {
@@ -63,42 +88,49 @@ public class DashboardFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_dashboard, container, false);
+        context = getActivity();
 
         setIds();
 
-        setBarChart();
+        getDataDashboard();
 
         menuClickListener();
 
         showBackButton.showBackButton(false);
 
-        transaksiProgress.setProgress(50f);
-        ratingProgress.setProgress(50f);
+        return view;
+    }
 
-        for (int i = 0; i < 5; i++) {
-            View lview = LayoutInflater.from(getActivity()).inflate(R.layout.transaksi_data, null);
+    private void getDataDashboard() {
+        sessionManager = new SessionManager(view.getContext());
+        dashboardService = RetrofitClient.getClient().create(DashboardService.class);
 
-            LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
-                    LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+        Call<Response> getData = dashboardService.dashboardData(sessionManager.getAuthToken());
+        getData.enqueue(new Callback<Response>() {
+            @Override
+            public void onResponse(Call<Response> call, retrofit2.Response<Response> response) {
 
-            if (i == 0) {
-                layoutParams.setMargins(getResources().getDimensionPixelSize(R.dimen.margin_24), 0,
-                        getResources().getDimensionPixelSize(R.dimen.margin_8), 0);
-            } else if (i == 4) {
-                layoutParams.setMargins(0, 0,
-                        getResources().getDimensionPixelSize(R.dimen.margin_24), 0);
-            } else {
-                layoutParams.setMargins(0, 0,
-                        getResources().getDimensionPixelSize(R.dimen.margin_8), 0);
+                if (response.isSuccessful()) {
+                    if (response.body().getStatus() == 200) {
+                        Data data = response.body().getData();
+                        setBarChart(data.getDashboard().getTotalPendapatan(),  data.getDashboard().getRekapPendapatan());
+                        setProgressInfo(data.getDashboard().getRateReview(), data.getDashboard().getTransaksiDone(),
+                                data.getDashboard().getTransaksiCount());
+                        setRecentTransaksi(data.getDashboard().getTransaksiList());
+                    } else {
+                        Toast.makeText(context,  "Response Status Code Error", Toast.LENGTH_LONG).show();
+                    }
+                } else {
+                    Toast.makeText(context,  "Failed to get Dashboard", Toast.LENGTH_LONG).show();
+                }
             }
 
-
-            lview.setLayoutParams(layoutParams);
-
-            transaksiData.addView(lview);
-        }
-
-        return view;
+            @Override
+            public void onFailure(Call<Response> call, Throwable t) {
+                Log.d("Failure Dashboard", t.getMessage().toString());
+                Toast.makeText(context,  "Failure Dashboard", Toast.LENGTH_LONG).show();
+            }
+        });
     }
 
     private void setIds() {
@@ -106,6 +138,13 @@ public class DashboardFragment extends Fragment {
         transaksiProgress = view.findViewById(R.id.transaksi_progress);
         ratingProgress = view.findViewById(R.id.rating_progress);
         transaksiData = view.findViewById(R.id.transaksi_data_horizontal);
+        totalPendapatan = view.findViewById(R.id.total_pendapatan);
+        totalTransaksi = view.findViewById(R.id.total_transaksi);
+        totalRate = view.findViewById(R.id.total_rating);
+        transaksiPercentage = view.findViewById(R.id.total_transaksi_percentage);
+        linearLayoutManager = new LinearLayoutManager(view.getContext(), LinearLayoutManager.HORIZONTAL, true);
+        transaksiData.setLayoutManager(linearLayoutManager);
+        viewAllTransaksi = view.findViewById(R.id.btn_all_transaksi);
     }
 
     private void menuClickListener() {
@@ -138,18 +177,39 @@ public class DashboardFragment extends Fragment {
             ft.replace(R.id.content, fragment, Constants.FRAG_MOVE);
             ft.commit();
         });
+
+        Button mTransaksi = view.findViewById(R.id.menu_transaksi);
+        mJadwal.setOnClickListener(v -> {
+            toolbarTitleCallback.setToolbarTitle("Transaksi");
+            Fragment fragment = new ListTransaksiFragment("all");
+            FragmentManager fm = getActivity().getSupportFragmentManager();
+            FragmentTransaction ft = fm.beginTransaction();
+            ft.replace(R.id.content, fragment, Constants.FRAG_MOVE);
+            ft.commit();
+        });
+
+        viewAllTransaksi.setOnClickListener(v -> {
+            toolbarTitleCallback.setToolbarTitle("Transaksi");
+            Fragment fragment = new ListTransaksiFragment("all");
+            FragmentManager fm = getActivity().getSupportFragmentManager();
+            FragmentTransaction ft = fm.beginTransaction();
+            ft.replace(R.id.content, fragment, Constants.FRAG_MOVE);
+            ft.commit();
+        });
     }
 
-    private void setBarChart() {
+    private void setBarChart(Integer inTotal, List<Integer> inRekap) {
         // Data-data yang akan ditampilkan di Chart
         ArrayList<BarEntry> dataPendapatan = new ArrayList<>();
-        dataPendapatan.add(new BarEntry(0, 1500000));
-        dataPendapatan.add(new BarEntry(1, 1430000));
-        dataPendapatan.add(new BarEntry(2, 1750000));
-        dataPendapatan.add(new BarEntry(3, 1390000));
-        dataPendapatan.add(new BarEntry(4, 1430000));
-        dataPendapatan.add(new BarEntry(5, 1750000));
-        dataPendapatan.add(new BarEntry(6, 1390000));
+        for (int i = 0; i < 7; i++) {
+            dataPendapatan.add(new BarEntry(i, 0));
+        }
+        if (inRekap.size() > 0) {
+            dataPendapatan = new ArrayList<>();
+            for (int i = 0; i < inRekap.size(); i++) {
+                dataPendapatan.add(new BarEntry(i, inRekap.get(i).longValue()));
+            }
+        }
 
         ArrayList<String> dataHari = new ArrayList<>();
         dataHari.add("Senin");
@@ -187,5 +247,37 @@ public class DashboardFragment extends Fragment {
         });
         barChart.getXAxis().setTextColor(getResources().getColor(R.color.primary_white));
         barChart.getXAxis().setAxisLineColor(getResources().getColor(R.color.primary_white));
+
+
+        DecimalFormat kursIndonesia = (DecimalFormat) DecimalFormat.getCurrencyInstance();
+        DecimalFormatSymbols formatRp = new DecimalFormatSymbols();
+
+        formatRp.setCurrencySymbol("Rp. ");
+        formatRp.setMonetaryDecimalSeparator(',');
+        formatRp.setGroupingSeparator('.');
+
+        kursIndonesia.setDecimalFormatSymbols(formatRp);
+        totalPendapatan.setText(kursIndonesia.format(inTotal.doubleValue()));
+    }
+
+    private void setProgressInfo(Float rate, Integer done, Integer count) {
+
+        String textTotalTransaksi = done + " / " + count;
+        String textTotalRate = "Rating " + rate;
+        int percentageTrans = done * 100 / count;
+        float percentageRate = rate * 100 / 5;
+        String textTransaksiPercentage = percentageTrans + "%";
+
+        totalTransaksi.setText(textTotalTransaksi);
+        totalRate.setText(textTotalRate);
+        transaksiPercentage.setText(textTransaksiPercentage);
+
+        transaksiProgress.setProgress(percentageTrans);
+        ratingProgress.setProgress(percentageRate);
+    }
+
+    private void setRecentTransaksi(List<Transaksi> datas) {
+        transaksiData.setAdapter(new HomeTransaksiAdapter(datas));
+        transaksiData.getLayoutManager().scrollToPosition(datas.size()-1);
     }
 }
