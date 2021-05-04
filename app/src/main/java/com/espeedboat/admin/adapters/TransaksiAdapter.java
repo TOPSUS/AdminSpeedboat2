@@ -62,7 +62,7 @@ public class TransaksiAdapter extends RecyclerView.Adapter<TransaksiViewHolder>{
         holder.setTo(item.getTujuan());
         holder.setToDate(item.getTanggalSampai());
         holder.setToTime(item.getJamSampai());
-        holder.itemView.setOnClickListener(v -> { itemClickListener(v, item); });
+        holder.itemView.findViewById(R.id.itemWrap).setOnClickListener(v -> { itemClickListener(v, item); });
     }
 
     private void itemClickListener(View view, Transaksi transaksi) {

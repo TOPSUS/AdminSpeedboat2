@@ -20,7 +20,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="@dimen/margin_16"
-            android:background="@drawable/bg_item_transaksi_dashboard"
+            android:background="@drawable/bg_item_white_clickable"
             android:orientation="vertical">
             <RelativeLayout
                 android:layout_width="match_parent"
