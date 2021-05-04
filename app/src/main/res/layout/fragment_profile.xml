@@ -155,7 +155,8 @@
                 android:padding="@dimen/margin_8"
                 android:background="@drawable/bg_btn_profile"
                 android:clickable="true"
-                android:focusable="true">
+                android:focusable="true"
+                android:visibility="gone">
                 <ImageView
                     android:id="@+id/img_article"
                     android:layout_alignParentStart="true"
@@ -190,7 +191,8 @@
                 android:padding="@dimen/margin_8"
                 android:background="@drawable/bg_btn_profile"
                 android:clickable="true"
-                android:focusable="true">
+                android:focusable="true"
+                android:visibility="gone">
                 <ImageView
                     android:id="@+id/img_reward"
                     android:layout_alignParentStart="true"

@@ -16,6 +16,7 @@ import com.espeedboat.admin.activity.LoginActivity;
 import com.espeedboat.admin.fragment.DashboardFragment;
 import com.espeedboat.admin.fragment.JadwalFragment;
 import com.espeedboat.admin.fragment.KapalFragment;
+import com.espeedboat.admin.fragment.ListTransaksiFragment;
 import com.espeedboat.admin.fragment.ProfileFragment;
 import com.espeedboat.admin.fragment.QrFragment;
 import com.espeedboat.admin.interfaces.FinishActivity;
@@ -112,6 +113,10 @@ public class MainActivity extends AppCompatActivity implements FinishActivity, T
                 loadFragment(new JadwalFragment());
                 title.setText(R.string.menu_jadwal);
                 return true;
+            case R.id.transaksi:
+                loadFragment(new ListTransaksiFragment("all"));
+                title.setText(R.string.menu_transaksi);
+                return true;
         }
 
         return false;
@@ -121,24 +126,27 @@ public class MainActivity extends AppCompatActivity implements FinishActivity, T
     private void backButtonClick() {
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-
-        try {
-            if (fragmentManager.findFragmentByTag(Constants.FRAG_MOVE).isVisible()) {
-                BottomNavigationView mBottomNavigationView = findViewById(R.id.bottomnav);
-//                if (mBottomNavigationView.getSelectedItemId() == R.id.nav_dashboard) {
-//                    super.onBackPressed();
-//                    finishActivity();
-//                } else {
-                    loadFragment(new DashboardFragment());
-                    mBottomNavigationView.setSelectedItemId(R.id.nav_dashboard);
-                    profileToolbar.setVisibility(View.VISIBLE);
-                    title.setText(R.string.menu_dashboard);
-                    back = findViewById(R.id.toolbar_back);
-                    back.setVisibility(View.INVISIBLE);
-//                }
+        if (fragmentManager.getBackStackEntryCount() > 0) {
+            fragmentManager.popBackStack();
+        } else {
+            try {
+                if (fragmentManager.findFragmentByTag(Constants.FRAG_MOVE).isVisible()) {
+                    BottomNavigationView mBottomNavigationView = findViewById(R.id.bottomnav);
+    //                if (mBottomNavigationView.getSelectedItemId() == R.id.nav_dashboard) {
+    //                    super.onBackPressed();
+    //                    finishActivity();
+    //                } else {
+                        loadFragment(new DashboardFragment());
+                        mBottomNavigationView.setSelectedItemId(R.id.nav_dashboard);
+                        profileToolbar.setVisibility(View.VISIBLE);
+                        title.setText(R.string.menu_dashboard);
+                        back = findViewById(R.id.toolbar_back);
+                        back.setVisibility(View.INVISIBLE);
+    //                }
+                }
+            } catch (NullPointerException e) {
+                super.onBackPressed();
             }
-        } catch (NullPointerException e) {
-            super.onBackPressed();
         }
     }
 

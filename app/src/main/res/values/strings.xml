@@ -74,4 +74,8 @@
 
     <string name="qr_screen_desc">Scan Ticket QR Here!</string>
     <string name="sb_qr">QR Scanner</string>
+
+    <string name="btn_approve">Approve</string>
+    <string name="btn_review">Review</string>
+    <string name="btn_payment">Proof of Payment</string>
 </resources>

@@ -3,6 +3,7 @@ package com.espeedboat.admin.fragment;
 import android.content.Context;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import android.util.Log;
@@ -17,6 +18,7 @@ import android.widget.Toast;
 import com.espeedboat.admin.R;
 import com.espeedboat.admin.client.RetrofitClient;
 import com.espeedboat.admin.interfaces.FinishActivity;
+import com.espeedboat.admin.interfaces.ToolbarTitle;
 import com.espeedboat.admin.model.Response;
 import com.espeedboat.admin.model.ReviewDetail;
 import com.espeedboat.admin.model.ReviewDetailOrder;
@@ -37,6 +39,13 @@ public class ReviewDetailFragment extends Fragment {
     private ImageView imageUser;
     private Integer review_id = 0;
     private ReviewService service;
+    ToolbarTitle toolbarTitleCallback;
+
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+        toolbarTitleCallback = (ToolbarTitle) context;
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -51,6 +60,7 @@ public class ReviewDetailFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_review_detail, container, false);
+        toolbarTitleCallback.setToolbarTitle("Review");
         this.service = RetrofitClient.getClient().create(ReviewService.class);
         getData();
 
@@ -65,6 +75,8 @@ public class ReviewDetailFragment extends Fragment {
                 @Override
                 public void onResponse(Call<Response> call, retrofit2.Response<Response> response) {
                     if (response.isSuccessful()) {
+                        Toast.makeText(getActivity(), "success ",
+                                Toast.LENGTH_LONG).show();
                         if (response.body().getStatus() == 200) {
                             setIds();
                             setValue(response.body().getData().getReviewDetail(), response.body().getData().getReviewDetailOrder());
@@ -72,6 +84,10 @@ public class ReviewDetailFragment extends Fragment {
                             Toast.makeText(getActivity(), response.body().getMessage(),
                                     Toast.LENGTH_LONG).show();
                         }
+                    } else {
+                        Log.d("data", response.message().toString());
+                        Toast.makeText(getActivity(), response.message().toString(),
+                                Toast.LENGTH_LONG).show();
                     }
                 }
 

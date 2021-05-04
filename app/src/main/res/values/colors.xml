@@ -28,6 +28,7 @@
     <!--  Secondary Color Scheme  -->
     <color name="secondary">#1bdcb9</color>
     <color name="secondary_light">#6bffeb</color>
+    <color name="secondary_super_light">#B0FFF4</color>
     <color name="secondary_dark">#00a989</color>
     <color name="secondary_grey">#CECECE</color>
     <color name="secondary_black">#747474</color>

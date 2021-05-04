@@ -45,10 +45,12 @@ public class ReviewFragment extends Fragment {
     private RecyclerView.LayoutManager layoutManager;
     private ReviewService service;
     private int transaksi_id = 0;
+    ToolbarTitle toolbarTitleCallback;
 
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
+        toolbarTitleCallback = (ToolbarTitle) context;
     }
 
     @Override
@@ -61,6 +63,7 @@ public class ReviewFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_review, container, false);
+        toolbarTitleCallback.setToolbarTitle("Review");
         recyclerView = view.findViewById(R.id.recycle_review);
         service = RetrofitClient.getClient().create(ReviewService.class);
         layoutManager = new LinearLayoutManager(view.getContext());
