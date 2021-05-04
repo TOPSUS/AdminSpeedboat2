@@ -119,7 +119,7 @@ public class ReviewFragment extends Fragment {
         ProgressBar pb_5 = view.findViewById(R.id.review_progress_5);
 
         text_score.setText(String.valueOf(tscore));
-        text_review.setText(String.valueOf(treview) + " ReviewList");
+        text_review.setText(String.valueOf(treview) + " Review");
 
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
                 Util.dpToPx(16, view.getContext()),

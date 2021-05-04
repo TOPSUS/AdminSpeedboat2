@@ -102,7 +102,7 @@ public class TransaksiViewHolder extends RecyclerView.ViewHolder {
             color = R.drawable.status_green;
         } else if (status.equals("digunakan")) {
             text = "Used";
-            color = R.drawable.status_default;
+            color = R.color.primary_white;
         } else if (status.equals("menunggu konfirmasi")) {
             text = "Waiting";
             color = R.drawable.status_yellow;
