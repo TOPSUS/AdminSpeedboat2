@@ -14,6 +14,7 @@
         android:background="@drawable/bg_item_kapal"
         android:layout_toStartOf="@id/lihatberita"
         android:padding="@dimen/margin_16"
+        android:layout_marginBottom="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
