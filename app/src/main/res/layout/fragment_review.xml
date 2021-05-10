@@ -32,7 +32,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/roboto_bold"
-                android:text="@string/base_null"
+                android:text="0.0"
                 android:textColor="@color/primary_white"
                 android:textSize="36sp" />
 
@@ -48,7 +48,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/roboto_medium"
-                android:text="@string/base_null"
+                android:text="Tidak Ada Review"
                 android:textColor="@color/primary_white"
                 android:textSize="12sp" />
         </LinearLayout>

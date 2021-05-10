@@ -18,7 +18,6 @@ import androidx.fragment.app.Fragment;
 
 import com.espeedboat.admin.R;
 import com.espeedboat.admin.activity.CreateJadwalActivity;
-import com.espeedboat.admin.activity.CreateKapalActivity;
 import com.espeedboat.admin.adapters.JadwalAdapter;
 import com.espeedboat.admin.client.RetrofitClient;
 import com.espeedboat.admin.interfaces.ShowBackButton;
@@ -28,6 +27,7 @@ import com.espeedboat.admin.model.Jadwal;
 import com.espeedboat.admin.model.Response;
 import com.espeedboat.admin.service.JadwalService;
 import com.espeedboat.admin.utils.SessionManager;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;

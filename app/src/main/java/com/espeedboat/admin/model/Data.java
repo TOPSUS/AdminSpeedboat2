@@ -57,6 +57,9 @@ public class Data {
     @SerializedName("dashboard")
     @Expose
     private Dashboard dashboard;
+    @SerializedName("reward")
+    @Expose
+    private List<Reward> reward = null;
 
     public List<Pelabuhan> getPelabuhan() {
         return pelabuhan;
@@ -192,5 +195,13 @@ public class Data {
 
     public void setDashboard(Dashboard dashboard) {
         this.dashboard = dashboard;
+    }
+
+    public List<Reward> getReward() {
+        return reward;
+    }
+
+    public void setReward(List<Reward> reward) {
+        this.reward = reward;
     }
 }

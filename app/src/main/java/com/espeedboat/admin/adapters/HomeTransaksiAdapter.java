@@ -64,7 +64,7 @@ public class HomeTransaksiAdapter extends RecyclerView.Adapter<HomeTransaksiView
         holder.setWaktuAsal(item.getJamBerangkat());
         holder.setWaktuTujuan(item.getJamSampai());
         holder.itemView.findViewById(R.id.itemWrapper).setOnClickListener(v -> { itemClickListener(v, item); });
-        holder.setMarginWrapper(pos, context);
+        holder.setMarginWrapper(pos, context, getItemCount());
     }
 
     private void itemClickListener(View view, Transaksi transaksi) {

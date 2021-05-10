@@ -123,13 +123,13 @@ public class HomeTransaksiViewHolder extends RecyclerView.ViewHolder {
         this.status.setImageResource(source);
     }
 
-    public void setMarginWrapper(int pos, Context con) {
+    public void setMarginWrapper(int pos, Context con, int last) {
         ViewGroup.MarginLayoutParams layoutParams =
                 (ViewGroup.MarginLayoutParams) wrapper.getLayoutParams();
         if (pos == 0) {
-            layoutParams.setMargins(Util.dpToPx(12, con), Util.dpToPx(4, con), Util.dpToPx(24, con), Util.dpToPx(12, con));
-        } else if (pos == 4) {
             layoutParams.setMargins(Util.dpToPx(24, con), Util.dpToPx(4, con), Util.dpToPx(12, con), Util.dpToPx(12, con));
+        } else if (pos == (last - 1)) {
+            layoutParams.setMargins(Util.dpToPx(12, con), Util.dpToPx(4, con), Util.dpToPx(24, con), Util.dpToPx(12, con));
         } else {
             layoutParams.setMargins(Util.dpToPx(12, con), Util.dpToPx(4, con), Util.dpToPx(12, con), Util.dpToPx(12, con));
         }

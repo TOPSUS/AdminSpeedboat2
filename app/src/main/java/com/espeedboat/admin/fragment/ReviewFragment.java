@@ -85,7 +85,7 @@ public class ReviewFragment extends Fragment {
                         ReviewSummary summary = data.getReviewSummary();
 
                         List<ReviewList> reviewList = data.getReviewList();
-                        int totalScore = summary.getTotalScore();
+                        float totalScore = summary.getTotalScore();
                         int totalReview = summary.getTotalReview();
                         ReviewSummaryScore reviewSummaryScoreReview = summary.getReviewSummaryScore();
 
@@ -108,7 +108,7 @@ public class ReviewFragment extends Fragment {
         });
     }
 
-    private void setAllReview(ReviewSummaryScore reviewSummaryScore, int tscore, int treview) {
+    private void setAllReview(ReviewSummaryScore reviewSummaryScore, Float tscore, int treview) {
         TextView text_score = view.findViewById(R.id.total_score);
         TextView text_review = view.findViewById(R.id.total_review);
         LinearLayout score_wrapper = view.findViewById(R.id.total_score_wrapper);
@@ -118,7 +118,10 @@ public class ReviewFragment extends Fragment {
         ProgressBar pb_4 = view.findViewById(R.id.review_progress_4);
         ProgressBar pb_5 = view.findViewById(R.id.review_progress_5);
 
-        text_score.setText(String.valueOf(tscore));
+        float f =0;
+        f = ((int) (tscore * 10)) / 10.0f;
+
+        text_score.setText(String.valueOf(f));
         text_review.setText(String.valueOf(treview) + " Review");
 
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(

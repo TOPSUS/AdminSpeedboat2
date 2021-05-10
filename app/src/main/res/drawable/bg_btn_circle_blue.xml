@@ -4,13 +4,17 @@
         android:state_pressed="true">
         <shape>
             <solid
-                android:color="@color/primary_grey_light"/>
+                android:color="@color/primary_dark"/>
+            <corners
+                android:radius="1000dp"/>
         </shape>
     </item>
     <item>
         <shape>
             <solid
-                android:color="@color/tertiary_blue"/>
+                android:color="@color/primary"/>
+            <corners
+                android:radius="1000dp"/>
         </shape>
     </item>
 </selector>

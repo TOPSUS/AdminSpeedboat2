@@ -6,13 +6,11 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.espeedboat.admin.activity.LoginActivity;
 import com.espeedboat.admin.fragment.DashboardFragment;
 import com.espeedboat.admin.fragment.JadwalFragment;
 import com.espeedboat.admin.fragment.KapalFragment;
@@ -22,8 +20,6 @@ import com.espeedboat.admin.fragment.QrFragment;
 import com.espeedboat.admin.interfaces.FinishActivity;
 import com.espeedboat.admin.interfaces.ShowBackButton;
 import com.espeedboat.admin.interfaces.ToolbarTitle;
-import com.espeedboat.admin.model.Auth;
-import com.espeedboat.admin.model.User;
 import com.espeedboat.admin.utils.Constants;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -132,24 +128,18 @@ public class MainActivity extends AppCompatActivity implements FinishActivity, T
             try {
                 if (fragmentManager.findFragmentByTag(Constants.FRAG_MOVE).isVisible()) {
                     BottomNavigationView mBottomNavigationView = findViewById(R.id.bottomnav);
-    //                if (mBottomNavigationView.getSelectedItemId() == R.id.nav_dashboard) {
-    //                    super.onBackPressed();
-    //                    finishActivity();
-    //                } else {
-                        loadFragment(new DashboardFragment());
-                        mBottomNavigationView.setSelectedItemId(R.id.nav_dashboard);
-                        profileToolbar.setVisibility(View.VISIBLE);
-                        title.setText(R.string.menu_dashboard);
-                        back = findViewById(R.id.toolbar_back);
-                        back.setVisibility(View.INVISIBLE);
-    //                }
+                    mBottomNavigationView.setSelectedItemId(R.id.nav_dashboard);
+                    loadFragment(new DashboardFragment());
+                    profileToolbar.setVisibility(View.VISIBLE);
+                    title.setText(R.string.menu_dashboard);
+                    back = findViewById(R.id.toolbar_back);
+                    back.setVisibility(View.INVISIBLE);
                 }
             } catch (NullPointerException e) {
                 super.onBackPressed();
             }
         }
     }
-
 
     @Override
     public void onBackPressed() {

@@ -102,6 +102,9 @@ public class CreateKapalActivity extends AppCompatActivity {
         setTipeValue(null);
         setPelabuhanValue(0, 0);
         setPelabuhanListener();
+
+        remove.setVisibility(View.GONE);
+        submit.setVisibility(View.GONE);
     }
 
     @Override

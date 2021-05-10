@@ -4,6 +4,8 @@ import android.content.Context;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -142,7 +144,7 @@ public class DashboardFragment extends Fragment {
         totalTransaksi = view.findViewById(R.id.total_transaksi);
         totalRate = view.findViewById(R.id.total_rating);
         transaksiPercentage = view.findViewById(R.id.total_transaksi_percentage);
-        linearLayoutManager = new LinearLayoutManager(view.getContext(), LinearLayoutManager.HORIZONTAL, true);
+        linearLayoutManager = new LinearLayoutManager(view.getContext(), LinearLayoutManager.HORIZONTAL, false);
         transaksiData.setLayoutManager(linearLayoutManager);
         viewAllTransaksi = view.findViewById(R.id.btn_all_transaksi);
     }
@@ -179,9 +181,19 @@ public class DashboardFragment extends Fragment {
         });
 
         Button mTransaksi = view.findViewById(R.id.menu_transaksi);
-        mJadwal.setOnClickListener(v -> {
+        mTransaksi.setOnClickListener(v -> {
             toolbarTitleCallback.setToolbarTitle("Transaksi");
             Fragment fragment = new ListTransaksiFragment("all");
+            FragmentManager fm = getActivity().getSupportFragmentManager();
+            FragmentTransaction ft = fm.beginTransaction();
+            ft.replace(R.id.content, fragment, Constants.FRAG_MOVE);
+            ft.commit();
+        });
+
+        Button mReward = view.findViewById(R.id.menu_reward);
+        mReward.setOnClickListener(v -> {
+            toolbarTitleCallback.setToolbarTitle("Reward");
+            Fragment fragment = new RewardFragment();
             FragmentManager fm = getActivity().getSupportFragmentManager();
             FragmentTransaction ft = fm.beginTransaction();
             ft.replace(R.id.content, fragment, Constants.FRAG_MOVE);
@@ -222,7 +234,7 @@ public class DashboardFragment extends Fragment {
 
         // Pengaturan atribut bar, seperti warna dan lain-lain
         BarDataSet dataSet = new BarDataSet(dataPendapatan, "Pendapatan");
-        dataSet.setColor(getResources().getColor(R.color.primary_white));
+        dataSet.setColor(context.getResources().getColor(R.color.primary_white));
         dataSet.setDrawValues(false);
 
 
@@ -245,8 +257,8 @@ public class DashboardFragment extends Fragment {
                 return dataHari.get((int) value);
             }
         });
-        barChart.getXAxis().setTextColor(getResources().getColor(R.color.primary_white));
-        barChart.getXAxis().setAxisLineColor(getResources().getColor(R.color.primary_white));
+        barChart.getXAxis().setTextColor(context.getResources().getColor(R.color.primary_white));
+        barChart.getXAxis().setAxisLineColor(context.getResources().getColor(R.color.primary_white));
 
 
         DecimalFormat kursIndonesia = (DecimalFormat) DecimalFormat.getCurrencyInstance();

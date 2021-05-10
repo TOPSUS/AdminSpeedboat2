@@ -9,7 +9,7 @@ public class ReviewSummary {
     private Integer totalReview;
     @SerializedName("total_score")
     @Expose
-    private Integer totalScore;
+    private Float totalScore;
     @SerializedName("review_summary_score")
     @Expose
     private ReviewSummaryScore reviewSummaryScore;
@@ -22,11 +22,11 @@ public class ReviewSummary {
         this.totalReview = totalReview;
     }
 
-    public Integer getTotalScore() {
+    public Float getTotalScore() {
         return totalScore;
     }
 
-    public void setTotalScore(Integer totalScore) {
+    public void setTotalScore(Float totalScore) {
         this.totalScore = totalScore;
     }
 

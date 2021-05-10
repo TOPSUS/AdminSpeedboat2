@@ -52,7 +52,7 @@
     <string name="kapal_pelabuhan">Pelabuhan</string>
     <string name="kapal_golongan">Golongan Kapal</string>
     <string name="kapal_save">Save</string>
-    
+
     <!--  Dashboard  -->
     <string name="jadwal_kapal">Kapal</string>
     <string name="jadwal_asal_pelabuhan">Asal Pelabuhan</string>

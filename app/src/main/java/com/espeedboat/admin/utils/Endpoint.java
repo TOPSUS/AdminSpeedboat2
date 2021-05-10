@@ -31,4 +31,7 @@ public class Endpoint {
     public static final String TRANSAKSI_TIKET = "transaksi/tiket/{kode_tiket}";
     public static final String TRANSAKSI_TIKET_APPROVE = "transaksi/tiket/approve/{id}";
     public static final String DASHBOARD_DATA = "dashboard/admin";
+    public static final String REWARD_INDEX = "reward";
+    public static final String REWARD_DELETE = "reward/{reward}";
+    public static final String REWARD_CREATE = "reward";
 }

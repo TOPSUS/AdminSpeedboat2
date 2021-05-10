@@ -90,6 +90,6 @@ public class ReviewViewHolder extends RecyclerView.ViewHolder{
     }
 
     public void setImageUser(String imageUser) {
-        Picasso.get().load(imageUser).transform(new CircleTransform()).into(this.imageUser);
+        Picasso.get().load("http://admin.espeedboat.xyz/storage/image_users/"+imageUser).transform(new CircleTransform()).into(this.imageUser);
     }
 }

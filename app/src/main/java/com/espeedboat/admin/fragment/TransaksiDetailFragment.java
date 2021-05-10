@@ -232,7 +232,7 @@ public class TransaksiDetailFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 if (bukti != null) {
-                    Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(bukti));
+                    Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://admin.espeedboat.xyz/storage/bukti_pembayaran/"+ bukti));
                     startActivity(browserIntent);
                 }
             }

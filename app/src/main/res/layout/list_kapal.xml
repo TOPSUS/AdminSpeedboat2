@@ -124,7 +124,8 @@
                 android:layout_alignBottom="@id/itemLay"
                 android:layout_alignParentEnd="true"
                 android:layout_alignTop="@id/itemLay"
-                android:background="@drawable/bg_item_kapal_remove">
+                android:background="@drawable/bg_item_kapal_remove"
+                android:visibility="gone">
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

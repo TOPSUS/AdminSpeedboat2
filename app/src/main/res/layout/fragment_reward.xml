@@ -5,8 +5,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/tertiary_blue"
-    tools:context=".fragment.KapalFragment">
+    tools:context=".fragment.RewardFragment">
 
     <LinearLayout
         android:id="@+id/empty_wrapper"
@@ -55,13 +54,14 @@
         android:focusableInTouchMode="true" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab"
+        android:id="@+id/fabAdd"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="end|bottom"
         android:src="@drawable/ic_baseline_add"
         android:backgroundTint="@color/primary"
         app:borderWidth="0dp"
-        android:visibility="gone"
+        android:visibility="visible"
         android:layout_margin="16dp" />
+
 </FrameLayout>
