@@ -1,7 +1,7 @@
 package com.espeedboat.admin.utils;
 
 public class Endpoint {
-    public static final String URL = "http://dev.espeedboat.xyz/";
+    public static final String URL = "http://speedboat.devmptr.com";
     public static final String LOGIN_ADMIN = "admin/login";
     public static final String REVIEW_LIST = "review";
     public static final String REVIEW_DETAIL = "review/{id}";
@@ -30,6 +30,7 @@ public class Endpoint {
     public static final String TRANSAKSI_APPROVE = "transaksi/approve/{id}";
     public static final String TRANSAKSI_TIKET = "transaksi/tiket/{kode_tiket}";
     public static final String TRANSAKSI_TIKET_APPROVE = "transaksi/tiket/approve/{id}";
+    public static final String BERITA_LIST = "berita/pelabuhan";
     public static final String DASHBOARD_DATA = "dashboard/admin";
     public static final String REWARD_INDEX = "reward";
     public static final String REWARD_DELETE = "reward/{reward}";
