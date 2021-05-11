@@ -20,6 +20,7 @@ import com.espeedboat.admin.adapters.BeritaAdapter;
 import com.espeedboat.admin.adapters.KapalAdapter;
 import com.espeedboat.admin.adapters.TransaksiAdapter;
 import com.espeedboat.admin.client.RetrofitClient;
+import com.espeedboat.admin.interfaces.ChangeBottomNav;
 import com.espeedboat.admin.interfaces.ShowBackButton;
 import com.espeedboat.admin.interfaces.ToolbarTitle;
 import com.espeedboat.admin.interfaces.UpdateListener;
@@ -47,12 +48,14 @@ public class BeritaFragment extends Fragment {
     private BeritaService service;
     ShowBackButton showBackButton;
     ToolbarTitle toolbarTitleCallback;
+    ChangeBottomNav changeBottomNav;
 
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
         showBackButton = (ShowBackButton) context;
         toolbarTitleCallback = (ToolbarTitle) context;
+        changeBottomNav = (ChangeBottomNav) context;
     }
 
 
@@ -71,6 +74,7 @@ public class BeritaFragment extends Fragment {
         layoutManager = new LinearLayoutManager(view.getContext());
         recyclerView.setLayoutManager(layoutManager);
         showBackButton.showBackButton(true);
+        changeBottomNav.setBottomNav(R.id.spacer);
 
         getData();
 
