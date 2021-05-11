@@ -290,6 +290,8 @@ public class DashboardFragment extends Fragment {
 
     private void setRecentTransaksi(List<Transaksi> datas) {
         transaksiData.setAdapter(new HomeTransaksiAdapter(datas));
-        transaksiData.getLayoutManager().scrollToPosition(datas.size()-1);
+        if (datas.size() > 0) {
+            transaksiData.getLayoutManager().scrollToPosition(0);
+        }
     }
 }

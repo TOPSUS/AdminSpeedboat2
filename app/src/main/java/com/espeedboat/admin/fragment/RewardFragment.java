@@ -20,6 +20,7 @@ import com.espeedboat.admin.activity.CreateKapalActivity;
 import com.espeedboat.admin.adapters.KapalAdapter;
 import com.espeedboat.admin.adapters.RewardAdapter;
 import com.espeedboat.admin.client.RetrofitClient;
+import com.espeedboat.admin.interfaces.ChangeBottomNav;
 import com.espeedboat.admin.interfaces.ShowBackButton;
 import com.espeedboat.admin.interfaces.UpdateListener;
 import com.espeedboat.admin.model.Data;
@@ -47,11 +48,13 @@ public class RewardFragment extends Fragment implements UpdateListener {
     private ListView listView;
     private Context context;
     ShowBackButton showBackButton;
+    ChangeBottomNav changeBottomNav;
 
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
         showBackButton = (ShowBackButton) context;
+        changeBottomNav = (ChangeBottomNav) context;
     }
 
     @Override
@@ -89,6 +92,7 @@ public class RewardFragment extends Fragment implements UpdateListener {
         rewards = new ArrayList<>();
         rewardAdapter = new RewardAdapter(context, rewards, RewardFragment.this);
         add = view.findViewById(R.id.fabAdd);
+        changeBottomNav.setBottomNav(R.id.spacer);
     }
 
     private void clickListener() {

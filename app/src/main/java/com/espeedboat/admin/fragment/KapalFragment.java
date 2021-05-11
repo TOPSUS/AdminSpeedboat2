@@ -23,6 +23,7 @@ import com.espeedboat.admin.R;
 import com.espeedboat.admin.activity.CreateKapalActivity;
 import com.espeedboat.admin.adapters.KapalAdapter;
 import com.espeedboat.admin.client.RetrofitClient;
+import com.espeedboat.admin.interfaces.ChangeBottomNav;
 import com.espeedboat.admin.interfaces.ShowBackButton;
 import com.espeedboat.admin.interfaces.UpdateListener;
 import com.espeedboat.admin.model.Data;
@@ -50,11 +51,13 @@ public class KapalFragment extends Fragment implements UpdateListener {
     private List<Kapal> kapals;
     private FloatingActionButton add;
     ShowBackButton showBackButton;
+    ChangeBottomNav changeBottomNav;
 
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
         showBackButton = (ShowBackButton) context;
+        changeBottomNav = (ChangeBottomNav) context;
     }
 
     @Override
@@ -92,6 +95,7 @@ public class KapalFragment extends Fragment implements UpdateListener {
         sessionManager = new SessionManager(view.getContext());
         kapals = new ArrayList<>();
         kapalAdapter = new KapalAdapter(context, kapals, KapalFragment.this);
+        changeBottomNav.setBottomNav(R.id.nav_kapal);
     }
 
     private void clickListener() {

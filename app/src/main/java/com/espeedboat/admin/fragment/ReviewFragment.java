@@ -20,6 +20,7 @@ import android.widget.Toast;
 import com.espeedboat.admin.R;
 import com.espeedboat.admin.adapters.ReviewAdapter;
 import com.espeedboat.admin.client.RetrofitClient;
+import com.espeedboat.admin.interfaces.ChangeBottomNav;
 import com.espeedboat.admin.interfaces.FinishActivity;
 import com.espeedboat.admin.interfaces.ToolbarTitle;
 import com.espeedboat.admin.model.Data;
@@ -46,10 +47,12 @@ public class ReviewFragment extends Fragment {
     private ReviewService service;
     private int transaksi_id = 0;
     ToolbarTitle toolbarTitleCallback;
+    ChangeBottomNav changeBottomNav;
 
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
+        changeBottomNav = (ChangeBottomNav) context;
         toolbarTitleCallback = (ToolbarTitle) context;
     }
 
@@ -68,6 +71,7 @@ public class ReviewFragment extends Fragment {
         service = RetrofitClient.getClient().create(ReviewService.class);
         layoutManager = new LinearLayoutManager(view.getContext());
         recyclerView.setLayoutManager(layoutManager);
+        changeBottomNav.setBottomNav(R.id.spacer);
 
         getData();
         return view;

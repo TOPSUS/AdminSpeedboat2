@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.espeedboat.admin.R;
 import com.espeedboat.admin.adapters.TransaksiAdapter;
 import com.espeedboat.admin.client.RetrofitClient;
+import com.espeedboat.admin.interfaces.ChangeBottomNav;
 import com.espeedboat.admin.interfaces.ShowBackButton;
 import com.espeedboat.admin.interfaces.ToolbarTitle;
 import com.espeedboat.admin.model.Response;
@@ -36,12 +37,14 @@ public class ListTransaksiFragment extends Fragment {
     private String type;
     ShowBackButton showBackButton;
     ToolbarTitle toolbarTitleCallback;
+    ChangeBottomNav changeBottomNav;
 
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
         showBackButton = (ShowBackButton) context;
         toolbarTitleCallback = (ToolbarTitle) context;
+        changeBottomNav = (ChangeBottomNav) context;
     }
 
     public ListTransaksiFragment(String type) {
@@ -63,6 +66,7 @@ public class ListTransaksiFragment extends Fragment {
         layoutManager = new LinearLayoutManager(view.getContext());
         recyclerView.setLayoutManager(layoutManager);
         showBackButton.showBackButton(false);
+        changeBottomNav.setBottomNav(R.id.transaksi);
 
         getData();
 

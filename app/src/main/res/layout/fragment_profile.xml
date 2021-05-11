@@ -185,14 +185,14 @@
                     android:src="@drawable/ic_chevron_right_24"/>
             </RelativeLayout>
             <RelativeLayout
+                android:id="@+id/menu_reward"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginVertical="@dimen/margin_8"
                 android:padding="@dimen/margin_8"
                 android:background="@drawable/bg_btn_profile"
                 android:clickable="true"
-                android:focusable="true"
-                android:visibility="gone">
+                android:focusable="true">
                 <ImageView
                     android:id="@+id/img_reward"
                     android:layout_alignParentStart="true"
@@ -250,6 +250,114 @@
                     android:layout_marginHorizontal="@dimen/margin_16"/>
                 <ImageView
                     android:id="@+id/right_review"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_width="@dimen/margin_32"
+                    android:layout_height="@dimen/margin_32"
+                    android:src="@drawable/ic_chevron_right_24"/>
+            </RelativeLayout>
+            <RelativeLayout
+                android:id="@+id/menu_jadwal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="@dimen/margin_8"
+                android:padding="@dimen/margin_8"
+                android:background="@drawable/bg_btn_profile"
+                android:clickable="true"
+                android:focusable="true">
+                <ImageView
+                    android:id="@+id/img_jadwal"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"
+                    android:layout_width="@dimen/margin_24"
+                    android:layout_height="@dimen/margin_24"
+                    android:src="@drawable/ic_date_range_24"/>
+                <TextView
+                    android:id="@+id/txt_jadwal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_toEndOf="@id/img_jadwal"
+                    android:layout_toStartOf="@+id/right_jadwal"
+                    android:layout_centerVertical="true"
+                    android:text="@string/profile_menu_jadwal"
+                    android:fontFamily="@font/roboto_bold"
+                    android:textSize="18sp"
+                    android:textColor="@color/primary_black"
+                    android:layout_marginHorizontal="@dimen/margin_16"/>
+                <ImageView
+                    android:id="@+id/right_jadwal"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_width="@dimen/margin_32"
+                    android:layout_height="@dimen/margin_32"
+                    android:src="@drawable/ic_chevron_right_24"/>
+            </RelativeLayout>
+            <RelativeLayout
+                android:id="@+id/menu_transaksi"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="@dimen/margin_8"
+                android:padding="@dimen/margin_8"
+                android:background="@drawable/bg_btn_profile"
+                android:clickable="true"
+                android:focusable="true">
+                <ImageView
+                    android:id="@+id/img_transaksi"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"
+                    android:layout_width="@dimen/margin_24"
+                    android:layout_height="@dimen/margin_24"
+                    android:src="@drawable/ic_baseline_fact_check_24"/>
+                <TextView
+                    android:id="@+id/txt_transaksi"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_toEndOf="@id/img_transaksi"
+                    android:layout_toStartOf="@+id/right_transaksi"
+                    android:layout_centerVertical="true"
+                    android:text="@string/profile_menu_transaksi"
+                    android:fontFamily="@font/roboto_bold"
+                    android:textSize="18sp"
+                    android:textColor="@color/primary_black"
+                    android:layout_marginHorizontal="@dimen/margin_16"/>
+                <ImageView
+                    android:id="@+id/right_transaksi"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_width="@dimen/margin_32"
+                    android:layout_height="@dimen/margin_32"
+                    android:src="@drawable/ic_chevron_right_24"/>
+            </RelativeLayout>
+            <RelativeLayout
+                android:id="@+id/menu_kapal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="@dimen/margin_8"
+                android:padding="@dimen/margin_8"
+                android:background="@drawable/bg_btn_profile"
+                android:clickable="true"
+                android:focusable="true">
+                <ImageView
+                    android:id="@+id/img_kapal"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"
+                    android:layout_width="@dimen/margin_24"
+                    android:layout_height="@dimen/margin_24"
+                    android:src="@drawable/ic_boat_24"/>
+                <TextView
+                    android:id="@+id/txt_kapal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_toEndOf="@id/img_kapal"
+                    android:layout_toStartOf="@+id/right_kapal"
+                    android:layout_centerVertical="true"
+                    android:text="@string/profile_menu_kapal"
+                    android:fontFamily="@font/roboto_bold"
+                    android:textSize="18sp"
+                    android:textColor="@color/primary_black"
+                    android:layout_marginHorizontal="@dimen/margin_16"/>
+                <ImageView
+                    android:id="@+id/right_kapal"
                     android:layout_alignParentEnd="true"
                     android:layout_centerVertical="true"
                     android:layout_width="@dimen/margin_32"

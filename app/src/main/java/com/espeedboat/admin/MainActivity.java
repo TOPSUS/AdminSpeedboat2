@@ -7,6 +7,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -17,6 +18,7 @@ import com.espeedboat.admin.fragment.KapalFragment;
 import com.espeedboat.admin.fragment.ListTransaksiFragment;
 import com.espeedboat.admin.fragment.ProfileFragment;
 import com.espeedboat.admin.fragment.QrFragment;
+import com.espeedboat.admin.interfaces.ChangeBottomNav;
 import com.espeedboat.admin.interfaces.FinishActivity;
 import com.espeedboat.admin.interfaces.ShowBackButton;
 import com.espeedboat.admin.interfaces.ToolbarTitle;
@@ -24,7 +26,7 @@ import com.espeedboat.admin.utils.Constants;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-public class MainActivity extends AppCompatActivity implements FinishActivity, ToolbarTitle, ShowBackButton {
+public class MainActivity extends AppCompatActivity implements FinishActivity, ToolbarTitle, ShowBackButton, ChangeBottomNav {
 
     private Toolbar toolbar;
     private TextView title;
@@ -48,7 +50,6 @@ public class MainActivity extends AppCompatActivity implements FinishActivity, T
         });
 
         loadFragment(new DashboardFragment());
-
     }
 
     @Override
@@ -168,5 +169,11 @@ public class MainActivity extends AppCompatActivity implements FinishActivity, T
             back.setVisibility(View.GONE);
             profileToolbar.setVisibility(View.VISIBLE);
         }
+    }
+
+    @Override
+    public void setBottomNav(int id) {
+        MenuItem item = navigation.getMenu().findItem(id);
+        item.setChecked(true);
     }
 }

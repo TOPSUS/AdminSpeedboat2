@@ -20,6 +20,7 @@ import com.espeedboat.admin.R;
 import com.espeedboat.admin.activity.CreateJadwalActivity;
 import com.espeedboat.admin.adapters.JadwalAdapter;
 import com.espeedboat.admin.client.RetrofitClient;
+import com.espeedboat.admin.interfaces.ChangeBottomNav;
 import com.espeedboat.admin.interfaces.ShowBackButton;
 import com.espeedboat.admin.interfaces.UpdateListener;
 import com.espeedboat.admin.model.Data;
@@ -48,11 +49,13 @@ public class JadwalFragment extends Fragment implements UpdateListener {
     private List<Jadwal> jadwals;
     private FloatingActionButton add;
     ShowBackButton showBackButton;
+    ChangeBottomNav changeBottomNav;
 
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
         showBackButton = (ShowBackButton) context;
+        changeBottomNav = (ChangeBottomNav) context;
     }
 
     @Override
@@ -83,6 +86,7 @@ public class JadwalFragment extends Fragment implements UpdateListener {
         add = view.findViewById(R.id.fab);
         jadwalAdapter = new JadwalAdapter(getActivity(), jadwals, JadwalFragment.this);
         showBackButton.showBackButton(false);
+        changeBottomNav.setBottomNav(R.id.jadwal);
     }
 
     private void clickListener() {
