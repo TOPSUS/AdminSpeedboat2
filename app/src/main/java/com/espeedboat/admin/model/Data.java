@@ -12,6 +12,9 @@ public class Data {
     @SerializedName("list_kapal")
     @Expose
     private List<Kapal> listKapal = null;
+    @SerializedName("list_berita")
+    @Expose
+    private List<Berita> listBerita = null;
     @SerializedName("kapal")
     @Expose
     private Kapal kapal;
@@ -95,6 +98,10 @@ public class Data {
 
     public List<Kapal> getListKapal() {
         return listKapal;
+    }
+
+    public List<Berita> getListBerita() {
+        return listBerita;
     }
 
     public void setListKapal(List<Kapal> kapal) {

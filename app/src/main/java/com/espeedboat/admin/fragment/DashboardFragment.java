@@ -200,6 +200,16 @@ public class DashboardFragment extends Fragment {
             ft.commit();
         });
 
+        Button mBeritaPelabuhan = view.findViewById(R.id.menu_artikel_pelabuhan);
+        mBeritaPelabuhan.setOnClickListener(v -> {
+            toolbarTitleCallback.setToolbarTitle("Berita Pelabuhan");
+            Fragment fragment = new BeritaFragment();
+            FragmentManager fm = getActivity().getSupportFragmentManager();
+            FragmentTransaction ft = fm.beginTransaction();
+            ft.replace(R.id.content, fragment, Constants.FRAG_MOVE);
+            ft.commit();
+        });
+
         viewAllTransaksi.setOnClickListener(v -> {
             toolbarTitleCallback.setToolbarTitle("Transaksi");
             Fragment fragment = new ListTransaksiFragment("all");

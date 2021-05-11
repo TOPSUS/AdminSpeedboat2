@@ -205,7 +205,7 @@
                 android:layout_height="match_parent"
                 android:orientation="horizontal">
                 <Button
-                    android:id="@+id/menu_artikel"
+                    android:id="@+id/menu_artikel_pelabuhan"
                     android:layout_width="wrap_content"
                     android:layout_height="56dp"
                     android:layout_marginLeft="@dimen/margin_24"
@@ -215,14 +215,13 @@
                     android:fontFamily="@font/roboto_medium"
                     android:backgroundTint="@color/primary_light"
                     android:drawableLeft="@drawable/ic_article_24"
-                    android:drawableTint="@color/primary_white"
-                    android:visibility="gone"/>
+                    android:drawableTint="@color/primary_white" />
 
                 <Button
                     android:id="@+id/menu_reward"
                     android:layout_width="wrap_content"
                     android:layout_height="56dp"
-                    android:layout_marginLeft="@dimen/margin_24"
+                    android:layout_marginLeft="@dimen/margin_8"
                     android:layout_marginRight="@dimen/margin_8"
                     android:text="@string/profile_menu_point"
                     android:textAllCaps="false"
