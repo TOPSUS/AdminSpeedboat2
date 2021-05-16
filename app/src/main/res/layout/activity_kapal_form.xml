@@ -120,37 +120,37 @@
 
             </com.google.android.material.textfield.TextInputLayout>
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/pelabuhanTextField"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginVertical="@dimen/margin_4"
-                android:hint="@string/kapal_pelabuhan"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu">
+<!--            <com.google.android.material.textfield.TextInputLayout-->
+<!--                android:id="@+id/pelabuhanTextField"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginVertical="@dimen/margin_4"-->
+<!--                android:hint="@string/kapal_pelabuhan"-->
+<!--                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu">-->
 
-                <AutoCompleteTextView
-                    android:id="@+id/autoCompletePelabuhan"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="none"/>
+<!--                <AutoCompleteTextView-->
+<!--                    android:id="@+id/autoCompletePelabuhan"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:inputType="none"/>-->
 
-            </com.google.android.material.textfield.TextInputLayout>
+<!--            </com.google.android.material.textfield.TextInputLayout>-->
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/golonganTextField"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginVertical="@dimen/margin_4"
-                android:hint="@string/kapal_golongan"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu">
+<!--            <com.google.android.material.textfield.TextInputLayout-->
+<!--                android:id="@+id/golonganTextField"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginVertical="@dimen/margin_4"-->
+<!--                android:hint="@string/kapal_golongan"-->
+<!--                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu">-->
 
-                <AutoCompleteTextView
-                    android:id="@+id/autoCompleteGolongan"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="none"/>
+<!--                <AutoCompleteTextView-->
+<!--                    android:id="@+id/autoCompleteGolongan"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:inputType="none"/>-->
 
-            </com.google.android.material.textfield.TextInputLayout>
+<!--            </com.google.android.material.textfield.TextInputLayout>-->
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/lamaOperasiTextField"

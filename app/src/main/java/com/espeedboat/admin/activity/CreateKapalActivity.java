@@ -100,8 +100,8 @@ public class CreateKapalActivity extends AppCompatActivity {
         }
 
         setTipeValue(null);
-        setPelabuhanValue(0, 0);
-        setPelabuhanListener();
+//        setPelabuhanValue(0, 0);
+//        setPelabuhanListener();
 
         remove.setVisibility(View.GONE);
         submit.setVisibility(View.GONE);
@@ -340,7 +340,7 @@ public class CreateKapalActivity extends AppCompatActivity {
         deskripsi.setText(kapal.getDeskripsi());
         contact.setText(kapal.getContact());
         setTipeValue(kapal.getTipe());
-        setPelabuhanValue(kapal.getGolongan().getIdPelabuhan(), kapal.getGolongan().getId());
+//        setPelabuhanValue(kapal.getGolongan().getIdPelabuhan(), kapal.getGolongan().getId());
         lamaBeroperasi.setText(kapal.getTanggalBeroperasi());
 
         //set Image
@@ -363,93 +363,93 @@ public class CreateKapalActivity extends AppCompatActivity {
         autoCompleteTipe.setAdapter(adapter);
     }
 
-    private void setPelabuhanValue(final int selectedId, final int golonganId) {
-        PelabuhanService service = RetrofitClient.getClient().create(PelabuhanService.class);
-        ArrayList<String> lp = new ArrayList<>();
-        autoCompletePelabuhan = findViewById(R.id.autoCompletePelabuhan);
-        Call<Response> getNamaPelabuhan = service.listNamaPelabuhan(sessionManager.getAuthToken());
+//    private void setPelabuhanValue(final int selectedId, final int golonganId) {
+//        PelabuhanService service = RetrofitClient.getClient().create(PelabuhanService.class);
+//        ArrayList<String> lp = new ArrayList<>();
+//        autoCompletePelabuhan = findViewById(R.id.autoCompletePelabuhan);
+//        Call<Response> getNamaPelabuhan = service.listNamaPelabuhan(sessionManager.getAuthToken());
+//
+//        getNamaPelabuhan.enqueue(new Callback<Response>() {
+//            @Override
+//            public void onResponse(Call<Response> call, retrofit2.Response<Response> response) {
+//                String pelabuhanString = null;
+//                if (response.isSuccessful()) {
+//                    if (response.body().getStatus() == 200) {
+//                        Data data = response.body().getData();
+//
+//                        for (Pelabuhan list : data.getPelabuhan()) {
+//                            if (selectedId > 0) {
+//                                if (list.getId() == selectedId) {
+//                                    pelabuhanString = list.getNama();
+//                                }
+//                            }
+//                            lp.add(list.getNama());
+//                        }
+//
+//                        ArrayAdapter adapter = new ArrayAdapter(CreateKapalActivity.this, R.layout.item_dropdown, lp);
+//                        if (selectedId > 0 && pelabuhanString != null && golonganId > 0) {
+//                            autoCompletePelabuhan.setText(pelabuhanString);
+//                            setGolonganValue(pelabuhanString, golonganId);
+//                        }
+//                        autoCompletePelabuhan.setAdapter(adapter);
+//                    }
+//                }
+//            }
+//
+//            @Override
+//            public void onFailure(Call<Response> call, Throwable t) {
+//                Log.e("ERROR [KapalFragment] ", t.getMessage());
+//                Toast.makeText(getApplicationContext(),  t.getMessage(), Toast.LENGTH_LONG).show();
+//            }
+//        });
+//    }
+//
+//    private void setPelabuhanListener() {
+//        autoCompletePelabuhan.setOnItemClickListener((parent, view, position, id) -> {
+//            String nama = parent.getItemAtPosition(position).toString();
+//            setGolonganValue(nama, 0);
+//        });
+//    }
 
-        getNamaPelabuhan.enqueue(new Callback<Response>() {
-            @Override
-            public void onResponse(Call<Response> call, retrofit2.Response<Response> response) {
-                String pelabuhanString = null;
-                if (response.isSuccessful()) {
-                    if (response.body().getStatus() == 200) {
-                        Data data = response.body().getData();
-
-                        for (Pelabuhan list : data.getPelabuhan()) {
-                            if (selectedId > 0) {
-                                if (list.getId() == selectedId) {
-                                    pelabuhanString = list.getNama();
-                                }
-                            }
-                            lp.add(list.getNama());
-                        }
-
-                        ArrayAdapter adapter = new ArrayAdapter(CreateKapalActivity.this, R.layout.item_dropdown, lp);
-                        if (selectedId > 0 && pelabuhanString != null && golonganId > 0) {
-                            autoCompletePelabuhan.setText(pelabuhanString);
-                            setGolonganValue(pelabuhanString, golonganId);
-                        }
-                        autoCompletePelabuhan.setAdapter(adapter);
-                    }
-                }
-            }
-
-            @Override
-            public void onFailure(Call<Response> call, Throwable t) {
-                Log.e("ERROR [KapalFragment] ", t.getMessage());
-                Toast.makeText(getApplicationContext(),  t.getMessage(), Toast.LENGTH_LONG).show();
-            }
-        });
-    }
-
-    private void setPelabuhanListener() {
-        autoCompletePelabuhan.setOnItemClickListener((parent, view, position, id) -> {
-            String nama = parent.getItemAtPosition(position).toString();
-            setGolonganValue(nama, 0);
-        });
-    }
-
-    private void setGolonganValue(String namaPelabuhan, Integer golonganId) {
-        GolonganService gservice = RetrofitClient.getClient().create(GolonganService.class);
-        ArrayList<String> golongans = new ArrayList<>();
-
-        Call<Response> getGolonganP = gservice.golonganPelabuhan(sessionManager.getAuthToken(), namaPelabuhan);
-
-        getGolonganP.enqueue(new Callback<Response>() {
-            @Override
-            public void onResponse(Call<Response> call, retrofit2.Response<Response> response) {
-                String namaGolongan = null;
-
-                if (response.isSuccessful()) {
-                    if (response.body().getStatus() == 200) {
-                        Data data = response.body().getData();
-                        for (Golongan list : data.getGolongan()) {
-                            if (list.getId() == golonganId) {
-                                namaGolongan = list.getGolongan();
-                            }
-//                            golongans.add(list.getGolongan() + " (" + list.getHarga().toString() + ")" );
-                            golongans.add(list.getGolongan());
-                        }
-
-                        autoCompleteGolongan = findViewById(R.id.autoCompleteGolongan);
-                        ArrayAdapter adapter = new ArrayAdapter(CreateKapalActivity.this, R.layout.item_dropdown, golongans);
-                        if (golonganId > 0 && namaGolongan != null) {
-                            autoCompleteGolongan.setText(namaGolongan);
-                        }
-                        autoCompleteGolongan.setAdapter(adapter);
-                    }
-                }
-            }
-
-            @Override
-            public void onFailure(Call<Response> call, Throwable t) {
-                Log.e("ERROR [CreateKapalActivity] ", t.getMessage());
-                Toast.makeText(getApplicationContext(),  t.getMessage(), Toast.LENGTH_LONG).show();
-            }
-        });
-    }
+//    private void setGolonganValue(String namaPelabuhan, Integer golonganId) {
+//        GolonganService gservice = RetrofitClient.getClient().create(GolonganService.class);
+//        ArrayList<String> golongans = new ArrayList<>();
+//
+//        Call<Response> getGolonganP = gservice.golonganPelabuhan(sessionManager.getAuthToken(), namaPelabuhan);
+//
+//        getGolonganP.enqueue(new Callback<Response>() {
+//            @Override
+//            public void onResponse(Call<Response> call, retrofit2.Response<Response> response) {
+//                String namaGolongan = null;
+//
+//                if (response.isSuccessful()) {
+//                    if (response.body().getStatus() == 200) {
+//                        Data data = response.body().getData();
+//                        for (Golongan list : data.getGolongan()) {
+//                            if (list.getId() == golonganId) {
+//                                namaGolongan = list.getGolongan();
+//                            }
+////                            golongans.add(list.getGolongan() + " (" + list.getHarga().toString() + ")" );
+//                            golongans.add(list.getGolongan());
+//                        }
+//
+//                        autoCompleteGolongan = findViewById(R.id.autoCompleteGolongan);
+//                        ArrayAdapter adapter = new ArrayAdapter(CreateKapalActivity.this, R.layout.item_dropdown, golongans);
+//                        if (golonganId > 0 && namaGolongan != null) {
+//                            autoCompleteGolongan.setText(namaGolongan);
+//                        }
+//                        autoCompleteGolongan.setAdapter(adapter);
+//                    }
+//                }
+//            }
+//
+//            @Override
+//            public void onFailure(Call<Response> call, Throwable t) {
+//                Log.e("ERROR [CreateKapalActivity] ", t.getMessage());
+//                Toast.makeText(getApplicationContext(),  t.getMessage(), Toast.LENGTH_LONG).show();
+//            }
+//        });
+//    }
 
     private void setLamaOperasiListener() {
         Long tanggal = MaterialDatePicker.todayInUtcMilliseconds();
