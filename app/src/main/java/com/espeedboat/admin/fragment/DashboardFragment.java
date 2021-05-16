@@ -286,7 +286,10 @@ public class DashboardFragment extends Fragment {
 
         String textTotalTransaksi = done + " / " + count;
         String textTotalRate = "Rating " + rate;
-        int percentageTrans = done * 100 / count;
+        int percentageTrans = 0;
+        if (count != 0) {
+            percentageTrans = done * 100 / count;
+        }
         float percentageRate = rate * 100 / 5;
         String textTransaksiPercentage = percentageTrans + "%";
 
