@@ -72,7 +72,7 @@ public class Kapal {
     }
 
     public String getFotoUrl() {
-        return Endpoint.URL+"/image_kapal/images/"+foto;
+        return Endpoint.URL_DEV+"/storage/kapal_image/"+foto;
     }
 
     public void setFoto(String foto) {

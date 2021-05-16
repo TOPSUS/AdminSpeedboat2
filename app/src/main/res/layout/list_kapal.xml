@@ -81,7 +81,7 @@
                     android:layout_below="@+id/header_wrapper">
                     <LinearLayout
                         android:id="@+id/info_wrapper"
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:orientation="vertical">
                         <TextView
@@ -90,28 +90,33 @@
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/roboto_medium"
                             android:text="Speedboat"
+                            android:capitalize="words"
                             android:textColor="@color/primary_grey"
                             android:textSize="16sp" />
-                        <TextView
-                            android:id="@+id/golongan"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="@font/roboto_medium"
-                            android:text="Golongan I"
-                            android:textColor="@color/primary_black"
-                            android:textSize="16sp" />
+<!--                        <TextView-->
+<!--                            android:id="@+id/golongan"-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:fontFamily="@font/roboto_medium"-->
+<!--                            android:text="Golongan I"-->
+<!--                            android:textColor="@color/primary_black"-->
+<!--                            android:textSize="16sp" />-->
                     </LinearLayout>
-
-                    <TextView
-                        android:id="@+id/harga"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentEnd="true"
-                        android:layout_alignBottom="@id/info_wrapper"
-                        android:fontFamily="@font/roboto_bold"
-                        android:text="Rp. 300.000,-"
-                        android:textColor="@color/primary"
-                        android:textSize="24sp" />
+<!--                    <LinearLayout-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_toEndOf="@id/info_wrapper"-->
+<!--                        android:gravity="end"-->
+<!--                        android:orientation="vertical">-->
+<!--                        <TextView-->
+<!--                            android:id="@+id/harga"-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:fontFamily="@font/roboto_bold"-->
+<!--                            android:text="Rp. 300.000,-"-->
+<!--                            android:textColor="@color/primary"-->
+<!--                            android:textSize="24sp" />-->
+<!--                    </LinearLayout>-->
                 </RelativeLayout>
             </RelativeLayout>
 

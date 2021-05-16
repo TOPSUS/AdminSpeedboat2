@@ -34,6 +34,7 @@ import com.espeedboat.admin.R;
 import com.espeedboat.admin.model.Response;
 import com.espeedboat.admin.service.KapalService;
 import com.espeedboat.admin.utils.Constants;
+import com.espeedboat.admin.utils.Endpoint;
 import com.espeedboat.admin.utils.SessionManager;
 
 public class KapalAdapter extends BaseAdapter {
@@ -76,7 +77,7 @@ public class KapalAdapter extends BaseAdapter {
         holder.nama = rowView.findViewById(R.id.nama);
         holder.kapasitas = rowView.findViewById(R.id.kapasitas);
         holder.tipe = rowView.findViewById(R.id.tipe);
-        holder.golongan = rowView.findViewById(R.id.golongan);
+//        holder.golongan = rowView.findViewById(R.id.golongan);
         holder.price = rowView.findViewById(R.id.harga);
         holder.remove = rowView.findViewById(R.id.remove);
         holder.itemLayout = rowView.findViewById(R.id.itemLay);
@@ -86,11 +87,12 @@ public class KapalAdapter extends BaseAdapter {
         holder.nama.setText(kapals.get(position).getNama());
         holder.kapasitas.setText("Kapasitas " + kapals.get(position).getKapasitas().toString());
         holder.tipe.setText(kapals.get(position).getTipe());
-        holder.golongan.setText(kapals.get(position).getGolongan().getGolongan());
-        holder.price.setText("Rp. " + kapals.get(position).getGolongan().getHarga().toString() + ",-");
+//        holder.golongan.setText(kapals.get(position).getGolongan().getGolongan());
+//        holder.price.setText("Rp. " + kapals.get(position).getGolongan().getHarga().toString() + ",-");
 
         //set Image
         Glide.with(context).load(kapals.get(position).getFotoUrl()).into(holder.image);
+        Log.d("link : ", kapals.get(position).getFotoUrl());
 
         // listener
         holder.remove.setOnClickListener(v -> {

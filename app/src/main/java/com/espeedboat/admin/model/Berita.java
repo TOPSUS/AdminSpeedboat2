@@ -39,7 +39,7 @@ public class Berita {
     }
 
     public String getFotoBeritaUrl() {
-        return Endpoint.URL+"/image_kapal/images/"+foto;
+        return Endpoint.URL_ADMIN+"/storage/image_berita_pelabuhan/"+foto;
     }
 
     public void setFotoBerita(String foto) {
