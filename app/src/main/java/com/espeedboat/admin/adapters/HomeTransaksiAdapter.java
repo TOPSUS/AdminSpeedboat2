@@ -77,7 +77,7 @@ public class HomeTransaksiAdapter extends RecyclerView.Adapter<HomeTransaksiView
         FragmentTransaction mFragmentTransaction = mFragmentManager
                 .beginTransaction()
                 .replace(R.id.content, tdFragment, tdFragment.getTag());
-        mFragmentTransaction.addToBackStack("list transaksi");
+        mFragmentTransaction.addToBackStack(Constants.FRAG_MOVE);
         mFragmentTransaction.commit();
     }
 }

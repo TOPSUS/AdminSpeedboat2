@@ -29,6 +29,7 @@ import com.espeedboat.admin.adapters.TransaksiAdapter;
 import com.espeedboat.admin.client.RetrofitClient;
 import com.espeedboat.admin.fragment.KapalFragment;
 import com.espeedboat.admin.fragment.ReviewFragment;
+import com.espeedboat.admin.interfaces.ChangeBottomNav;
 import com.espeedboat.admin.interfaces.FinishActivity;
 import com.espeedboat.admin.interfaces.ShowBackButton;
 import com.espeedboat.admin.interfaces.ToolbarTitle;
@@ -51,6 +52,7 @@ import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
 import com.github.mikephil.charting.formatter.ValueFormatter;
 import com.github.mikephil.charting.utils.ColorTemplate;
 import com.github.mikephil.charting.utils.ViewPortHandler;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
@@ -73,12 +75,19 @@ public class DashboardFragment extends Fragment {
     Context context;
     TextView totalPendapatan, totalTransaksi, totalRate, transaksiPercentage, viewAllTransaksi;
     LinearLayoutManager linearLayoutManager;
+    ChangeBottomNav changeBottomNav;
 
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
         toolbarTitleCallback = (ToolbarTitle) context;
         showBackButton = (ShowBackButton) context;
+        changeBottomNav = (ChangeBottomNav) context;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
     }
 
     @Override
@@ -99,6 +108,9 @@ public class DashboardFragment extends Fragment {
         menuClickListener();
 
         showBackButton.showBackButton(false);
+
+        toolbarTitleCallback.setToolbarTitle("Dashboard");
+        changeBottomNav.setBottomNav(R.id.nav_dashboard);
 
         return view;
     }
