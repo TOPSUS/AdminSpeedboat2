@@ -120,16 +120,16 @@ public class CreateKapalActivity extends AppCompatActivity {
         deskripsi = findViewById(R.id.deskripsiForm);
         contact = findViewById(R.id.contactForm);
         lamaBeroperasi = findViewById(R.id.lamaOperasiForm);
-        imageBtn = findViewById(R.id.image_wrapper);
+//        imageBtn = findViewById(R.id.image_wrapper);
         imageView = findViewById(R.id.image_kapal);
         remove = findViewById(R.id.btn_remove);
         submit = findViewById(R.id.btn_submit);
     }
 
     private void eventListener() {
-        imageBtn.setOnClickListener(v -> {
-            setCameraListener();
-        });
+//        imageBtn.setOnClickListener(v -> {
+//            setCameraListener();
+//        });
 
         lamaBeroperasi.setOnClickListener(v -> {
             setLamaOperasiListener();
@@ -342,6 +342,11 @@ public class CreateKapalActivity extends AppCompatActivity {
         setTipeValue(kapal.getTipe());
 //        setPelabuhanValue(kapal.getGolongan().getIdPelabuhan(), kapal.getGolongan().getId());
         lamaBeroperasi.setText(kapal.getTanggalBeroperasi());
+        nama.setEnabled(false);
+        kapasitas.setEnabled(false);
+        deskripsi.setEnabled(false);
+        contact.setEnabled(false);
+        lamaBeroperasi.setEnabled(false);
 
         //set Image
         Glide.with(this).load(kapal.getFotoUrl()).into(imageView);
@@ -361,6 +366,7 @@ public class CreateKapalActivity extends AppCompatActivity {
         }
 
         autoCompleteTipe.setAdapter(adapter);
+        autoCompleteTipe.setEnabled(false);
     }
 
 //    private void setPelabuhanValue(final int selectedId, final int golonganId) {

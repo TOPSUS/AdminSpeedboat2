@@ -1,4 +1,4 @@
-package com.espeedboat.admin;
+package com.espeedboat.admin.activity;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -6,7 +6,6 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.FileProvider;
 import androidx.fragment.app.FragmentManager;
 
-import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -18,24 +17,19 @@ import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.espeedboat.admin.activity.CreateKapalActivity;
-import com.espeedboat.admin.activity.EditProfileActivity;
+import com.espeedboat.admin.R;
 import com.espeedboat.admin.adapters.DropdownAdapter;
 import com.espeedboat.admin.client.RetrofitClient;
 import com.espeedboat.admin.model.Data;
 import com.espeedboat.admin.model.Dropdown;
-import com.espeedboat.admin.model.Pelabuhan;
 import com.espeedboat.admin.model.Response;
 import com.espeedboat.admin.service.KapalService;
-import com.espeedboat.admin.service.PelabuhanService;
 import com.espeedboat.admin.service.RewardService;
 import com.espeedboat.admin.utils.Constants;
 import com.espeedboat.admin.utils.SessionManager;
@@ -54,7 +48,6 @@ import java.util.List;
 import java.util.Locale;
 import java.util.UUID;
 
-import de.hdodenhof.circleimageview.CircleImageView;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
@@ -306,7 +299,8 @@ public class CreateRewardActivity extends AppCompatActivity {
 
 
     private void setCameraListener() {
-        final CharSequence[] options = {"Camera", "Choose from Gallery", "Cancel" };
+//        final CharSequence[] options = {"Camera", "Choose from Gallery", "Cancel" };
+        final CharSequence[] options = {"Choose from Gallery", "Cancel" };
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Choose Image");

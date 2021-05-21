@@ -17,6 +17,7 @@ import com.espeedboat.admin.utils.SessionManager;
 import com.espeedboat.admin.utils.Util;
 import com.google.android.material.textfield.TextInputEditText;
 
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -54,6 +55,7 @@ public class EditProfileActivity extends AppCompatActivity {
     private TextInputEditText nama, alamat, nohp, email;
     private Uri selectedImage;
     private Button submit;
+    private ProgressDialog progress;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,6 +93,7 @@ public class EditProfileActivity extends AppCompatActivity {
         editprofile = findViewById(R.id.image_wrapper);
         profile = findViewById(R.id.image_edit_user);
         submit = findViewById(R.id.btn_submit);
+        progress = new ProgressDialog(this);
     }
 
     private void setToolbar() {
@@ -145,19 +148,25 @@ public class EditProfileActivity extends AppCompatActivity {
             Call<Response> updateUser = service.updateProfile(sessionManager.getAuthToken(), sessionManager.getUserId(),
                     r_nama, r_alamat, r_jk, r_hp, r_email, body);
 
+            progress.setMessage("Updating...");
+            progress.show();
+
             updateUser.enqueue(new Callback<Response>() {
                 @Override
                 public void onResponse(Call<Response> call, retrofit2.Response<Response> response) {
                     if (response.isSuccessful()) {
                         if (response.body().getStatus() == 200) {
                             Toast.makeText(getApplicationContext(),  response.body().getMessage(), Toast.LENGTH_LONG).show();
+                            progress.dismiss();
                             onBackPressed();
                         } else {
                             Log.d("Response not 200", response.message().toString());
+                            progress.dismiss();
                             Toast.makeText(getApplicationContext(),  "Error", Toast.LENGTH_LONG).show();
                         }
                     } else {
                         Log.d("Response not success", response.message());
+                        progress.dismiss();
                         Toast.makeText(getApplicationContext(),  "Error", Toast.LENGTH_LONG).show();
                     }
                 }
@@ -165,6 +174,7 @@ public class EditProfileActivity extends AppCompatActivity {
                 @Override
                 public void onFailure(Call<Response> call, Throwable t) {
                     Log.d("Response not success", t.getMessage());
+                    progress.dismiss();
                     Toast.makeText(getApplicationContext(),  "Failed", Toast.LENGTH_LONG).show();
                 }
             });
@@ -210,7 +220,7 @@ public class EditProfileActivity extends AppCompatActivity {
     }
 
     private void setCameraListener() {
-        final CharSequence[] options = {"Camera", "Choose from Gallery", "Cancel" };
+        final CharSequence[] options = {"Choose from Gallery", "Cancel" };
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Choose Image");

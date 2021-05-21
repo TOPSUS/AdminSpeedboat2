@@ -135,7 +135,7 @@ public class User {
     }
 
     public String getUrlFoto() {
-        return Endpoint.URL+"/user/images/"+foto;
+        return Endpoint.URL_DEV+"/user/images/"+foto;
     }
 
     public void setFoto(String foto) {

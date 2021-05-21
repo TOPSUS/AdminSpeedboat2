@@ -36,7 +36,8 @@ public class Util {
     }
 
     public static void setImageUser(String imageUser, ImageView target) {
-        Picasso.get().load(imageUser).transform(new CircleTransform()).into(target);
+        Picasso.get().load("http://admin.espeedboat.xyz/storage/image_users/"+imageUser).transform(new CircleTransform()).into(target);
+//        Picasso.get().load(imageUser).transform(new CircleTransform()).into(target);
     }
 
     public static String getRealPathFromURIPath(Uri contentURI, Activity activity) {

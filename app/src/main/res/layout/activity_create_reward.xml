@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".CreateRewardActivity">
+    tools:context=".activity.CreateRewardActivity">
 
     <include android:id="@+id/main_toolbar"
         layout="@layout/main_toolbar"/>

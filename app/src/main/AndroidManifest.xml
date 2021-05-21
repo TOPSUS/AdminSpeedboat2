@@ -18,7 +18,7 @@
         android:usesCleartextTraffic="true">
         <activity android:name=".activity.WebViewActivity"></activity>
         <activity android:name=".activity.CreateJadwalActivity" />
-        <activity android:name=".CreateRewardActivity"></activity>
+        <activity android:name=".activity.CreateRewardActivity"></activity>
         <activity android:name=".activity.GantiPasswordActivity" />
         <activity android:name=".activity.SubmitForgotPassActivity" />
         <activity android:name=".activity.VerifCodeForgotPassActivity" />
