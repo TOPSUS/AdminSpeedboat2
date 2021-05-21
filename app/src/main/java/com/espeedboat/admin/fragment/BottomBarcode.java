@@ -180,6 +180,7 @@ public class BottomBarcode  extends BottomSheetDialogFragment {
                                     Toast.makeText(getActivity(), response.body().getMessage(),
                                             Toast.LENGTH_SHORT).show();
                                     infoTiket.setText(kode_tiket + " - Used");
+                                    setStatus("digunakan");
                                     btn_approve.setVisibility(View.INVISIBLE);
                                 } else {
                                     Toast.makeText(getActivity(), response.body().getMessage(),
