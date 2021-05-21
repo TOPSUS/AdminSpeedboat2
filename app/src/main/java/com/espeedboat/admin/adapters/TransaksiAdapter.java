@@ -3,6 +3,7 @@ package com.espeedboat.admin.adapters;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -63,6 +64,7 @@ public class TransaksiAdapter extends RecyclerView.Adapter<TransaksiViewHolder>{
         holder.setToDate(item.getTanggalSampai());
         holder.setToTime(item.getJamSampai());
         holder.itemView.findViewById(R.id.itemWrap).setOnClickListener(v -> { itemClickListener(v, item); });
+        Log.d("Data Transaksi", item.getTanggalSampai().toString());
     }
 
     private void itemClickListener(View view, Transaksi transaksi) {

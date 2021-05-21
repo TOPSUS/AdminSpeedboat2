@@ -173,8 +173,8 @@ public class TransaksiDetailFragment extends Fragment {
     private void setButton(String status, @Nullable String bukti) {
         if (bukti != null && status.equals("menunggu konfirmasi")) {
             this.btn_wrapper.setVisibility(View.VISIBLE);
-            this.btn_left.setBackground(view.getContext().getDrawable(R.drawable.btn_green_style));
-            this.btn_left.setText(R.string.btn_approve);
+//            this.btn_left.setBackground(view.getContext().getDrawable(R.drawable.btn_green_style));
+//            this.btn_left.setText(R.string.btn_approve);
             this.isDone = 0;
             this.bukti = bukti;
             setButtonListener();
