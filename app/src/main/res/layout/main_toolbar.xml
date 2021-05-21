@@ -56,6 +56,7 @@
             android:layout_alignParentEnd="true"
             android:clickable="true"
             android:scaleType="center"
+            android:visibility="invisible"
             android:src="@drawable/ic_notifications_none_24"/>
     </RelativeLayout>
     
