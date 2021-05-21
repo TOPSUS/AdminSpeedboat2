@@ -24,5 +24,6 @@ public class WebViewActivity extends AppCompatActivity {
 
         WebSettings webset = webview.getSettings();
         webset.setJavaScriptEnabled(true);
+        webset.setBuiltInZoomControls(true);
     }
 }

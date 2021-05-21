@@ -23,11 +23,13 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.espeedboat.admin.R;
+import com.espeedboat.admin.activity.WebViewActivity;
 import com.espeedboat.admin.adapters.TransaksiDetailAdapter;
 import com.espeedboat.admin.client.RetrofitClient;
 import com.espeedboat.admin.interfaces.ChangeBottomNav;
 import com.espeedboat.admin.interfaces.ShowBackButton;
 import com.espeedboat.admin.interfaces.ToolbarTitle;
+import com.espeedboat.admin.model.Berita;
 import com.espeedboat.admin.model.Response;
 import com.espeedboat.admin.model.Transaksi;
 import com.espeedboat.admin.service.TransaksiService;
@@ -240,8 +242,12 @@ public class TransaksiDetailFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 if (bukti != null) {
-                    Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://admin.espeedboat.xyz/storage/bukti_pembayaran/"+ bukti));
-                    startActivity(browserIntent);
+                    Intent i = new Intent((AppCompatActivity) view.getContext(), WebViewActivity.class);
+                    String link = "http://admin.espeedboat.xyz/storage/bukti_pembayaran/"+ bukti;
+                    i.putExtra("URL", link);
+                    view.getContext().startActivity(i);
+//                    Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse());
+//                    startActivity(browserIntent);
                 }
             }
         });
