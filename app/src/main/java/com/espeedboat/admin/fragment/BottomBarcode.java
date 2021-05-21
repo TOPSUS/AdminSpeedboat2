@@ -116,7 +116,7 @@ public class BottomBarcode  extends BottomSheetDialogFragment {
         toDate.setText(tiket.getTanggalSampai());
         toTime.setText(tiket.getJamSampai());
         if (tiket.getStatusTiket().equals("Used")) {
-            canApprove = false;
+            canApprove = true;
         } else if (tiket.getStatusTiket().equals("Expired")) {
             canApprove = false;
         } else {
@@ -153,7 +153,7 @@ public class BottomBarcode  extends BottomSheetDialogFragment {
         this.status.setText(text);
         this.status_wrapper.setBackgroundResource(color);
 
-        if (text.equals("Success")) {
+        if (text.equals("Success") || text.equals("Used")) {
             if (canApprove) {
                 btn_approve.setVisibility(View.VISIBLE);
             } else {
