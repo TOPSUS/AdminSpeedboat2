@@ -120,7 +120,7 @@ public class CreateRewardActivity extends AppCompatActivity {
         back = findViewById(R.id.toolbar_back);
 
         title = findViewById(R.id.toolbar_title);
-        title.setText(R.string.menu_speedboat_create);
+        title.setText(R.string.menu_reward_create);
 
         profileToolbar.setVisibility(View.GONE);
         back.setVisibility(View.VISIBLE);

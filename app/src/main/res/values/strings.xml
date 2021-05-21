@@ -12,6 +12,8 @@
     <string name="menu_speedboat_edit">Edit Kapal</string>
     <string name="menu_jadwal_create">Create Jadwal</string>
     <string name="menu_jadwal_edit">Edit Jadwal</string>
+    <string name="menu_reward_create">Create Reward</string>
+    <string name="menu_reward_claim">User Reward</string>
 
     <!--  Auth  -->
     <string name="auth_masuk">Masuk</string>

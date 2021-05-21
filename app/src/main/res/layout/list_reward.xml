@@ -10,90 +10,110 @@
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
         app:cardElevation="8dp"
-        app:cardCornerRadius="@dimen/margin_8">
+        android:animateLayoutChanges="true"
+        app:cardCornerRadius="@dimen/margin_8"
+        android:clickable="true"
+        android:focusable="true"
+        android:checkable="true">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
-
-            <!-- Media -->
-            <ImageView
-                android:id="@+id/image_reward"
-                android:layout_width="match_parent"
-                android:layout_height="194dp"
-                app:srcCompat="@drawable/no_profile"
-                android:scaleType="centerCrop"
-                android:contentDescription="Image Reward"/>
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:paddingHorizontal="16dp"
-                android:paddingVertical="8dp">
+                android:orientation="vertical">
 
-                <!-- Title, secondary and supporting text -->
-                <TextView
-                    android:id="@+id/nama"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Nama Reward"
-                    android:textAppearance="?attr/textAppearanceHeadline6"/>
-                <TextView
-                    android:id="@+id/poin"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
-                    android:text="0 Poin"
-                    android:textAppearance="?attr/textAppearanceBody2"
-                    android:textColor="?android:attr/textColorSecondary"/>
-                <TextView
-                    android:id="@+id/reward"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:text="Reward : PC Cantik"
-                    android:textAppearance="?attr/textAppearanceBody2"
-                    android:textColor="?android:attr/textColorSecondary"/>
-                <TextView
-                    android:id="@+id/masa_berlaku"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
-                    android:text="Masa Berlaku : 1 April 2021"
-                    android:textAppearance="?attr/textAppearanceBody2"
-                    android:textColor="?android:attr/textColorSecondary"/>
+                <!-- Media -->
+                <ImageView
+                    android:id="@+id/image_reward"
+                    android:layout_width="match_parent"
+                    android:layout_height="194dp"
+                    app:srcCompat="@drawable/no_profile"
+                    android:scaleType="centerCrop"
+                    android:contentDescription="Image Reward"/>
 
-            </LinearLayout>
-
-            <!-- Buttons -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="16dp"
-                android:layout_marginVertical="8dp"
-                android:orientation="horizontal">
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/btn_edit"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="8dp"
-                    android:text="Edit"
-                    style="?attr/borderlessButtonStyle"
-                    android:backgroundTint="@color/primary"
-                    android:textColor="@color/primary_white"
-                    android:visibility="gone"/>
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/btn_delete"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Delete"
-                    style="?attr/borderlessButtonStyle"
-                    android:backgroundTint="@color/primary_red"
-                    android:textColor="@color/primary_white"/>
-            </LinearLayout>
+                    android:orientation="vertical"
+                    android:paddingHorizontal="16dp"
+                    android:paddingVertical="8dp">
 
+                    <!-- Title, secondary and supporting text -->
+                    <TextView
+                        android:id="@+id/nama"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Nama Reward"
+                        android:textAppearance="?attr/textAppearanceHeadline6"/>
+                    <TextView
+                        android:id="@+id/poin"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:text="0 Poin"
+                        android:textAppearance="?attr/textAppearanceBody2"
+                        android:textColor="?android:attr/textColorSecondary"/>
+                    <TextView
+                        android:id="@+id/reward"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:text="Reward : PC Cantik"
+                        android:textAppearance="?attr/textAppearanceBody2"
+                        android:textColor="?android:attr/textColorSecondary"/>
+                    <TextView
+                        android:id="@+id/masa_berlaku"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:text="Masa Berlaku : 1 April 2021"
+                        android:textAppearance="?attr/textAppearanceBody2"
+                        android:textColor="?android:attr/textColorSecondary"/>
+
+                </LinearLayout>
+
+                <RelativeLayout
+                    android:id="@+id/expandCard"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone">
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btn_show"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Show Claim"
+                        android:visibility="visible"
+                        android:backgroundTint="@color/primary"
+                        android:insetTop="0dp"
+                        android:insetBottom="0dp"
+                        app:cornerRadius="0dp"
+                        app:icon="@drawable/ic_eye_24"
+                        app:iconGravity="textStart"
+                        android:textAlignment="center"
+                        android:textSize="14sp"
+                        android:textColor="@color/primary_white"
+                        android:fontFamily="@font/roboto_bold"/>
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btn_delete"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/btn_show"
+                        android:text="Delete"
+                        app:icon="@drawable/ic_baseline_delete"
+                        app:iconGravity="textStart"
+                        android:backgroundTint="@color/primary_red"
+                        android:insetTop="0dp"
+                        android:insetBottom="0dp"
+                        app:cornerRadius="0dp"
+                        android:textAlignment="center"
+                        android:textSize="14sp"
+                        android:textColor="@color/primary_white"
+                        android:fontFamily="@font/roboto_bold"/>
+                </RelativeLayout>
+            </LinearLayout>
         </LinearLayout>
 
     </com.google.android.material.card.MaterialCardView>

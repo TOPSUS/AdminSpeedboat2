@@ -30,4 +30,13 @@ public interface RewardService {
                                     @Part("minimal_point") RequestBody minimal_point,
                                     @Part("id_kapal") RequestBody id_kapal,
                                     @Part MultipartBody.Part body);
+
+    @GET(Endpoint.USER_REWARD_INDEX)
+    Call<Response> getUserRewards(@Header("Authorization") String token, @Path(value = "id", encoded = true) int id);
+
+    @GET(Endpoint.USER_REWARD_SEND)
+    Call<Response> sendUserRewards(@Header("Authorization") String token, @Path(value = "id_detail", encoded = true) int id);
+
+    @GET(Endpoint.USER_REWARD_DONE)
+    Call<Response> doneUserRewards(@Header("Authorization") String token, @Path(value = "id_detail", encoded = true) int id);
 }

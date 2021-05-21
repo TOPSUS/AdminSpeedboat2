@@ -37,4 +37,7 @@ public class Endpoint {
     public static final String REWARD_INDEX = "reward";
     public static final String REWARD_DELETE = "reward/{reward}";
     public static final String REWARD_CREATE = "reward";
+    public static final String USER_REWARD_INDEX = "reward/get/user/{id}";
+    public static final String USER_REWARD_SEND = "reward/send/user/{id_detail}";
+    public static final String USER_REWARD_DONE = "reward/done/user/{id_detail}";
 }

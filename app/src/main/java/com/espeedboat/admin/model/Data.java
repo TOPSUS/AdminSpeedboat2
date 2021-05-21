@@ -63,6 +63,9 @@ public class Data {
     @SerializedName("reward")
     @Expose
     private List<Reward> reward = null;
+    @SerializedName("user_reward")
+    @Expose
+    private List<UserReward> userReward = null;
 
     public List<Pelabuhan> getPelabuhan() {
         return pelabuhan;
@@ -210,5 +213,13 @@ public class Data {
 
     public void setReward(List<Reward> reward) {
         this.reward = reward;
+    }
+
+    public List<UserReward> getUserReward() {
+        return userReward;
+    }
+
+    public void setUserReward(List<UserReward> userReward) {
+        this.userReward = userReward;
     }
 }

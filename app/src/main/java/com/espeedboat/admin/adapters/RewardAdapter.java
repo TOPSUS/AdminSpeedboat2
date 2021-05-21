@@ -2,7 +2,11 @@ package com.espeedboat.admin.adapters;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.os.Bundle;
+import android.transition.AutoTransition;
+import android.transition.TransitionManager;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,19 +17,29 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+
+import android.transition.Slide;
+import android.transition.Transition;
 
 import com.bumptech.glide.Glide;
 import com.espeedboat.admin.R;
 import com.espeedboat.admin.client.RetrofitClient;
+import com.espeedboat.admin.fragment.TransaksiDetailFragment;
+import com.espeedboat.admin.fragment.UserRewardFragment;
 import com.espeedboat.admin.interfaces.UpdateListener;
 import com.espeedboat.admin.model.Kapal;
 import com.espeedboat.admin.model.Response;
 import com.espeedboat.admin.model.Reward;
 import com.espeedboat.admin.service.KapalService;
 import com.espeedboat.admin.service.RewardService;
+import com.espeedboat.admin.utils.Constants;
 import com.espeedboat.admin.utils.Endpoint;
 import com.espeedboat.admin.utils.SessionManager;
 import com.google.android.material.button.MaterialButton;
+import com.google.android.material.card.MaterialCardView;
 
 import java.util.List;
 
@@ -69,12 +83,14 @@ public class RewardAdapter extends BaseAdapter {
         rowView = layoutInflater.inflate(R.layout.list_reward, null);
 
         // init
+        holder.itemLay = rowView.findViewById(R.id.card);
+        holder.expand = rowView.findViewById(R.id.expandCard);
         holder.nama = rowView.findViewById(R.id.nama);
         holder.poin = rowView.findViewById(R.id.poin);
         holder.reward = rowView.findViewById(R.id.reward);
         holder.masa_berlaku = rowView.findViewById(R.id.masa_berlaku);
         holder.imageReward = rowView.findViewById(R.id.image_reward);
-        holder.edit = rowView.findViewById(R.id.btn_edit);
+        holder.show = rowView.findViewById(R.id.btn_show);
         holder.delete = rowView.findViewById(R.id.btn_delete);
 
         // set text
@@ -82,6 +98,16 @@ public class RewardAdapter extends BaseAdapter {
         holder.poin.setText("Minimal " + rewards.get(position).getMinimalPoint() + " Poin");
         holder.reward.setText(rewards.get(position).getReward());
         holder.masa_berlaku.setText(rewards.get(position).getReward());
+
+        holder.itemLay.setOnClickListener(v -> {
+            if (holder.expand.getVisibility() == View.GONE) {
+                TransitionManager.beginDelayedTransition(holder.itemLay, new AutoTransition());
+                holder.expand.setVisibility(View.VISIBLE);
+            } else {
+//                TransitionManager.beginDelayedTransition(holder.itemLay, new AutoTransition());
+                holder.expand.setVisibility(View.GONE);
+            }
+        });
 
         //set Image
         Glide.with(context).load(Endpoint.URL + rewards.get(position).getFoto()).error(R.drawable.no_profile).into(holder.imageReward);
@@ -91,12 +117,28 @@ public class RewardAdapter extends BaseAdapter {
             confirmDelete(rewards.get(position).getId());
         });
 
+        holder.show.setOnClickListener(v -> {
+            UserRewardFragment uRFragment = new UserRewardFragment();
+            Bundle bundle = new Bundle();
+            bundle.putInt(Constants.REWARD_ID, rewards.get(position).getId());
+            uRFragment.setArguments(bundle);
+
+            FragmentManager mFragmentManager = ((AppCompatActivity) context).getSupportFragmentManager();
+            FragmentTransaction mFragmentTransaction = mFragmentManager
+                    .beginTransaction()
+                    .replace(R.id.content, uRFragment, uRFragment.getTag());
+            mFragmentTransaction.addToBackStack("list reward");
+            mFragmentTransaction.commit();
+        });
+
         return rowView;
     }
 
     public class Holder {
-        MaterialButton edit, delete;
+        MaterialCardView itemLay;
+        MaterialButton show, delete;
         ImageView imageReward;
+        RelativeLayout expand;
         TextView nama, poin, reward, masa_berlaku;
     }
 
