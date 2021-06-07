@@ -45,7 +45,7 @@ public class QrFragment extends Fragment {
         view = inflater.inflate(R.layout.fragment_qr, container, false);
         previewView = view.findViewById(R.id.previewView);
         FragmentManager fm = ((AppCompatActivity) view.getContext()).getSupportFragmentManager();
-        analyzer = new ImageAnalyzer(fm);
+        analyzer = new ImageAnalyzer(fm, getActivity());
 
         cameraProviderFuture.addListener(new Runnable() {
             @Override

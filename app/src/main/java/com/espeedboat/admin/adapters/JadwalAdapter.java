@@ -97,15 +97,15 @@ public class JadwalAdapter extends BaseAdapter {
         holder.kodeAsal.setText(listJadwal.get(position).getKodeAsal());
         holder.harga.setText("IDR " + String.valueOf(listJadwal.get(position).getHarga()));
 
-        holder.itemLay.setOnClickListener(v -> {
-            if (holder.expand.getVisibility() == View.GONE) {
-                TransitionManager.beginDelayedTransition(holder.itemLay, new AutoTransition());
-                holder.expand.setVisibility(View.VISIBLE);
-            } else {
-                TransitionManager.beginDelayedTransition(holder.itemLay, new AutoTransition());
-                holder.expand.setVisibility(View.GONE);
-            }
-        });
+//        holder.itemLay.setOnClickListener(v -> {
+//            if (holder.expand.getVisibility() == View.GONE) {
+//                TransitionManager.beginDelayedTransition(holder.itemLay, new AutoTransition());
+//                holder.expand.setVisibility(View.VISIBLE);
+//            } else {
+//                TransitionManager.beginDelayedTransition(holder.itemLay, new AutoTransition());
+//                holder.expand.setVisibility(View.GONE);
+//            }
+//        });
 
         holder.delete.setOnClickListener(v -> {
             confirmDelete(listJadwal.get(position).getId());

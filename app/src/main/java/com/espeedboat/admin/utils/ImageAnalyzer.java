@@ -1,17 +1,22 @@
 package com.espeedboat.admin.utils;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.media.Image;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Surface;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.camera.core.ImageAnalysis;
 import androidx.camera.core.ImageProxy;
 import androidx.fragment.app.FragmentManager;
 
+import com.espeedboat.admin.client.RetrofitClient;
 import com.espeedboat.admin.fragment.BottomBarcode;
+import com.espeedboat.admin.model.Response;
+import com.espeedboat.admin.service.TransaksiService;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -24,13 +29,18 @@ import com.google.mlkit.vision.common.InputImage;
 
 import java.util.List;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+
 public class ImageAnalyzer implements ImageAnalysis.Analyzer{
     private BottomBarcode bottomBarcode;
     private FragmentManager fragmentManager;
+    private Context context;
 
-    public ImageAnalyzer(FragmentManager fm) {
+    public ImageAnalyzer(FragmentManager fm, Context con) {
         this.fragmentManager = fm;
         this.bottomBarcode = BottomBarcode.newInstance();
+        this.context = con;
     }
 
     @Override
@@ -89,11 +99,15 @@ public class ImageAnalyzer implements ImageAnalysis.Analyzer{
     }
 
     private void readBarcodeData(List<Barcode> barcodes) {
+        TransaksiService s;
+        s = RetrofitClient.getClient().create(TransaksiService.class);
+
         for (Barcode barcode : barcodes) {
             Log.d("Barcode [readBarcodeData]", barcode.getDisplayValue());
             switch (barcode.getValueType()) {
                 case Barcode.TYPE_TEXT:
                     String kode_tiket = barcode.getDisplayValue();
+
                     if (!bottomBarcode.isAdded()) {
                         Bundle args = new Bundle();
                         args.putString(Constants.KODE_TIKET, kode_tiket);
@@ -103,4 +117,5 @@ public class ImageAnalyzer implements ImageAnalysis.Analyzer{
             }
         }
     }
+
 }

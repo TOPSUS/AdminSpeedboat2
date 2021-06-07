@@ -22,6 +22,7 @@ import com.espeedboat.admin.utils.Constants;
 import com.espeedboat.admin.utils.SessionManager;
 import com.espeedboat.admin.utils.Util;
 import com.github.mikephil.charting.utils.Utils;
+import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 
 import retrofit2.Call;
@@ -34,7 +35,7 @@ public class BottomBarcode  extends BottomSheetDialogFragment {
     private String kode_tiket;
     private Boolean canApprove = false;
     private TransaksiService service;
-    private LinearLayout status_wrapper;
+    private LinearLayout status_wrapper, layout_tiket, layout_not_tiket;
     private Button btn_approve;
     private int tiket_id = 0;
 
@@ -46,6 +47,7 @@ public class BottomBarcode  extends BottomSheetDialogFragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.bottom_sheet_barcode_data, container, false);
+
         return view;
     }
 
@@ -72,6 +74,7 @@ public class BottomBarcode  extends BottomSheetDialogFragment {
                     if (response.body().getStatus() == 200) {
                         setValue(response.body().getData().getTiket());
                     } else {
+                        notTiket();
                         Toast.makeText(getActivity(), response.body().getMessage(),
                                 Toast.LENGTH_LONG).show();
                     }
@@ -80,6 +83,7 @@ public class BottomBarcode  extends BottomSheetDialogFragment {
 
             @Override
             public void onFailure(Call<Response> call, Throwable t) {
+                notTiket();
                 Log.d("Failure [Bottom Barcode]", t.getMessage());
                 Toast.makeText(getActivity(), t.getMessage(),
                         Toast.LENGTH_LONG).show();
@@ -102,9 +106,13 @@ public class BottomBarcode  extends BottomSheetDialogFragment {
         priceTiket = view.findViewById(R.id.qr_ticket_price);
         infoTiket = view.findViewById(R.id.qr_ticket_info);
         btn_approve = view.findViewById(R.id.qr_approve);
+        layout_not_tiket = view.findViewById(R.id.notTiketWrapper);
+        layout_tiket = view.findViewById(R.id.isTiketWrapper);
     }
 
     private void setValue(Tiket tiket) {
+        layout_tiket.setVisibility(View.VISIBLE);
+        layout_not_tiket.setVisibility(View.GONE);
         tiket_id = tiket.getId();
         username.setText(tiket.getNama());
         noId.setText(tiket.getNomorId());
@@ -116,7 +124,7 @@ public class BottomBarcode  extends BottomSheetDialogFragment {
         toDate.setText(tiket.getTanggalSampai());
         toTime.setText(tiket.getJamSampai());
         if (tiket.getStatusTiket().equals("Used")) {
-            canApprove = true;
+            canApprove = false;
         } else if (tiket.getStatusTiket().equals("Expired")) {
             canApprove = false;
         } else {
@@ -201,5 +209,10 @@ public class BottomBarcode  extends BottomSheetDialogFragment {
                 }
             }
         });
+    }
+
+    private void notTiket() {
+        layout_tiket.setVisibility(View.GONE);
+        layout_not_tiket.setVisibility(View.VISIBLE);
     }
 }

@@ -48,7 +48,7 @@ public class TransaksiDetailFragment extends Fragment {
     private ImageView back;
     private TransaksiService service;
     private int transaksi_id = 0, isDone = 0;
-    private Button btn_left, btn_right;
+    private Button btn_left, btn_right, btn_etiket;
     private String bukti;
     ShowBackButton showBackButton;
     ChangeBottomNav changeBottomNav;
@@ -128,6 +128,7 @@ public class TransaksiDetailFragment extends Fragment {
         this.btn_left = view.findViewById(R.id.td_btn_left);
         this.btn_right = view.findViewById(R.id.td_btn_right);
         this.btn_wrapper = view.findViewById(R.id.td_btn_wrapper);
+        this.btn_etiket = view.findViewById(R.id.btn_etiket);
     }
 
     private void setValue(Transaksi data) {
@@ -248,6 +249,20 @@ public class TransaksiDetailFragment extends Fragment {
                     view.getContext().startActivity(i);
 //                    Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse());
 //                    startActivity(browserIntent);
+                }
+            }
+        });
+
+        this.btn_etiket.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (transaksi_id != 0) {
+                    Intent i = new Intent((AppCompatActivity) view.getContext(), WebViewActivity.class);
+                    String link = "http://admin.espeedboat.xyz/e-ticket/"+ transaksi_id;
+                    i.putExtra("URL", link);
+                    view.getContext().startActivity(i);
+                } else {
+                    Toast.makeText(getActivity(), "Transaksi Not Found", Toast.LENGTH_SHORT).show();
                 }
             }
         });
